@@ -4,5 +4,9 @@
     "module": "commonjs",
     "rootDir": "./src",
     "outDir": "./dist"
+  },
+  "typedocOptions":{
+    "entryPoints": ["src/"],
+    "out": "docs"
   }
 }

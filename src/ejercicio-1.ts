@@ -1,3 +1,8 @@
+/**
+ * This enumeration shows the different allergens that we have in this case
+ * @enum
+ */
+
 enum Allergen {
     Huevo = 1,
     Cacahuete = 2,
@@ -9,18 +14,23 @@ enum Allergen {
     Gato = 128,
   }
   
-  function getAllergens(score: number): Allergen[] | undefined {
-    if (!Number.isInteger(score) || score <= 0) {
+/**
+ * Function that returns to which allergens a person is allergic
+ * @param puntuation - Total puntuation of a person allergies
+ * @returns - List of allergens to which that person is allergic
+ */
+  function getAllergens(puntuation: number): Allergen[] | undefined {
+    if (!Number.isInteger(puntuation) || puntuation <= 0) {
       return undefined;
     }
   
     const allergens = Object.values(Allergen).filter(
-      (allergen) => typeof allergen === "number" && score & allergen
+      (allergen) => typeof allergen === "number" && puntuation & allergen
     );
   
     return allergens as Allergen[];
   }
-  
+
 
 console.log(getAllergens(129)); // It should return [Huevo, Gato]
 console.log(getAllergens(257)); // It should return [Huevo]
