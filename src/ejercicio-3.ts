@@ -1,25 +1,23 @@
 /**
- * Define el tipo de datos para una celda del tablero de ajedrez.
+ * Defines which are the possible types for the cells of the chess.
  */
 type ChessCell = "-" | "N" | "B";
 
 /**
- * Define el tipo de datos para el tablero de ajedrez.
+ * Defines the data type for the chess.
  */
 type ChessBoard = [ChessCell[], ChessCell[], ChessCell[], ChessCell[], ChessCell[], ChessCell[], ChessCell[], ChessCell[]];
 
 /**
- * Determina si dos reinas pueden atacarse en un tablero de ajedrez.
- * @param board El tablero de ajedrez.
- * @returns True si las dos reinas pueden atacarse, false en caso contrario. Undefined si el tablero no es válido.
+ * Determines if two queens can attack each other on the chess.
+ * @param board The chess board.
+ * @returns True if both of the queens can attack each other, false if not. Undefined if the chess board is not valid because of the size or any irregularity.
  */
 function checkAtack(board: ChessBoard): boolean | undefined {
-  // Verifica que el tablero sea válido.
   if (board.length !== 8 || board.some(row => row.length !== 8 || row.some(cell => !["-", "N", "B"].includes(cell)))) {
     return undefined;
   }
 
-  // Busca la posición de las reinas.
   let blackQueen: [number, number] | undefined = undefined;
   let whiteQueen: [number, number] | undefined = undefined;
 
@@ -33,7 +31,6 @@ function checkAtack(board: ChessBoard): boolean | undefined {
     }
   }
 
-  // Verifica si las reinas pueden atacarse.
   if (blackQueen === undefined || whiteQueen === undefined) {
     return undefined;
   }

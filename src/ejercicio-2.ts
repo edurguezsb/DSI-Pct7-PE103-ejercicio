@@ -1,75 +1,75 @@
 /**
- * Representa un número complejo.
+ * Represent a complex number.
  */
 type ComplexNumber = [number, number];
 
 /**
- * Realiza la suma de dos números complejos.
- * @param a Primer número complejo.
- * @param b Segundo número complejo.
- * @returns El resultado de la suma como un número complejo.
+ * Adding two complex numbers.
+ * @param a First complex number.
+ * @param b Second complex number.
+ * @returns The result is a complex number too.
  */
 function add(a: ComplexNumber, b: ComplexNumber): ComplexNumber {
   return [a[0] + b[0], a[1] + b[1]];
 }
 
 /**
- * Realiza la resta de dos números complejos.
- * @param a Primer número complejo.
- * @param b Segundo número complejo.
- * @returns El resultado de la resta como un número complejo.
+ * Subtracting two complex numbers.
+ * @param a First complex number.
+ * @param b Second complex number.
+ * @returns The result is a complex number too.
  */
 function sub(a: ComplexNumber, b: ComplexNumber): ComplexNumber {
   return [a[0] - b[0], a[1] - b[1]];
 }
 
 /**
- * Realiza la multiplicación de dos números complejos.
- * @param a Primer número complejo.
- * @param b Segundo número complejo.
- * @returns El resultado de la multiplicación como un número complejo.
+ * Multiplication of two complex numbers.
+ * @param a First complex number.
+ * @param b Second complex number.
+ * @returns The result is a complex number too.
  */
 function mult(a: ComplexNumber, b: ComplexNumber): ComplexNumber {
   const real = a[0] * b[0] - a[1] * b[1];
-  const imag = a[0] * b[1] + a[1] * b[0];
-  return [real, imag];
+  const imaginary = a[0] * b[1] + a[1] * b[0];
+  return [real, imaginary];
 }
 
 /**
- * Realiza la división de dos números complejos.
- * @param a Primer número complejo.
- * @param b Segundo número complejo.
- * @returns El resultado de la división como un número complejo.
+ * Division of two complex numbers.
+ * @param a First complex number.
+ * @param b Second complex number.
+ * @returns The result is a complex number too.
  */
 function div(a: ComplexNumber, b: ComplexNumber): ComplexNumber {
   const real = (a[0] * b[0] + a[1] * b[1]) / (b[0] * b[0] + b[1] * b[1]);
-  const imag = (a[1] * b[0] - a[0] * b[1]) / (b[0] * b[0] + b[1] * b[1]);
-  return [real, imag];
+  const imaginary = (a[1] * b[0] - a[0] * b[1]) / (b[0] * b[0] + b[1] * b[1]);
+  return [real, imaginary];
 }
 
 /**
- * Realiza el producto escalar de un número complejo y un número real.
- * @param a El número complejo a escalar.
- * @param b El número real por el cual se escala el número complejo.
- * @returns El resultado del producto escalar como un número complejo.
+ * Scalar product of a complex number and a real number.
+ * @param a The complex number to scale.
+ * @param b The real number by which the complex number is scaled.
+ * @returns The result of the dot product as a complex number.
  */
 function prod(a: ComplexNumber, b: number): ComplexNumber {
   return [a[0] * b, a[1] * b];
 }
 
 /**
- * Calcula el conjugado de un número complejo.
- * @param a El número complejo para calcular su conjugado.
- * @returns El conjugado del número complejo como un número complejo.
+ * Conjugate of a complex number.
+ * @param a The complex number to calculate its conjugate.
+ * @returns The conjugate of the complex number as a complex number.
  */
 function conj(a: ComplexNumber): ComplexNumber {
   return [a[0], -a[1]];
 }
 
 /**
- * Calcula el módulo de un número complejo.
- * @param a El número complejo para calcular su módulo.
- * @returns El módulo del número complejo como un número real.
+ * Module of a complex number.
+ * @param a The complex number to calculate its module.
+ * @returns The module of the complex number as a real number.
  */
 function abs(a: ComplexNumber): number {
   return Math.sqrt(a[0] * a[0] + a[1] * a[1]);

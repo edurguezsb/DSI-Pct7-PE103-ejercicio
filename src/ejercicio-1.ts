@@ -1,5 +1,5 @@
 /**
- * This enumeration shows the different allergens that we have in this case
+ * This enumeration shows the different allergens that we have in this case.
  * @enum
  */
 
@@ -15,9 +15,9 @@ enum Allergen {
   }
   
 /**
- * Function that returns to which allergens a person is allergic
- * @param puntuation - Total puntuation of a person allergies
- * @returns - List of allergens to which that person is allergic
+ * Function that returns to which allergens a person is allergic.
+ * @param puntuation - Total puntuation of a person allergies.
+ * @returns - List of allergens to which that person is allergic.
  */
   function getAllergens(puntuation: number): Allergen[] | undefined {
     if (!Number.isInteger(puntuation) || puntuation <= 0) {
