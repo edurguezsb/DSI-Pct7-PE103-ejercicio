@@ -151,8 +151,11 @@ Escriba una función fromArrayToRanges que reciba un array o lista de números e
 Ejemplos:
 
 [5, 6, 7, 9, 12, 13, 14] => “5_7, 9, 12_14”
+
 [-3, -2, -1, 3, 5, 6, 7] => “-3_-1, 3, 5_7”
+
 [17] => “17”
+
 [3, 5, 6, 7, 9, 10] => “3, 5_7, 9_10”
 
 
