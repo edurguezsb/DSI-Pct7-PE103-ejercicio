@@ -70,15 +70,25 @@ Dadas las posiciones de dos reinas en un tablero de ajedrez, determine si ambas 
 Un tablero de ajedrez puede representarse mediante un array bidimensional de 8 x 8 casillas. Por lo tanto, si la reina negra está ubicada en la posición (1, 3), mientras que la reina blanca está ubicada en la posición (3, 5), tendríamos una estructura de datos como la que sigue:
 
 [
+
     [-, -, -, -, -, -, -, -]
+    
     [-, -, -, N, -, -, -, -]
+    
     [-, -, -, -, -, -, -, -]
+    
     [-, -, -, -, -, B, -, -]
+    
     [-, -, -, -, -, -, -, -]
+    
     [-, -, -, -, -, -, -, -]
+    
     [-, -, -, -, -, -, -, -]
+    
     [-, -, -, -, -, -, -, -]
+    
 ]
+
 Escriba una función checkAtack que, dada una estructura de datos como la anterior, devuelva un valor lógico indicando si ambas reinas podrían atacarse dadas las posiciones de las mismas. Tenga en cuenta que solo puede haber una reina blanca y una reina negra en el tablero. En caso de que lo anterior no suceda, la función deberá devolver el valor undefined.
 
 Por último, el tablero debe consistir en, exactamente, 8 filas y 8 columnas, donde cada casilla puede contener alguno de los valores -, N o B, exclusivamente. Aunque la anterior comprobación podría llevarse a cabo a través del código fuente incluido en la función (en tiempo de ejecución), defina un tipo de datos adecuado que impida, desde el punto de vista del tipado (en tiempo de compilación), pasarle a la función checkAtack un tablero no válido, esto es, con un número de filas/columnas diferente a 8 y/o celdas con valores no válidos).
