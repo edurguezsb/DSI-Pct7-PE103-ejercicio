@@ -32,8 +32,8 @@ enum Allergen {
   }
 
 
-console.log(getAllergens(129)); // It should return [Huevo, Gato]
-console.log(getAllergens(257)); // It should return [Huevo]
-console.log(getAllergens(256)); // It should return []
-console.log(getAllergens(515)); // It should return [Huevo, Cacahuete]
-console.log(getAllergens(84));  // It should return [Marisco, Tomate, Polen]
+console.log(getAllergens(129));
+console.log(getAllergens(257));
+console.log(getAllergens(256));
+console.log(getAllergens(515));
+console.log(getAllergens(84));
