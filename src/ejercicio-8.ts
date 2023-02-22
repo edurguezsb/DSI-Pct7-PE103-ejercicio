@@ -1,51 +1,34 @@
 /**
- * Comprueba si las palabras de un array están encadenadas y devuelve las letras en común.
- * @param words El array de palabras a comprobar.
- * @returns Un string con las letras comunes en caso de estar encadenadas, o un mensaje de error en caso contrario.
+ * Check if the words in an array are chained.
+ * @param words - An array of text strings.
+ * @returns A text string containing the letters that string the words in the array, or "Error al encadenar" if the words are not connected.
  */
 function meshArray(words: string[]): string {
-    let result = "";
-    
-    for (let i = 0; i < words.length - 1; i++) {
-      const currentWord = words[i];
-      const nextWord = words[i + 1];
-      const intersection = getIntersection(currentWord, nextWord);
-      
-      if (intersection.length === 0) {
-        return "Error al encadenar";
-      }
-      
-      result += intersection;
-    }
-    
-    return result;
-  }
-  
-  /**
-   * Devuelve las letras que dos palabras tienen en común al final y al principio.
-   * @param word1 La primera palabra.
-   * @param word2 La segunda palabra.
-   * @returns Las letras que ambas palabras tienen en común.
-   */
-  function getIntersection(word1: string, word2: string): string {
-    let result = "";
-    
-    for (let i = 1; i < Math.min(word1.length, word2.length); i++) {
-      const suffix = word1.slice(word1.length - i);
-      const prefix = word2.slice(0, i);
-      
-      if (suffix === prefix) {
-        result = suffix;
+  let result = "";
+  for (let i = 0; i < words.length - 1; i++) {
+    const current = words[i];
+    const next = words[i + 1];
+    let commonLetters = "";
+    for (let j = 0; j < current.length; j++) {
+      if (next.startsWith(current.slice(j))) {
+        commonLetters = current.slice(j);
+        break;
       }
     }
-    
-    return result;
+    if (commonLetters.length === 0) {
+      return "Error al encadenar";
+    }
+    result += commonLetters;
   }
+  return result;
+}
 
-
-console.log(meshArray(["allow", "lowering", "ringmaster", "terror"]));
-console.log(meshArray(["kingdom", "dominator", "notorious", "usual", "allegory"]));
-console.log(meshArray(["apple", "legion", "onion"]));
-console.log(meshArray(["peach", "choose", "escape", "eager"]));
-console.log(meshArray(["sun", "near", "are"]));
-  
+// Pruebas
+console.log(meshArray(["allow", "lowering", "ringmaster", "terror"])); // Debería mostrar "lowringter"
+console.log(meshArray(["kingdom", "dominator", "notorious", "usual", "allegory"])); // Debería mostrar "Error al encadenar"
+console.log(meshArray(["apply", "plywood"])); // Debería mostrar "plywood"
+console.log(meshArray(["apple", "each"])); // Debería mostrar "e"
+console.log(meshArray(["behemoth", "mother"])); // Debería mostrar "mo"
+console.log(meshArray(["apply", "playground"])); // Debería mostrar "Error al encadenar"
+console.log(meshArray(["apple", "peggy"])); // Debería mostrar "Error al encadenar"
+console.log(meshArray(["behemoth", "mathematics"])); // Debería mostrar "Error al encadenar"

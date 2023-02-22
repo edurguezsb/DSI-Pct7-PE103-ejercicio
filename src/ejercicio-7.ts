@@ -1,10 +1,10 @@
 /**
- * Decodifica el valor de una resistencia en función de los colores de sus bandas.
- * @param colors Los colores de las bandas de la resistencia.
- * @returns El valor numérico de la resistencia.
+ * Decodes the value of a resistor based on the colors of its bands.
+ * @param colors The colors of the resistance bands.
+ * @returns The numerical value of the resistor.
  */
 function decodeResistor(colors: string[]): number {
-    const colorToNumber = {
+    const equivalence = {
       negro: 0,
       marrón: 1,
       rojo: 2,
@@ -17,13 +17,12 @@ function decodeResistor(colors: string[]): number {
       blanco: 9,
     };
   
-    const firstColor = colorToNumber[colors[0].toLowerCase()];
-    const secondColor = colorToNumber[colors[1].toLowerCase()];
-  
-    const result = (firstColor * 10) + secondColor;
+    const color1 = equivalence[colors[0].toLowerCase()];
+    const color2 = equivalence[colors[1].toLowerCase()];
+    const result = (color1 * 10) + color2;
   
     return result;
-  }
+}
 
   
 console.log(decodeResistor(["Marrón", "Verde"]));

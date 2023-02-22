@@ -1,15 +1,15 @@
 /**
- * Función que recibe un elemento de la colección y retorna su versión modificada.
- * @param elemento El elemento de la colección a modificar.
- * @returns El elemento modificado.
+ * Function that receives an element from the collection and returns its modified version.
+ * @param elemento The element of the collection to modify.
+ * @returns The modified item.
  */
 type MapCallback<T> = (elemento: T) => T;
 
 /**
- * Modifica cada elemento de una colección en base a un callback.
- * @param collection La colección de elementos a modificar.
- * @param callback El callback que define la modificación a aplicar a cada elemento.
- * @returns La colección modificada.
+ * Modifies each element of a collection based on a callback.
+ * @param collection The collection of elements to modify.
+ * @param callback The callback that defines the modification to apply to each element.
+ * @returns The modified collection.
  */
 function myMap<T>(collection: T[], callback: MapCallback<T>): T[] {
   const result: T[] = [];

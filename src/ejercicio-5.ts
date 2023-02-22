@@ -1,7 +1,7 @@
 /**
- * Genera una matriz cuadrada con números enteros dispuestos en una espiral.
- * @param n El tamaño de la matriz cuadrada.
- * @returns La matriz con los números enteros dispuestos en una espiral.
+ * Generates a square matrix with integers arranged in a spiral.
+ * @param n The size of the square matrix.
+ * @returns The array with the integers arranged in a spiral.
  */
 function getSpiralMatrix(n: number): number[][] {
     const matrix: number[][] = [];
@@ -38,7 +38,6 @@ function getSpiralMatrix(n: number): number[][] {
         left++;
       }
     }
-  
     return matrix;
   }
 

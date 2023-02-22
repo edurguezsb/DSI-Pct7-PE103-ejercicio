@@ -1,24 +1,24 @@
 /**
- * Comprime un array de números en rangos.
- * @param arr El array de números a comprimir.
- * @returns La cadena de caracteres que representa los rangos obtenidos.
+ * Compresses an array of numbers into ranges.
+ * @param arrai The array of numbers to compress.
+ * @returns The character string representing the returned ranges.
  */
-function fromArrayToRanges(arr: number[]): string {
-    if (arr.length === 0) {
+function fromArrayToRanges(arrai: number[]): string {
+    if (arrai.length === 0) {
       return "";
     }
   
     const ranges: string[] = [];
-    let start = arr[0];
-    let end = arr[0];
+    let start = arrai[0];
+    let end = arrai[0];
   
-    for (let i = 1; i < arr.length; i++) {
-      if (arr[i] === end + 1) {
-        end = arr[i];
+    for (let i = 1; i < arrai.length; i++) {
+      if (arrai[i] === end + 1) {
+        end = arrai[i];
       } else {
         ranges.push(start === end ? `${start}` : `${start}_${end}`);
-        start = arr[i];
-        end = arr[i];
+        start = arrai[i];
+        end = arrai[i];
       }
     }
   
@@ -28,9 +28,9 @@ function fromArrayToRanges(arr: number[]): string {
   }
   
   /**
-   * Descomprime una cadena de caracteres en un array de números.
-   * @param str La cadena de caracteres que representa los rangos.
-   * @returns El array de números correspondiente a los rangos.
+   * Decompresses a string of characters into an array of numbers.
+   * @param str The character string representing the ranges.
+   * @returns The array of numbers corresponding to the ranges.
    */
   function fromRangesToArray(str: string): number[] {
     const ranges = str.split(", ");
