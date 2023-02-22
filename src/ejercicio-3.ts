@@ -39,7 +39,7 @@ function checkAtack(board: ChessBoard): boolean | undefined {
 }
 
 
-// Tablero válido
+
 const board1: ChessBoard = [
     ["-", "-", "-", "-", "-", "-", "-", "-"],
     ["-", "-", "-", "N", "-", "-", "-", "-"],
@@ -50,22 +50,20 @@ const board1: ChessBoard = [
     ["-", "-", "-", "-", "-", "-", "-", "-"],
     ["-", "-", "-", "-", "-", "-", "-", "-"],
   ];
-console.log("¿Las reinas pueden atacarse en el tablero 1?", checkAtack(board1)); // true
-  
-  // Tablero válido
+console.log("¿Las reinas pueden atacarse en el tablero 1?", checkAtack(board1)); // true porque están en diagonal
+
   const board2: ChessBoard = [
     ["-", "-", "-", "-", "-", "-", "-", "-"],
     ["-", "-", "-", "-", "-", "-", "-", "-"],
     ["-", "-", "-", "-", "-", "-", "-", "-"],
-    ["-", "-", "-", "N", "-", "-", "-", "-"],
     ["-", "-", "-", "-", "-", "-", "-", "-"],
     ["-", "-", "-", "-", "-", "-", "-", "-"],
-    ["-", "-", "-", "-", "-", "-", "-", "B"],
+    ["-", "-", "-", "-", "-", "-", "-", "-"],
+    ["-", "-", "-", "N", "-", "-", "-", "B"],
     ["-", "-", "-", "-", "-", "-", "-", "-"],
   ];
-console.log("¿Las reinas pueden atacarse en el tablero 2?", checkAtack(board2)); // true
-  
-  // Tablero válido
+console.log("¿Las reinas pueden atacarse en el tablero 2?", checkAtack(board2)); // true porque estan en línea horizontal
+
   const board3: ChessBoard = [
     ["-", "-", "-", "-", "-", "-", "-", "-"],
     ["-", "-", "-", "-", "-", "-", "-", "-"],
@@ -76,9 +74,8 @@ console.log("¿Las reinas pueden atacarse en el tablero 2?", checkAtack(board2))
     ["-", "-", "-", "-", "-", "-", "-", "B"],
     ["-", "-", "-", "-", "-", "-", "-", "-"],
   ];
-console.log("¿Las reinas pueden atacarse en el tablero 3?", checkAtack(board3)); // false
-  
-  // Tablero no válido
+console.log("¿Las reinas pueden atacarse en el tablero 3?", checkAtack(board3)); // false no hay manera directa de atacarse
+
   const board4: ChessBoard = [
     ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
     ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
@@ -89,5 +86,4 @@ console.log("¿Las reinas pueden atacarse en el tablero 3?", checkAtack(board3))
     ["-", "-", "-", "B", "-", "-", "-", "-", "-"],
     ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
   ];
-console.log("¿Las reinas pueden atacarse en el tablero 4?", checkAtack(board4)); // undefined
-  
+console.log("¿Las reinas pueden atacarse en el tablero 4?", checkAtack(board4)); // undefined porque el tablero es más grande de lo permitido
