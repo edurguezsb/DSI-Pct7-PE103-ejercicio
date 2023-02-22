@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Practica-4</title><meta name="description" content="Documentation for Practica-4"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>theory-examples</title><meta name="description" content="Documentation for theory-examples"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base=".">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -6,13 +6,272 @@
 <div id="tsd-toolbar-links"></div></div>
 <ul class="results">
 <li class="state loading">Preparing search index...</li>
-<li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">Practica-4</a></div>
+<li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">theory-examples</a></div>
 <div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
 <div class="container container-main">
 <div class="col-8 col-content">
 <div class="tsd-page-title">
-<h2>Practica-4</h2></div>
-<div class="tsd-panel tsd-typography"></div></div>
+<h2>theory-examples</h2></div>
+<div class="tsd-panel tsd-typography">
+<a href="#práctica-4" id="práctica-4" style="color: inherit; text-decoration: none;">
+  <h1>Práctica 4</h1>
+</a>
+<p>En esta actividad, la Práctica 4 de la asignatura, se nos plantean varios problemas de programación que nos ayudarán a conocer más en profundidad los arrays, tuplas y enumerados de TypeScript.
+A continuación se mostrarán las soluciones para los problemas mencionados anteriormente, acompañados de explicaciones y comentarios que faciliten su comprendimiento.</p>
+
+<a href="#ejercicio-1---el-alergólogo" id="ejercicio-1---el-alergólogo" style="color: inherit; text-decoration: none;">
+  <h2><em>Ejercicio 1 - El alergólogo</em></h2>
+</a>
+
+<a href="#enunciado" id="enunciado" style="color: inherit; text-decoration: none;">
+  <h3>Enunciado:</h3>
+</a>
+<p>Una prueba de alérgenos produce un valor numérico (entero positivo) único, el cual contiene información sobre las alergias de una persona. La lista de posibles alérgenos es la siguiente:</p>
+<p>Huevo (1)
+Cacahuete (2)
+Marisco (4)
+Fresa (8)
+Tomate (16)
+Chocolate (32)
+Polen (64)
+Gato (128)
+Por ejemplo, si alguien fuera alérgico a los gatos y al tomate, obtendría una puntuación igual a 128 + 16 = 144.</p>
+<p>Escriba una función getAllergens que reciba una puntuación de alérgenos de una persona y que devuelva una lista con los alérgenos a los que la persona es alérgica. Los diferentes alérgenos deberán modelarse mediante un enumerado.</p>
+<p>Por último, tenga en cuenta que la función podría recibir una puntuación que incluya alérgenos no contemplados en la lista, esto es, alérgenos cuya puntuación sea 256, 512, 1024, etc. Además, si el valor pasado como argumento no es entero y positivo, la función deberá retornar el valor undefined.</p>
+
+<a href="#código" id="código" style="color: inherit; text-decoration: none;">
+  <h4>Código</h4>
+</a>
+<pre><code class="language-TypeScript">
+</code></pre>
+
+<a href="#comprobaciones" id="comprobaciones" style="color: inherit; text-decoration: none;">
+  <h4>Comprobaciones</h4>
+</a>
+<pre><code class="language-TypeScript">
+</code></pre>
+
+<a href="#ejercicio-2---números-complejos" id="ejercicio-2---números-complejos" style="color: inherit; text-decoration: none;">
+  <h2><em>Ejercicio 2 - Números complejos</em></h2>
+</a>
+
+<a href="#enunciado-1" id="enunciado-1" style="color: inherit; text-decoration: none;">
+  <h3>Enunciado:</h3>
+</a>
+<p>Con lo visto hasta ahora en la asignatura, defina un tipo de datos propio que permita representar un número complejo, esto es, pares de valores numéricos reales, donde la primera componente del par es la parte real del complejo, mientras que la segunda componente del par representa su parte imaginaria.</p>
+<p>A continuación, partiendo de dicha definición, escriba funciones que permitan calcular las siguientes operaciones sobre números complejos:</p>
+<p>Suma, resta, multiplicación y división (funciones add, sub, mult y div). Estas funciones reciben como argumentos dos complejos y devuelven un complejo.
+Producto escalar (función prod). Esta función recibe como argumentos un complejo y un número real, retornando un número complejo.
+Conjugado (función conj). Recibe como argumento un complejo y devuelve otro complejo.
+Módulo (función abs). La función recibe como argumento un complejo y retorna un valor real.</p>
+
+<a href="#código-1" id="código-1" style="color: inherit; text-decoration: none;">
+  <h4>Código</h4>
+</a>
+<pre><code class="language-TypeScript">
+</code></pre>
+
+<a href="#comprobaciones-1" id="comprobaciones-1" style="color: inherit; text-decoration: none;">
+  <h4>Comprobaciones</h4>
+</a>
+<pre><code class="language-TypeScript">
+</code></pre>
+
+<a href="#ejercicio-3---no-cabrees-a-la-reina" id="ejercicio-3---no-cabrees-a-la-reina" style="color: inherit; text-decoration: none;">
+  <h2><em>Ejercicio 3 - No cabrees a la reina</em></h2>
+</a>
+
+<a href="#enunciado-2" id="enunciado-2" style="color: inherit; text-decoration: none;">
+  <h3>Enunciado:</h3>
+</a>
+<p>Dadas las posiciones de dos reinas en un tablero de ajedrez, determine si ambas reinas podrían atacarse en caso de cabrearse una con la otra. En el ajedrez, una reina puede atacar piezas ubicadas en la misma fila, columna o diagonal.</p>
+<p>Un tablero de ajedrez puede representarse mediante un array bidimensional de 8 x 8 casillas. Por lo tanto, si la reina negra está ubicada en la posición (1, 3), mientras que la reina blanca está ubicada en la posición (3, 5), tendríamos una estructura de datos como la que sigue:</p>
+<p>[</p>
+<pre><code><span class="hl-0">[-, -, -, -, -, -, -, -]</span><br/><br/><span class="hl-0">[-, -, -, </span><span class="hl-1">N</span><span class="hl-0">, -, -, -, -]</span><br/><br/><span class="hl-0">[-, -, -, -, -, -, -, -]</span><br/><br/><span class="hl-0">[-, -, -, -, -, </span><span class="hl-1">B</span><span class="hl-0">, -, -]</span><br/><br/><span class="hl-0">[-, -, -, -, -, -, -, -]</span><br/><br/><span class="hl-0">[-, -, -, -, -, -, -, -]</span><br/><br/><span class="hl-0">[-, -, -, -, -, -, -, -]</span><br/><br/><span class="hl-0">[-, -, -, -, -, -, -, -]</span>
+</code></pre>
+<p>]</p>
+<p>Escriba una función checkAtack que, dada una estructura de datos como la anterior, devuelva un valor lógico indicando si ambas reinas podrían atacarse dadas las posiciones de las mismas. Tenga en cuenta que solo puede haber una reina blanca y una reina negra en el tablero. En caso de que lo anterior no suceda, la función deberá devolver el valor undefined.</p>
+<p>Por último, el tablero debe consistir en, exactamente, 8 filas y 8 columnas, donde cada casilla puede contener alguno de los valores -, N o B, exclusivamente. Aunque la anterior comprobación podría llevarse a cabo a través del código fuente incluido en la función (en tiempo de ejecución), defina un tipo de datos adecuado que impida, desde el punto de vista del tipado (en tiempo de compilación), pasarle a la función checkAtack un tablero no válido, esto es, con un número de filas/columnas diferente a 8 y/o celdas con valores no válidos).</p>
+
+<a href="#código-2" id="código-2" style="color: inherit; text-decoration: none;">
+  <h4>Código</h4>
+</a>
+<pre><code class="language-TypeScript">
+</code></pre>
+
+<a href="#comprobaciones-2" id="comprobaciones-2" style="color: inherit; text-decoration: none;">
+  <h4>Comprobaciones</h4>
+</a>
+<pre><code class="language-TypeScript">
+</code></pre>
+
+<a href="#ejercicio-4---reimplementando-la-función-map" id="ejercicio-4---reimplementando-la-función-map" style="color: inherit; text-decoration: none;">
+  <h2><em>Ejercicio 4 - Reimplementando la función <code>map</code></em></h2>
+</a>
+
+<a href="#enunciado-3" id="enunciado-3" style="color: inherit; text-decoration: none;">
+  <h3>Enunciado:</h3>
+</a>
+<p>Implemente una función que emule el comportamiento de la función map proporcionada por el lenguaje sin hacer uso esta última. La función map actúa sobre una colección de elementos, modificando el valor de cada uno de ellos en base a un callback que se le pasa como argumento.</p>
+<p>Teniendo en cuenta lo anterior, escriba una función myMap que reciba una colección (array) de valores numéricos como primer argumento, además de un callback que permita modificar cada elemento de la colección como segundo argumento. La función deberá devolver la colección modificada.</p>
+
+<a href="#código-3" id="código-3" style="color: inherit; text-decoration: none;">
+  <h4>Código</h4>
+</a>
+<pre><code class="language-TypeScript">
+</code></pre>
+
+<a href="#comprobaciones-3" id="comprobaciones-3" style="color: inherit; text-decoration: none;">
+  <h4>Comprobaciones</h4>
+</a>
+<pre><code class="language-TypeScript">
+</code></pre>
+
+<a href="#ejercicio-5---matrices-espirales" id="ejercicio-5---matrices-espirales" style="color: inherit; text-decoration: none;">
+  <h2><em>Ejercicio 5 - Matrices espirales</em></h2>
+</a>
+
+<a href="#enunciado-4" id="enunciado-4" style="color: inherit; text-decoration: none;">
+  <h3>Enunciado:</h3>
+</a>
+<p>Escriba una función getSpiralMatrix que, dado un entero positivo n representando el tamaño de una matriz cuadrada, devuelva una matriz (array bidimensional) con todos los números enteros en el rango [1, n*n] y que estén dispuestos en la matriz conformando una espiral. La espiral debe comenzar en la primera fila y columna de la matriz e irse completando siguiendo las agujas del reloj.</p>
+
+<a href="#código-4" id="código-4" style="color: inherit; text-decoration: none;">
+  <h4>Código</h4>
+</a>
+<pre><code class="language-TypeScript">
+</code></pre>
+
+<a href="#comprobaciones-4" id="comprobaciones-4" style="color: inherit; text-decoration: none;">
+  <h4>Comprobaciones</h4>
+</a>
+<pre><code class="language-TypeScript">
+</code></pre>
+
+<a href="#ejercicio-6---compresión-de-números-en-rangos" id="ejercicio-6---compresión-de-números-en-rangos" style="color: inherit; text-decoration: none;">
+  <h2><em>Ejercicio 6 - Compresión de números en rangos</em></h2>
+</a>
+
+<a href="#enunciado-5" id="enunciado-5" style="color: inherit; text-decoration: none;">
+  <h3>Enunciado:</h3>
+</a>
+<p>Escriba una función fromArrayToRanges que reciba un array o lista de números enteros y los comprima en rangos, es decir, que devuelva una cadena de caracteres con la compresión obtenida. Un rango, es decir, un conjunto de números consecutivos se representará mediante una cadena de caracteres con el primer y último número del rango separado por un guión bajo (_). Un rango de un único número será la cadena de caracteres que representa a ese ùnico número. Luego, una serie de rangos vendrá separada por comas (,).
+Ejemplos:</p>
+<p>[5, 6, 7, 9, 12, 13, 14] =&gt; “5_7, 9, 12_14”</p>
+<p>[-3, -2, -1, 3, 5, 6, 7] =&gt; “-3_-1, 3, 5_7”</p>
+<p>[17] =&gt; “17”</p>
+<p>[3, 5, 6, 7, 9, 10] =&gt; “3, 5_7, 9_10”</p>
+<p>Escriba una función fromRangesToArray que lleve a cabo la operación inversa, es decir, que reciba como argumento una cadena de caracteres representando una serie de rangos y devuelva el array de números correspondiente.</p>
+
+<a href="#código-5" id="código-5" style="color: inherit; text-decoration: none;">
+  <h4>Código</h4>
+</a>
+<pre><code class="language-TypeScript">
+</code></pre>
+
+<a href="#comprobaciones-5" id="comprobaciones-5" style="color: inherit; text-decoration: none;">
+  <h4>Comprobaciones</h4>
+</a>
+<pre><code class="language-TypeScript">
+</code></pre>
+
+<a href="#ejercicio-7---decodificar-resistencias" id="ejercicio-7---decodificar-resistencias" style="color: inherit; text-decoration: none;">
+  <h2><em>Ejercicio 7 - Decodificar resistencias</em></h2>
+</a>
+
+<a href="#enunciado-6" id="enunciado-6" style="color: inherit; text-decoration: none;">
+  <h3>Enunciado:</h3>
+</a>
+<p>Si desea realizar algún proyecto usando una Raspberry Pi, probablemente necesitará usar resistencias. Para este ejercicio necesita conocer dos cosas sobre las resistencias:</p>
+<p>Cada resistor o resistencia tiene un valor de resistencia en Ohmios asociado. Además, las resistencias son tan pequeñas que si se les imprimiera el valor en ellas, sería muy difícil de leer. Para resolver este problema, los fabricantes siguen un estándar de bandas codificadas de colores para indicar sus valores de resistencia. Cada banda tiene una posición y un valor numérico.</p>
+<p>Las primeras dos bandas de una resistencia tienen un esquema de codificación muy simple: cada color se mapea a un único número. Por ejemplo, si una resistencia tiene impresa una banda marrón (valor 1) seguida de una banda verde (valor 5), el valor de la resistencia se traduciría al número 15.</p>
+<p>El objetivo de este ejercicio es crear un programa que nos ayude a calcular el valor de una resistencia sin tener que memorizar los valores de las bandas. Para ello, cree una función decodeResistor que recibe como parámetros los nombres de los colores de una resistencia como entrada y devuelve un número de dos dígitos indicando el valor de la resistencia. La función deberá devover un número de dos dígitos incluso si recibe más de dos colores como parámetros.</p>
+<p>Las bandas de colores están codificadas de la siguiente manera:</p>
+<p>Negro: 0
+Marrón: 1
+Rojo: 2
+Naranja: 3
+Amarillo: 4
+Verde: 5
+Azul: 6
+Violeta: 7
+Gris: 8
+Blanco: 9
+De este modo, la combinación Marrón-Verde debería devolver 15 al igual que Marrón-Verde-Violeta ignorando el tercer color.</p>
+
+<a href="#código-6" id="código-6" style="color: inherit; text-decoration: none;">
+  <h4>Código</h4>
+</a>
+<pre><code class="language-TypeScript">
+</code></pre>
+
+<a href="#comprobaciones-6" id="comprobaciones-6" style="color: inherit; text-decoration: none;">
+  <h4>Comprobaciones</h4>
+</a>
+<pre><code class="language-TypeScript">
+</code></pre>
+
+<a href="#ejercicio-8---palabras-encadenadas-en-un-array" id="ejercicio-8---palabras-encadenadas-en-un-array" style="color: inherit; text-decoration: none;">
+  <h2><em>Ejercicio 8 - Palabras encadenadas en un array</em></h2>
+</a>
+
+<a href="#enunciado-7" id="enunciado-7" style="color: inherit; text-decoration: none;">
+  <h3>Enunciado:</h3>
+</a>
+<p>Dado un array que contiene exclusivamente cadenas de texto, comprobar que las palabras del array están encadenadas. Esto es, una o más letras del final de una cadena coinciden con el comienzo de la siguiente cadena del array.</p>
+<p>Ejemplos de palabras encadenadas:</p>
+<p>“apply” and “plywood”</p>
+<p>“apple” and “each”</p>
+<p>“behemoth” and “mother”</p>
+<p>Ejemplos de palabras no encadenadas:</p>
+<p>“apply” and “playground”</p>
+<p>“apple” and “peggy”</p>
+<p>“behemoth” and “mathematics</p>
+<p>Para resolver este ejercicio, escriba una función meshArray que compruebe si las cadenas del array están encadenadas o no. La función recibirá como parámetro un array de cadenas de texto y devolverá:</p>
+<p>“Error al encadenar” si las cadenas del array no están encadenadas.
+Una cadena de texto que contenga las letras que encadenan las palabras del array. A priori no sabe cuantas letras encadenadas tendrán en común, pero al menos será una.
+Ejemplos de ejecución del programa:</p>
+<p>1: [“allow”, “lowering”, “ringmaster”, “terror”] –&gt; “lowringter”</p>
+<p>Este array está encadenado porque:</p>
+<p>Las letras “low” de la primera palabra encadenan con la palabra “lowering”.
+Las letras “ring” en la segunda y tercera palabras están encadenadas.
+Por último, las letras “ter” en las dos últimas palabras también están encadenadas.
+2: [“kingdom”, “dominator”, “notorious”, “usual”, “allegory”] –&gt; “Error al encadenar”</p>
+<p>En este caso, aunque las palabras “dominator” y “notorious” comparten letras en el mismo orden, las últimas letras de la primera palabra no encadenan con las primeras letras de la segunda.</p>
+
+<a href="#código-7" id="código-7" style="color: inherit; text-decoration: none;">
+  <h4>Código</h4>
+</a>
+<pre><code class="language-TypeScript">
+</code></pre>
+
+<a href="#comprobaciones-7" id="comprobaciones-7" style="color: inherit; text-decoration: none;">
+  <h4>Comprobaciones</h4>
+</a>
+<pre><code class="language-TypeScript">
+</code></pre>
+
+<a href="#elementos-bibliográficos" id="elementos-bibliográficos" style="color: inherit; text-decoration: none;">
+  <h2>Elementos Bibliográficos:</h2>
+</a>
+<ul>
+<li><p>Guión de la Práctica 4, <a href="https://ull-esit-inf-dsi-2223.github.io/prct04-arrays-tuples-enums/">https://ull-esit-inf-dsi-2223.github.io/prct04-arrays-tuples-enums/</a> .</p>
+</li>
+<li><p>Guia de TypeDoc, <a href="https://typedoc.org/guides/installation/">https://typedoc.org/guides/installation/</a> .</p>
+</li>
+<li><p>Adam Freeman - Essential TypeScript 4: From Beginner to ProURL,<a href="https://www.oreilly.com/library/view/essential-typescript-4/9781484270110/html/Part_1.xhtml">https://www.oreilly.com/library/view/essential-typescript-4/9781484270110/html/Part_1.xhtml</a> .</p>
+</li>
+<li><p>Basic writing and formatting syntax, <a href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax</a> .</p>
+</li>
+<li></li>
+<li></li>
+</ul>
+
+<a href="#conclusiones" id="conclusiones" style="color: inherit; text-decoration: none;">
+  <h2>Conclusiones</h2>
+</a>
+<p>Ejercicios bastante entretenidos para probar cosas, sobretodo ir aprendiendo y conociendo nuevos métodos de los tipos de datos. Quizás lo más &quot;complicado&quot; haya sido algún ejercicio como el 8, donde hay un poco de mareo con tema de formulas y demás, que a pesar de ser muy sencillas al final me acabo confundiendo y llega un punto en el que tengo un código muy enrevesado o directamente no funcional, o que no cumple con los requisitos especificados en el enunciado.</p>
+</div></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
