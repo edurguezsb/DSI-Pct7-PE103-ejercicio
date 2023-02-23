@@ -1,21 +1,26 @@
 {
-  "name": "theory-examples",
+  "name": "DSI",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc-watch --onSuccess \"node dist/ejercicio-8.js\""
-
+    "test": "mocha",
+    "start": "tsc-watch --onSuccess \"node dist/ejercicio-2.js\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/chai": "^4.3.4",
+    "@types/mocha": "^10.0.1",
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
+    "chai": "^4.3.7",
     "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
+    "mocha": "^10.2.0",
     "prettier": "^2.8.4",
+    "ts-node": "^10.9.1",
     "tsc-watch": "^6.0.0",
     "typedoc": "^0.23.25"
   }
