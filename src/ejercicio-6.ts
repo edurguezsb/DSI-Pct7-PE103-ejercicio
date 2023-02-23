@@ -3,7 +3,7 @@
  * @param arrai The array of numbers to compress.
  * @returns The character string representing the returned ranges.
  */
-function fromArrayToRanges(arrai: number[]): string {
+export function fromArrayToRanges(arrai: number[]): string {
     if (arrai.length === 0) {
       return "";
     }
@@ -32,7 +32,7 @@ function fromArrayToRanges(arrai: number[]): string {
    * @param str The character string representing the ranges.
    * @returns The array of numbers corresponding to the ranges.
    */
-  function fromRangesToArray(str: string): number[] {
+export function fromRangesToArray(str: string): number[] {
     const ranges = str.split(", ");
     const result: number[] = [];
   
@@ -51,16 +51,16 @@ function fromArrayToRanges(arrai: number[]): string {
     }
   
     return result;
-  }
+}
 
+/*
+console.log(fromArrayToRanges([5, 6, 7, 9, 12, 13, 14]));
+console.log(fromArrayToRanges([-3, -2, -1, 3, 5, 6, 7]));
+console.log(fromArrayToRanges([17]));
+console.log(fromArrayToRanges([3, 5, 6, 7, 9, 10]));
   
-console.log(fromArrayToRanges([5, 6, 7, 9, 12, 13, 14])); // "5_7, 9, 12_14"
-console.log(fromArrayToRanges([-3, -2, -1, 3, 5, 6, 7])); // "-3_-1, 3, 5_7"
-console.log(fromArrayToRanges([17])); // "17"
-console.log(fromArrayToRanges([3, 5, 6, 7, 9, 10])); // "3, 5_7, 9_10"
-  
-console.log(fromRangesToArray("5_7, 9, 12_14")); // [5, 6, 7, 9, 12, 13, 14]
+console.log(fromRangesToArray("5_7, 9, 12_14"));
 console.log(fromRangesToArray("-3_-1, 3, 5_7"));
 console.log(fromRangesToArray("17"));
 console.log(fromRangesToArray("3, 5_7, 9_10"));
-  
+*/

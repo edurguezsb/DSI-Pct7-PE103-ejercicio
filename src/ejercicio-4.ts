@@ -21,7 +21,7 @@ export function myMap<T>(collection: T[], callback: MapCallback<T>): T[] {
   return result;
 }
 
-
+/*
 const collection_1 = [0, 1, 2, 3, 4];
 const modCollection_1 = myMap(collection_1, (elemento) => elemento * elemento);
 console.log(modCollection_1);
@@ -29,3 +29,4 @@ console.log(modCollection_1);
 const collection_2 = ["e", "d", "u", "a", "r"];
 const modCollection_2 = myMap(collection_2, (elemento) => `elemento ${elemento}`);
 console.log(modCollection_2);
+*/

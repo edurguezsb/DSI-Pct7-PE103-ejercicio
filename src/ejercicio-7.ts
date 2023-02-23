@@ -3,7 +3,7 @@
  * @param colors The colors of the resistance bands.
  * @returns The numerical value of the resistor.
  */
-function decodeResistor(colors: string[]): number {
+export function decodeResistor(colors: string[]): number {
     const equivalence = {
       negro: 0,
       marrón: 1,
@@ -24,10 +24,10 @@ function decodeResistor(colors: string[]): number {
     return result;
 }
 
-  
+/*
 console.log(decodeResistor(["Marrón", "Verde"]));
 console.log(decodeResistor(["Marrón", "Verde", "Violeta"]));
 console.log(decodeResistor(["Amarillo", "Blanco"]));
 console.log(decodeResistor(["Negro", "Negro"]));
 console.log(decodeResistor(["Naranja", "Azul", "Verde", "Blanco"]));
-  
+*/

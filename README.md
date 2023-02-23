@@ -246,7 +246,7 @@ const a2: ComplexNumber = [1, -2];
 
 En este caso son definidas varias funciones para trabajar con números complejos, que se representan como una tupla de dos números. La tupla representa la parte real e imaginaria del número complejo, respectivamente.
 
-Las funciones definidas son: ``àdd```= sumar, ```sub```= restar, ```mult```= multiplicar, ```div```= dividir,  ```prod```= producto escalar, ```conj```= conjugado y ``àbs```= calcular el módulo de un complejo. Cada función toma dos argumentos que son números complejos y devuelve un número complejo que representa el resultado de la operación correspondiente.
+Las funciones definidas son: ```add```= sumar, ```sub```= restar, ```mult```= multiplicar, ```div```= dividir,  ```prod```= producto escalar, ```conj```= conjugado y ```abs```= calcular el módulo de un complejo. Cada función toma dos argumentos que son números complejos y devuelve un número complejo que representa el resultado de la operación correspondiente.
 
 Además, se definen dos constantes ```a1``` y ```a2``` que son números complejos que se utilizan para probar las diferentes funciones.
 
@@ -637,18 +637,134 @@ Escriba una función getSpiralMatrix que, dado un entero positivo n representand
 #### Código
 
 ``` TypeScript
+
+/**
+ * Generates a square matrix with integers arranged in a spiral.
+ * @param n The size of the square matrix.
+ * @returns The array with the integers arranged in a spiral.
+ */
+function getSpiralMatrix(n: number): number[][] {
+    const matrix: number[][] = [];
+  
+    for (let i = 0; i < n; i++) {
+      matrix.push(new Array(n));
+    }
+  
+    let top = 0, bottom = n - 1, left = 0, right = n - 1;
+    let value = 1;
+  
+    while (top <= bottom && left <= right) {
+      for (let i = left; i <= right; i++) {
+        matrix[top][i] = value++;
+      }
+      top++;
+  
+      for (let i = top; i <= bottom; i++) {
+        matrix[i][right] = value++;
+      }
+      right--;
+  
+      if (top <= bottom) {
+        for (let i = right; i >= left; i--) {
+          matrix[bottom][i] = value++;
+        }
+        bottom--;
+      }
+  
+      if (left <= right) {
+        for (let i = bottom; i >= top; i--) {
+          matrix[i][left] = value++;
+        }
+        left++;
+      }
+    }
+    return matrix;
+}
+
 ```
+
+En este caso hemos tenido que definit la función ```getSpiralMatrix```, que genera una matriz cuadrada con enteros que forman una espiral, recorriendo de fuera a dentro la matriz ordenando los valores que muestra de menor a mayor.
+
+La función toma un parámetro ```n```, que es el tamaño de la matriz cuadrada que se va a generar. La función comienza creando una matriz cuadrada vacía utilizando dos bucles ```for``` anidados que recorren cada fila y columna de la matriz.
+
+La función luego utiliza cuatro variables, ```top```, ```bottom```, ```left``` y ```right```, para ir siguiendo la posición actual de la espiral a medida que se construye la matriz. Estas variables que acabo de mencionar comienzan en 0 y se incrementan y disminuyen a medida que la espiral se desarrolla/va avanzando.
+
+La función utiliza otros cuatro bucles ```for``` anidados para agregar valores a la matriz en forma de espiral:
+
+- El primer bucle agrega valores a la fila superior de la matriz, de izquierda a derecha. 
+
+- El segundo bucle agrega valores a la columna derecha de la matriz, de arriba a abajo. 
+
+- El tercer bucle agrega valores a la fila inferior de la matriz, de derecha a izquierda. 
+
+- El cuarto bucle agrega valores a la columna izquierda de la matriz, de abajo hacia arriba.
 
 #### Comprobaciones
 
 Hemos hecho las siguientes comprobaciones con console.log():
 
 ``` TypeScript
+
+console.log(getSpiralMatrix(3));
+console.log(getSpiralMatrix(4));
+console.log(getSpiralMatrix(5));
+console.log(getSpiralMatrix(6));
+
 ```
 
 Cuyos resultados son:
 
 ```bash
+
+[ 
+  [ 1, 2, 3 ], 
+
+  [ 8, 9, 4 ], 
+
+  [ 7, 6, 5 ] 
+  
+]
+
+[
+  [ 1, 2, 3, 4 ],
+
+  [ 12, 13, 14, 5 ],
+
+  [ 11, 16, 15, 6 ],
+
+  [ 10, 9, 8, 7 ]
+
+]
+
+[
+
+  [ 1, 2, 3, 4, 5 ],
+
+  [ 16, 17, 18, 19, 6 ],
+
+  [ 15, 24, 25, 20, 7 ],
+
+  [ 14, 23, 22, 21, 8 ],
+
+  [ 13, 12, 11, 10, 9 ]
+
+]
+
+[
+
+  [ 1, 2, 3, 4, 5, 6 ],
+
+  [ 20, 21, 22, 23, 24, 7 ],
+
+  [ 19, 32, 33, 34, 25, 8 ],
+
+  [ 18, 31, 36, 35, 26, 9 ],
+
+  [ 17, 30, 29, 28, 27, 10 ],
+
+  [ 16, 15, 14, 13, 12, 11 ]
+
+]
 
 ```
 
@@ -656,11 +772,46 @@ Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos 
 
 ```TypeScript
 
+import 'mocha';
+import {expect} from 'chai';
+import { getSpiralMatrix } from '../src/ejercicio-5';
 
+describe('getSpiralMatrix function', () => {
+  it('should return an empty array if the input is 0', () => {
+    const result = getSpiralMatrix(0);
+    expect(result).to.deep.equal([]);
+  });
+
+  it('should return a 1x1 array if the input is 1', () => {
+    const result = getSpiralMatrix(1);
+    expect(result).to.deep.equal([[1]]);
+  });
+
+  it('should generate a 2x2 matrix with values in a spiral', () => {
+    const result = getSpiralMatrix(2);
+    expect(result).to.deep.equal([[1, 2], [4, 3]]);
+  });
+
+  it('should generate a 3x3 matrix with values in a spiral', () => {
+    const result = getSpiralMatrix(3);
+    expect(result).to.deep.equal([[1, 2, 3], [8, 9, 4], [7, 6, 5]]);
+  });
+
+  it('should generate a 5x5 matrix with values in a spiral', () => {
+    const result = getSpiralMatrix(5);
+    expect(result).to.deep.equal([
+      [1, 2, 3, 4, 5],
+      [16, 17, 18, 19, 6],
+      [15, 24, 25, 20, 7],
+      [14, 23, 22, 21, 8],
+      [13, 12, 11, 10, 9],
+    ]);
+  });
+});
 
 ```
 
-![f](Img/f)
+![f5](Img/f5.png)
 
 ## _Ejercicio 6 - Compresión de números en rangos_
 
@@ -683,18 +834,111 @@ Escriba una función fromRangesToArray que lleve a cabo la operación inversa, e
 #### Código
 
 ``` TypeScript
+
+/**
+ * Compresses an array of numbers into ranges.
+ * @param arrai The array of numbers to compress.
+ * @returns The character string representing the returned ranges.
+ */
+function fromArrayToRanges(arrai: number[]): string {
+    if (arrai.length === 0) {
+      return "";
+    }
+  
+    const ranges: string[] = [];
+    let start = arrai[0];
+    let end = arrai[0];
+  
+    for (let i = 1; i < arrai.length; i++) {
+      if (arrai[i] === end + 1) {
+        end = arrai[i];
+      } else {
+        ranges.push(start === end ? `${start}` : `${start}_${end}`);
+        start = arrai[i];
+        end = arrai[i];
+      }
+    }
+  
+    ranges.push(start === end ? `${start}` : `${start}_${end}`);
+  
+    return ranges.join(", ");
+  }
+  
+  /**
+   * Decompresses a string of characters into an array of numbers.
+   * @param str The character string representing the ranges.
+   * @returns The array of numbers corresponding to the ranges.
+   */
+  function fromRangesToArray(str: string): number[] {
+    const ranges = str.split(", ");
+    const result: number[] = [];
+  
+    for (let i = 0; i < ranges.length; i++) {
+      const range = ranges[i].split("_");
+  
+      if (range.length === 1) {
+        result.push(parseInt(range[0]));
+      } else {
+        const start = parseInt(range[0]);
+        const end = parseInt(range[1]);
+        for (let j = start; j <= end; j++) {
+          result.push(j);
+        }
+      }
+    }
+  
+    return result;
+}
+
 ```
+
+Tenemos dos funciones, ```fromArrayToRanges``` y ```fromRangesToArray```, que se utilizan para convertir entre una cadena de caracteres que representa un rango de números y un arreglo de números digamos.
+
+La función ```fromArrayToRanges``` toma un arreglo de números y devuelve una cadena de caracteres que representa los rangos en el arreglo. La función itera sobre el arreglo y determina los rangos de números que aparecen consecutivamente. Luego, para cada rango, la función agrega una cadena de caracteres que representa ese rango al arreglo ```ranges```. Finalmente, la función une todos los elementos del arreglo ```ranges``` con una coma ```,``` y un espacio ``` ``` para producir la cadena de caracteres de salida.
+
+La función ```fromRangesToArray```hace lo contrario a la anterior,  toma una cadena de caracteres que representa un rango de números y devuelve el arreglo que corresponde a los números en el rango. En esta función utilizamos la función ```split``` para dividir la cadena de caracteres de entrada en rangos individuales. Luego, para cada rango, la función divide la cadena de caracteres del rango en dos números, el inicio y el final del rango. La función itera desde el inicio hasta el final del rango y agrega cada número al arreglo ```result```. Finalmente, devuelve ```result```ahora si con todos los números correspondientes al rango.
 
 #### Comprobaciones
 
 Hemos hecho las siguientes comprobaciones con console.log():
 
 ``` TypeScript
+
+console.log(fromArrayToRanges([5, 6, 7, 9, 12, 13, 14]));
+console.log(fromArrayToRanges([-3, -2, -1, 3, 5, 6, 7]));
+console.log(fromArrayToRanges([17]));
+console.log(fromArrayToRanges([3, 5, 6, 7, 9, 10]));
+  
+console.log(fromRangesToArray("5_7, 9, 12_14"));
+console.log(fromRangesToArray("-3_-1, 3, 5_7"));
+console.log(fromRangesToArray("17"));
+console.log(fromRangesToArray("3, 5_7, 9_10"));
+
 ```
 
 Cuyos resultados son:
 
 ```bash
+
+5_7, 9, 12_14
+
+-3_-1, 3, 5_7
+
+17
+
+3, 5_7, 9_10
+
+[
+   5,  6,  7, 9, 12, 13, 14
+]
+
+[
+  -3, -2, -1, 3, 5,  6,  7
+]
+
+[ 17 ]
+
+[ 3, 5, 6, 7, 9, 10 ]
 
 ```
 
@@ -702,11 +946,41 @@ Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos 
 
 ```TypeScript
 
+import 'mocha';
+import {expect} from 'chai';
+import { fromArrayToRanges, fromRangesToArray } from '../src/ejercicio-6';
 
+describe('fromArrayToRanges function', () => {
+  it('should return an empty string if the input array is empty', () => {
+    const input: number[] = [];
+    const result = fromArrayToRanges(input);
+    expect(result).to.equal("");
+  });
+
+  it('should return a string that represents the ranges in the input array', () => {
+    const input = [1, 2, 3, 5, 6, 7, 10];
+    const result = fromArrayToRanges(input);
+    expect(result).to.equal("1_3, 5_7, 10");
+  });
+});
+
+describe('fromRangesToArray function', () => {
+  it('should return an empty array if the input string is empty', () => {
+    const input = "";
+    const result = fromRangesToArray(input);
+    expect(result).to.deep.equal([]);
+  });
+
+  it('should return an array of numbers that corresponds to the input string', () => {
+    const input = "1_3, 5_7, 10";
+    const result = fromRangesToArray(input);
+    expect(result).to.deep.equal([1, 2, 3, 5, 6, 7, 10]);
+  });
+});
 
 ```
 
-![f](Img/f)
+![f6](Img/f6.png)
 
 ## _Ejercicio 7 - Decodificar resistencias_
 
@@ -737,30 +1011,101 @@ De este modo, la combinación Marrón-Verde debería devolver 15 al igual que Ma
 #### Código
 
 ``` TypeScript
+
+/**
+ * Decodes the value of a resistor based on the colors of its bands.
+ * @param colors The colors of the resistance bands.
+ * @returns The numerical value of the resistor.
+ */
+function decodeResistor(colors: string[]): number {
+    const equivalence = {
+      negro: 0,
+      marrón: 1,
+      rojo: 2,
+      naranja: 3,
+      amarillo: 4,
+      verde: 5,
+      azul: 6,
+      violeta: 7,
+      gris: 8,
+      blanco: 9,
+    };
+  
+    const color1 = equivalence[colors[0].toLowerCase()];
+    const color2 = equivalence[colors[1].toLowerCase()];
+    const result = (color1 * 10) + color2;
+  
+    return result;
+}
+
 ```
+
+Programa con una sencilla función llamada ```decodeResistor``` a la que le damos unos colores, que en este caso representan las bandas de resistencia y nos devuelve su valor numérico.
+
+La función utiliza ```equivalence``` que nos da la correspondencia entre el color y su valor numérico. Para cada color de la entrada, la función utiliza ```equivalence``` para determinar su valor numérico y lo almacena en ```color1``` y ```color2```. Luego, la función calcula el valor de la resistencia sumando el valor de la primera banda multiplicado por diez y el valor de la segunda banda y nos devuelve ese valor ya sumado.
 
 #### Comprobaciones
 
 Hemos hecho las siguientes comprobaciones con console.log():
 
 ``` TypeScript
+
+console.log(decodeResistor(["Marrón", "Verde"]));
+console.log(decodeResistor(["Marrón", "Verde", "Violeta"]));
+console.log(decodeResistor(["Amarillo", "Blanco"]));
+console.log(decodeResistor(["Negro", "Negro"]));
+console.log(decodeResistor(["Naranja", "Azul", "Verde", "Blanco"]));
+
 ```
 
 Cuyos resultados son:
 
 ```bash
-
+15
+15
+49
+0
+36
 ```
 
 Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
 
+import 'mocha';
+import {expect} from 'chai';
+import {decodeResistor} from '../src/ejercicio-7';
 
+describe('decodeResistor function', () => {
+  it('should return the correct value for a two-band resistor', () => {
+    const result = decodeResistor(['marrón', 'negro']);
+    expect(result).to.equal(1);
+  });
+
+  it('should return the correct value for a three-band resistor', () => {
+    const result = decodeResistor(['marrón', 'negro', 'rojo']);
+    expect(result).to.equal(10);
+  });
+
+  it('should return the correct value for a four-band resistor', () => {
+    const result = decodeResistor(['marrón', 'negro', 'negro', 'rojo']);
+    expect(result).to.equal(100);
+  });
+
+  it('should return the correct value for a five-band resistor', () => {
+    const result = decodeResistor(['marrón', 'negro', 'negro', 'oro', 'marrón']);
+    expect(result).to.equal(1000);
+  });
+
+  it('should return the correct value for a six-band resistor', () => {
+    const result = decodeResistor(['marrón', 'negro', 'negro', 'marrón', 'negro', 'plata']);
+    expect(result).to.equal(100000);
+  });
+});
 
 ```
 
-![f](Img/f)
+![f7](Img/f7.png)
 
 ## _Ejercicio 8 - Palabras encadenadas en un array_
 
@@ -804,30 +1149,122 @@ En este caso, aunque las palabras “dominator” y “notorious” comparten le
 #### Código
 
 ``` TypeScript
+
+/**
+ * Check if the words in an array are chained.
+ * @param words - An array of text strings.
+ * @returns A text string containing the letters that string the words in the array, or "Error al encadenar" if the words are not connected.
+ */
+function meshArray(words: string[]): string {
+  let result = "";
+  for (let i = 0; i < words.length - 1; i++) {
+    const current = words[i];
+    const next = words[i + 1];
+    let commonLetters = "";
+    for (let j = 0; j < current.length; j++) {
+      if (next.startsWith(current.slice(j))) {
+        commonLetters = current.slice(j);
+        break;
+      }
+    }
+    if (commonLetters.length === 0) {
+      return "Error al encadenar";
+    }
+    result += commonLetters;
+  }
+  return result;
+}
+
 ```
+
+En este último ejercicio tenemos la función llamada ```meshArray``` que comprueba si las palabras en un array están encadenadas y devuelve una cadena de texto que contiene las letras que encadenan las palabras en el array o un mensaje de error si no están conectadas de ninguna manera.
+
+1. La función utiliza un bucle ```for``` para iterar por el array de palabras y compara cada palabra con la siguiente. 
+
+2. La función utiliza un segundo bucle ```for``` que recorre cada letra de la palabra actual y busca una coincidencia en la siguiente palabra utilizando el método ```startsWith```. 
+
+3. Si se encuentra una coincidencia, la función va almacenando las letras comunes en una variable de texto llamada ```commonLetters```.
+
+4. Si no se encuentra ninguna coincidencia, la función devuelve un mensaje de error. Si se encuentran letras en común, la función las añade a una variable de texto ```result```.
+
+5. Finalmente, la función devuelve la variable ```result`` que contiene las letras comunes que unen las palabras en el array, o un mensaje de error si las palabras no están conectadas.
+
 
 #### Comprobaciones
 
 Hemos hecho las siguientes comprobaciones con console.log():
 
 ``` TypeScript
+
+console.log(meshArray(["eduardo", "oluis", "srodriguez", "zsan", "nblas"]));
+console.log(meshArray(["allow", "lowering", "ringmaster", "terror"]));
+console.log(meshArray(["kingdom", "dominator", "notorious", "usual", "allegory"]));
+console.log(meshArray(["apply", "plywood"]));
+console.log(meshArray(["apple", "each"]));
+console.log(meshArray(["behemoth", "mother"]));
+console.log(meshArray(["apply", "playground"]));
+console.log(meshArray(["apple", "peggy"]));
+console.log(meshArray(["behemoth", "mathematics"]));
+
 ```
 
 Cuyos resultados son:
 
 ```bash
 
+oszn
+lowringter
+Error al encadenar
+ply
+e
+moth
+Error al encadenar
+Error al encadenar
+Error al encadenar
+
 ```
 
 Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
+import 'mocha';
+import { expect } from 'chai';
+import { meshArray } from '../src/ejercicio-8';
 
+describe('meshArray function', () => {
+  it('should return an empty string when an empty array is passed', () => {
+    const input: string[] = [];
+    const result = meshArray(input);
+    expect(result).to.equal('');
+  });
 
+  it('should return the common letters when the words are chained together', () => {
+    const input = ['beach', 'achieve', 'evening'];
+    const result = meshArray(input);
+    expect(result).to.equal('che');
+  });
 
+  it('should return an error message when the words are not chained together', () => {
+    const input = ['one', 'two', 'three'];
+    const result = meshArray(input);
+    expect(result).to.equal('Error al encadenar');
+  });
+
+  it('should handle an array with one word', () => {
+    const input = ['hello'];
+    const result = meshArray(input);
+    expect(result).to.equal('');
+  });
+
+  it('should handle an array with two identical words', () => {
+    const input = ['hello', 'hello'];
+    const result = meshArray(input);
+    expect(result).to.equal('hello');
+  });
+});
 ```
 
-![f](Img/f)
+![f8](Img/f8.png)
 
 ## Elementos Bibliográficos:
 
@@ -845,6 +1282,8 @@ Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos 
 
 - Vídeo de ejemplo de instalación y configuración de Mocha y Chai en un proyecto TypeScript, https://drive.google.com/file/d/1-z1oNOZP70WBDyhaaUijjHvFtqd6eAmJ/view .
 
+- Sobre un warning en particular, https://github.com/TypeStrong/typedoc/issues/1966 .
+
 - Adam Freeman - Essential TypeScript 4: From Beginner to ProURL,https://www.oreilly.com/library/view/essential-typescript-4/9781484270110/html/Part_1.xhtml .
 
 - Basic writing and formatting syntax, https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax .
@@ -854,4 +1293,6 @@ Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos 
 
 ## Conclusiones
 
-Ejercicios bastante entretenidos para probar cosas, sobretodo ir aprendiendo y conociendo nuevos métodos de los tipos de datos. Quizás lo más "complicado" haya sido algún ejercicio como el 8, donde hay un poco de mareo con tema de formulas y demás, que a pesar de ser muy sencillas al final me acabo confundiendo y llega un punto en el que tengo un código muy enrevesado o directamente no funcional, o que no cumple con los requisitos especificados en el enunciado.
+Ejercicios bastante entretenidos para probar cosas al igual que en la práctica 3, sobretodo sirven para  ir aprendiendo y conociendo nuevos métodos de los tipos de datos. En este caso gracias a estos ejercicios hemos aprendido y mejorado en cuanto a conocer más en profundidad los arrays, tuplas y enumerados. 
+
+También hay que destacar que hemos aprendido nociones básicas de TypeDoc para poder generar documentación muy útil de una manera muy sencilla realmente. Por otra parte podríamos decir que lo más complejo esta vez ha sido empezar a hacer tests con Mocha y la librería Chai, pero es cuestión de ir probando cosas, que a base de errores también se aprende.

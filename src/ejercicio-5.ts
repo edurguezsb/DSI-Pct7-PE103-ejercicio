@@ -3,7 +3,7 @@
  * @param n The size of the square matrix.
  * @returns The array with the integers arranged in a spiral.
  */
-function getSpiralMatrix(n: number): number[][] {
+export function getSpiralMatrix(n: number): number[][] {
     const matrix: number[][] = [];
   
     for (let i = 0; i < n; i++) {
@@ -39,11 +39,11 @@ function getSpiralMatrix(n: number): number[][] {
       }
     }
     return matrix;
-  }
+}
 
-  
+/*
 console.log(getSpiralMatrix(3));
 console.log(getSpiralMatrix(4));
 console.log(getSpiralMatrix(5));
 console.log(getSpiralMatrix(6));
-
+*/
