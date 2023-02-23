@@ -27,7 +27,6 @@ Por último, tenga en cuenta que la función podría recibir una puntuación que
 #### Código
 
 ``` TypeScript
-
 /**
  * This enumeration shows the different allergens that we have in this case.
  * @enum
@@ -60,7 +59,6 @@ export enum Allergen {
   
     return allergens as Allergen[];
   }
-
 ```
 
 El código define una enumeración llamada ```Allergen``` que contiene diferentes tipos de alergias, cada uno representado por un número entero diferente. La función ```getAllergens``` toma como argumento una puntuación total de las alergias de una persona y devuelve una lista de las alergias a las que esa persona es alérgica, según la puntuación que le pasemos.
@@ -72,13 +70,11 @@ La función primero comprueba si la puntuación es un número entero válido y m
 Hemos hecho las siguientes comprobaciones con console.log():
 
 ``` TypeScript
-
 console.log(getAllergens(129));
 console.log(getAllergens(257));
 console.log(getAllergens(256));
 console.log(getAllergens(515));
 console.log(getAllergens(84));
-
 ```
 
 Cuyos resultados son:
@@ -94,7 +90,6 @@ Cuyos resultados son:
 Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
-
 import 'mocha';
 import {expect} from 'chai';
 import {getAllergens, Allergen} from '../src/ejercicio-1';
@@ -138,7 +133,6 @@ describe('getAllergens function tests', () => {
     expect(getAllergens(NaN)).to.be.undefined;
   });
 });
-
 ```
 
 ![f1](Img/f1.png)
@@ -160,7 +154,6 @@ Módulo (función abs). La función recibe como argumento un complejo y retorna 
 #### Código
 
 ``` TypeScript
-
 /**
  * Represent a complex number.
  */
@@ -241,7 +234,6 @@ function abs(a: ComplexNumber): number {
 
 const a1: ComplexNumber = [3, 4];
 const a2: ComplexNumber = [1, -2];
-
 ```
 
 En este caso son definidas varias funciones para trabajar con números complejos, que se representan como una tupla de dos números. La tupla representa la parte real e imaginaria del número complejo, respectivamente.
@@ -256,7 +248,6 @@ Además, se definen dos constantes ```a1``` y ```a2``` que son números complejo
 Hemos hecho las siguientes comprobaciones con console.log():
 
 ``` TypeScript
-
 console.log("Suma: ", add(a1, a2));
 console.log("Resta: ", sub(a1, a2));
 console.log("Multiplicación: ", mult(a1, a2));
@@ -264,13 +255,11 @@ console.log("División: ", div(a1, a2));
 console.log("Producto escalar: ", prod(a1, 2));
 console.log("Conjugado de a1: ", conj(a1));
 console.log("Módulo de a1: ", abs(a1));
-
 ```
 
 Cuyos resultados son:
 
 ```bash
-
 Suma:  [ 4, 2 ]
 Resta:  [ 2, 6 ]
 Multiplicación:  [ 11, -2 ]
@@ -278,15 +267,55 @@ División:  [ -1, 2 ]
 Producto escalar:  [ 6, 8 ]
 Conjugado de a1:  [ 3, -4 ]
 Módulo de a1:  5
-
 ```
 
 Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
+import 'mocha';
+import { expect } from 'chai';
+import { ComplexNumber, add, sub, mult, div, prod, conj, abs } from '../src/ejercicio-2';
 
+describe('complex number operations', () => {
+  const a1: ComplexNumber = [3, 4];
+  const a2: ComplexNumber = [1, -2];
+  const scalar = 2;
 
+  it('should add two complex numbers', () => {
+    const result = add(a1, a2);
+    expect(result).to.eql([4, 2]);
+  });
 
+  it('should subtract two complex numbers', () => {
+    const result = sub(a1, a2);
+    expect(result).to.eql([2, 6]);
+  });
+
+  it('should multiply two complex numbers', () => {
+    const result = mult(a1, a2);
+    expect(result).to.eql([11, -2]);
+  });
+
+  it('should divide two complex numbers', () => {
+    const result = div(a1, a2);
+    expect(result).to.eql([0.6, 2.2]);
+  });
+
+  it('should scale a complex number', () => {
+    const result = prod(a1, scalar);
+    expect(result).to.eql([6, 8]);
+  });
+
+  it('should calculate the conjugate of a complex number', () => {
+    const result = conj(a1);
+    expect(result).to.eql([3, -4]);
+  });
+
+  it('should calculate the absolute value of a complex number', () => {
+    const result = abs(a1);
+    expect(result).to.eql(5);
+  });
+});
 ```
 
 ![f2](Img/f2.png)
@@ -327,7 +356,6 @@ Por último, el tablero debe consistir en, exactamente, 8 filas y 8 columnas, do
 #### Código
 
 ``` TypeScript
-
 /**
  * Defines which are the possible types for the cells of the chess.
  */
@@ -367,7 +395,6 @@ function checkAtack(board: ChessBoard): boolean | undefined {
 
   return blackQueen[0] === whiteQueen[0] || blackQueen[1] === whiteQueen[1] || Math.abs(blackQueen[0] - whiteQueen[0]) === Math.abs(blackQueen[1] - whiteQueen[1]);
 }
-
 ```
 
 Lo primero de nuestro programa es que definimos el tipo ```ChessCell```,que viene siendo que tipo de valores nos podemos encontrar en las casillas del tablero de ajedrez, en este caso se nos ha pedido que los valores sean: "-", "N", o "B". También definimos el tipo ```ChessBoard```, que es básicamente una matriz 8x8 que representa nuestro tablero de ajedrez.
@@ -381,7 +408,6 @@ La función utiliza dos variables ```blackQueen``` y ```whiteQueen``` para compr
 Hemos hecho las siguientes comprobaciones con console.log():
 
 ``` TypeScript
-
 const board1: ChessBoard = [
     ["-", "-", "-", "-", "-", "-", "-", "-"],
     ["-", "-", "-", "N", "-", "-", "-", "-"],
@@ -429,24 +455,20 @@ console.log("¿Las reinas pueden atacarse en el tablero 3?", checkAtack(board3))
     ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
   ];
 console.log("¿Las reinas pueden atacarse en el tablero 4?", checkAtack(board4)); // undefined porque el tablero es más grande de lo permitido
-
 ```
 
 Cuyos resultados son:
 
 ```bash
-
 ¿Las reinas pueden atacarse en el tablero 1? true
 ¿Las reinas pueden atacarse en el tablero 2? true
 ¿Las reinas pueden atacarse en el tablero 3? false
 ¿Las reinas pueden atacarse en el tablero 4? undefined
-
 ```
 
 Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
-
 import 'mocha';
 import {expect} from 'chai';
 import { ChessCell, ChessBoard, checkAtack } from '../src/ejercicio-3';
@@ -508,7 +530,6 @@ describe('chessboard operations', () => {
       expect(result).to.be.false;
     });
   });
-
 ```
 
 ![f3](Img/f3.png)
@@ -526,7 +547,6 @@ Teniendo en cuenta lo anterior, escriba una función myMap que reciba una colecc
 #### Código
 
 ``` TypeScript
-
 /**
  * Function that receives an element from the collection and returns its modified version.
  * @param elemento The element of the collection to modify.
@@ -549,7 +569,6 @@ function myMap<T>(collection: T[], callback: MapCallback<T>): T[] {
 
   return result;
 }
-
 ```
 
 Definimos la función ```myMap``` que recibe una colección de elementos y una función de devolución de llamada que define una transformación para aplicarsela a los elementos de la colección.
@@ -563,7 +582,6 @@ La función de ```myMap``` utiliza un bucle for para iterar sobre la colección 
 Hemos hecho las siguientes comprobaciones con console.log():
 
 ``` TypeScript
-
 const collection_1 = [0, 1, 2, 3, 4];
 const modCollection_1 = myMap(collection_1, (elemento) => elemento * elemento);
 console.log(modCollection_1);
@@ -571,13 +589,11 @@ console.log(modCollection_1);
 const collection_2 = ["e", "d", "u", "a", "r"];
 const modCollection_2 = myMap(collection_2, (elemento) => `elemento ${elemento}`);
 console.log(modCollection_2);
-
 ```
 
 Cuyos resultados son:
 
 ```bash
-
 [ 0, 1, 4, 9, 16 ]
 [
   'elemento e',
@@ -586,13 +602,11 @@ Cuyos resultados son:
   'elemento a',
   'elemento r'
 ]
-
 ```
 
 Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
-
 import 'mocha';
 import {expect} from 'chai';
 import { myMap } from '../src/ejercicio-4';
@@ -622,8 +636,6 @@ describe('myMap function', () => {
     expect(input).to.deep.equal([1, 2, 3]);
   });
 });
-
-
 ```
 
 ![f4](Img/f4.png)
@@ -637,7 +649,6 @@ Escriba una función getSpiralMatrix que, dado un entero positivo n representand
 #### Código
 
 ``` TypeScript
-
 /**
  * Generates a square matrix with integers arranged in a spiral.
  * @param n The size of the square matrix.
@@ -680,7 +691,6 @@ function getSpiralMatrix(n: number): number[][] {
     }
     return matrix;
 }
-
 ```
 
 En este caso hemos tenido que definit la función ```getSpiralMatrix```, que genera una matriz cuadrada con enteros que forman una espiral, recorriendo de fuera a dentro la matriz ordenando los valores que muestra de menor a mayor.
@@ -704,18 +714,15 @@ La función utiliza otros cuatro bucles ```for``` anidados para agregar valores 
 Hemos hecho las siguientes comprobaciones con console.log():
 
 ``` TypeScript
-
 console.log(getSpiralMatrix(3));
 console.log(getSpiralMatrix(4));
 console.log(getSpiralMatrix(5));
 console.log(getSpiralMatrix(6));
-
 ```
 
 Cuyos resultados son:
 
 ```bash
-
 [ 
   [ 1, 2, 3 ], 
 
@@ -765,13 +772,11 @@ Cuyos resultados son:
   [ 16, 15, 14, 13, 12, 11 ]
 
 ]
-
 ```
 
 Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
-
 import 'mocha';
 import {expect} from 'chai';
 import { getSpiralMatrix } from '../src/ejercicio-5';
@@ -808,7 +813,6 @@ describe('getSpiralMatrix function', () => {
     ]);
   });
 });
-
 ```
 
 ![f5](Img/f5.png)
@@ -834,7 +838,6 @@ Escriba una función fromRangesToArray que lleve a cabo la operación inversa, e
 #### Código
 
 ``` TypeScript
-
 /**
  * Compresses an array of numbers into ranges.
  * @param arrai The array of numbers to compress.
@@ -889,7 +892,6 @@ function fromArrayToRanges(arrai: number[]): string {
   
     return result;
 }
-
 ```
 
 Tenemos dos funciones, ```fromArrayToRanges``` y ```fromRangesToArray```, que se utilizan para convertir entre una cadena de caracteres que representa un rango de números y un arreglo de números digamos.
@@ -903,7 +905,6 @@ La función ```fromRangesToArray```hace lo contrario a la anterior,  toma una ca
 Hemos hecho las siguientes comprobaciones con console.log():
 
 ``` TypeScript
-
 console.log(fromArrayToRanges([5, 6, 7, 9, 12, 13, 14]));
 console.log(fromArrayToRanges([-3, -2, -1, 3, 5, 6, 7]));
 console.log(fromArrayToRanges([17]));
@@ -913,13 +914,11 @@ console.log(fromRangesToArray("5_7, 9, 12_14"));
 console.log(fromRangesToArray("-3_-1, 3, 5_7"));
 console.log(fromRangesToArray("17"));
 console.log(fromRangesToArray("3, 5_7, 9_10"));
-
 ```
 
 Cuyos resultados son:
 
 ```bash
-
 5_7, 9, 12_14
 
 -3_-1, 3, 5_7
@@ -939,13 +938,11 @@ Cuyos resultados son:
 [ 17 ]
 
 [ 3, 5, 6, 7, 9, 10 ]
-
 ```
 
 Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
-
 import 'mocha';
 import {expect} from 'chai';
 import { fromArrayToRanges, fromRangesToArray } from '../src/ejercicio-6';
@@ -977,7 +974,6 @@ describe('fromRangesToArray function', () => {
     expect(result).to.deep.equal([1, 2, 3, 5, 6, 7, 10]);
   });
 });
-
 ```
 
 ![f6](Img/f6.png)
@@ -1011,7 +1007,6 @@ De este modo, la combinación Marrón-Verde debería devolver 15 al igual que Ma
 #### Código
 
 ``` TypeScript
-
 /**
  * Decodes the value of a resistor based on the colors of its bands.
  * @param colors The colors of the resistance bands.
@@ -1037,7 +1032,6 @@ function decodeResistor(colors: string[]): number {
   
     return result;
 }
-
 ```
 
 Programa con una sencilla función llamada ```decodeResistor``` a la que le damos unos colores, que en este caso representan las bandas de resistencia y nos devuelve su valor numérico.
@@ -1049,13 +1043,11 @@ La función utiliza ```equivalence``` que nos da la correspondencia entre el col
 Hemos hecho las siguientes comprobaciones con console.log():
 
 ``` TypeScript
-
 console.log(decodeResistor(["Marrón", "Verde"]));
 console.log(decodeResistor(["Marrón", "Verde", "Violeta"]));
 console.log(decodeResistor(["Amarillo", "Blanco"]));
 console.log(decodeResistor(["Negro", "Negro"]));
 console.log(decodeResistor(["Naranja", "Azul", "Verde", "Blanco"]));
-
 ```
 
 Cuyos resultados son:
@@ -1071,7 +1063,6 @@ Cuyos resultados son:
 Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
-
 import 'mocha';
 import {expect} from 'chai';
 import {decodeResistor} from '../src/ejercicio-7';
@@ -1102,7 +1093,6 @@ describe('decodeResistor function', () => {
     expect(result).to.equal(100000);
   });
 });
-
 ```
 
 ![f7](Img/f7.png)
@@ -1149,7 +1139,6 @@ En este caso, aunque las palabras “dominator” y “notorious” comparten le
 #### Código
 
 ``` TypeScript
-
 /**
  * Check if the words in an array are chained.
  * @param words - An array of text strings.
@@ -1174,7 +1163,6 @@ function meshArray(words: string[]): string {
   }
   return result;
 }
-
 ```
 
 En este último ejercicio tenemos la función llamada ```meshArray``` que comprueba si las palabras en un array están encadenadas y devuelve una cadena de texto que contiene las letras que encadenan las palabras en el array o un mensaje de error si no están conectadas de ninguna manera.
@@ -1195,7 +1183,6 @@ En este último ejercicio tenemos la función llamada ```meshArray``` que compru
 Hemos hecho las siguientes comprobaciones con console.log():
 
 ``` TypeScript
-
 console.log(meshArray(["eduardo", "oluis", "srodriguez", "zsan", "nblas"]));
 console.log(meshArray(["allow", "lowering", "ringmaster", "terror"]));
 console.log(meshArray(["kingdom", "dominator", "notorious", "usual", "allegory"]));
@@ -1205,13 +1192,11 @@ console.log(meshArray(["behemoth", "mother"]));
 console.log(meshArray(["apply", "playground"]));
 console.log(meshArray(["apple", "peggy"]));
 console.log(meshArray(["behemoth", "mathematics"]));
-
 ```
 
 Cuyos resultados son:
 
 ```bash
-
 oszn
 lowringter
 Error al encadenar
@@ -1221,7 +1206,6 @@ moth
 Error al encadenar
 Error al encadenar
 Error al encadenar
-
 ```
 
 Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
