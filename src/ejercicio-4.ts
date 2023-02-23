@@ -3,7 +3,7 @@
  * @param elemento The element of the collection to modify.
  * @returns The modified item.
  */
-type MapCallback<T> = (elemento: T) => T;
+export type MapCallback<T> = (elemento: T) => T;
 
 /**
  * Modifies each element of a collection based on a callback.
@@ -11,7 +11,7 @@ type MapCallback<T> = (elemento: T) => T;
  * @param callback The callback that defines the modification to apply to each element.
  * @returns The modified collection.
  */
-function myMap<T>(collection: T[], callback: MapCallback<T>): T[] {
+export function myMap<T>(collection: T[], callback: MapCallback<T>): T[] {
   const result: T[] = [];
 
   for (let i = 0; i < collection.length; i++) {

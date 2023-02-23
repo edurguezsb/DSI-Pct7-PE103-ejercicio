@@ -526,18 +526,66 @@ Teniendo en cuenta lo anterior, escriba una función myMap que reciba una colecc
 #### Código
 
 ``` TypeScript
+
+/**
+ * Function that receives an element from the collection and returns its modified version.
+ * @param elemento The element of the collection to modify.
+ * @returns The modified item.
+ */
+type MapCallback<T> = (elemento: T) => T;
+
+/**
+ * Modifies each element of a collection based on a callback.
+ * @param collection The collection of elements to modify.
+ * @param callback The callback that defines the modification to apply to each element.
+ * @returns The modified collection.
+ */
+function myMap<T>(collection: T[], callback: MapCallback<T>): T[] {
+  const result: T[] = [];
+
+  for (let i = 0; i < collection.length; i++) {
+    result.push(callback(collection[i]));
+  }
+
+  return result;
+}
+
 ```
+
+Definimos la función ```myMap``` que recibe una colección de elementos y una función de devolución de llamada que define una transformación para aplicarsela a los elementos de la colección.
+
+La función ```myMap utiliza``` el tipo genérico T para indicar el tipo de elemento que se encuentra en la colección. También define un tipo de devolución de llamada ```MapCallback<T>``` que indica que la función de devolución de llamada toma un parámetro elemento de tipo T y devuelve un valor del mismo tipo.
+
+La función de ```myMap``` utiliza un bucle for para iterar sobre la colección y aplicar la función de devolución de llamada a cada elemento. Cada elemento se pasa a la función de devolución de llamada, que devuelve su versión modificada. La función de ```myMap``` almacena cada elemento modificado en un nuevo cambio ```result``` y devuelve ese cambio al final.
 
 #### Comprobaciones
 
 Hemos hecho las siguientes comprobaciones con console.log():
 
 ``` TypeScript
+
+const collection_1 = [0, 1, 2, 3, 4];
+const modCollection_1 = myMap(collection_1, (elemento) => elemento * elemento);
+console.log(modCollection_1);
+
+const collection_2 = ["e", "d", "u", "a", "r"];
+const modCollection_2 = myMap(collection_2, (elemento) => `elemento ${elemento}`);
+console.log(modCollection_2);
+
 ```
 
 Cuyos resultados son:
 
 ```bash
+
+[ 0, 1, 4, 9, 16 ]
+[
+  'elemento e',
+  'elemento d',
+  'elemento u',
+  'elemento a',
+  'elemento r'
+]
 
 ```
 
@@ -545,11 +593,40 @@ Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos 
 
 ```TypeScript
 
+import 'mocha';
+import {expect} from 'chai';
+import { myMap } from '../src/ejercicio-4';
+
+describe('myMap function', () => {
+  it('should return an empty array if the input array is empty', () => {
+    const input: number[] = [];
+    const result = myMap(input, x => x * 2);
+    expect(result).to.deep.equal([]);
+  });
+
+  it('should apply the callback function to each element in the array and return the transformed array', () => {
+    const input = [1, 2, 3];
+    const result = myMap(input, x => x * 2);
+    expect(result).to.deep.equal([2, 4, 6]);
+  });
+
+  it('should handle arrays of non-numeric types', () => {
+    const input = ['hello', 'world'];
+    const result = myMap(input, x => x.toUpperCase());
+    expect(result).to.deep.equal(['HELLO', 'WORLD']);
+  });
+
+  it('should not modify the original array', () => {
+    const input = [1, 2, 3];
+    myMap(input, x => x * 2);
+    expect(input).to.deep.equal([1, 2, 3]);
+  });
+});
 
 
 ```
 
-![f](Img/f)
+![f4](Img/f4.png)
 
 ## _Ejercicio 5 - Matrices espirales_
 
