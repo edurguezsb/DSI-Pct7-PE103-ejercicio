@@ -3,7 +3,7 @@
  * @enum
  */
 
-enum Allergen {
+export enum Allergen {
     Huevo = 1,
     Cacahuete = 2,
     Marisco = 4,
@@ -19,7 +19,7 @@ enum Allergen {
  * @param puntuation - Total puntuation of a person allergies.
  * @returns - List of allergens to which that person is allergic.
  */
-  function getAllergens(puntuation: number): Allergen[] | undefined {
+  export function getAllergens(puntuation: number): Allergen[] | undefined {
     if (!Number.isInteger(puntuation) || puntuation <= 0) {
       return undefined;
     }
@@ -32,8 +32,9 @@ enum Allergen {
   }
 
 
-console.log(getAllergens(129));
-console.log(getAllergens(257));
-console.log(getAllergens(256));
-console.log(getAllergens(515));
-console.log(getAllergens(84));
+//console.log(getAllergens(129));
+//console.log(getAllergens(257));
+//console.log(getAllergens(256));
+//console.log(getAllergens(515));
+//console.log(getAllergens(84));
+

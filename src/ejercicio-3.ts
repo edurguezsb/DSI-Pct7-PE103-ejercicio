@@ -1,19 +1,19 @@
 /**
  * Defines which are the possible types for the cells of the chess.
  */
-type ChessCell = "-" | "N" | "B";
+export type ChessCell = "-" | "N" | "B";
 
 /**
  * Defines the data type for the chess.
  */
-type ChessBoard = [ChessCell[], ChessCell[], ChessCell[], ChessCell[], ChessCell[], ChessCell[], ChessCell[], ChessCell[]];
+export type ChessBoard = [ChessCell[], ChessCell[], ChessCell[], ChessCell[], ChessCell[], ChessCell[], ChessCell[], ChessCell[]];
 
 /**
  * Determines if two queens can attack each other on the chess.
  * @param board The chess board.
  * @returns True if both of the queens can attack each other, false if not. Undefined if the chess board is not valid because of the size or any irregularity.
  */
-function checkAtack(board: ChessBoard): boolean | undefined {
+export function checkAtack(board: ChessBoard): boolean | undefined {
   if (board.length !== 8 || board.some(row => row.length !== 8 || row.some(cell => !["-", "N", "B"].includes(cell)))) {
     return undefined;
   }
@@ -39,7 +39,7 @@ function checkAtack(board: ChessBoard): boolean | undefined {
 }
 
 
-
+/* 
 const board1: ChessBoard = [
     ["-", "-", "-", "-", "-", "-", "-", "-"],
     ["-", "-", "-", "N", "-", "-", "-", "-"],
@@ -87,3 +87,4 @@ console.log("¿Las reinas pueden atacarse en el tablero 3?", checkAtack(board3))
     ["-", "-", "-", "-", "-", "-", "-", "-", "-"],
   ];
 console.log("¿Las reinas pueden atacarse en el tablero 4?", checkAtack(board4)); // undefined porque el tablero es más grande de lo permitido
+*/
