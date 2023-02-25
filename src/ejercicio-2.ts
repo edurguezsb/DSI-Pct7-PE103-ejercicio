@@ -42,8 +42,8 @@ export function mult(a: ComplexNumber, b: ComplexNumber): ComplexNumber {
  * @returns The result is a complex number too.
  */
 export function div(a: ComplexNumber, b: ComplexNumber): ComplexNumber {
-  const real = (a[0] * b[0] + a[1] * b[1]) / (b[0] * b[0] + b[1] * b[1]);
-  const imaginary = (a[1] * b[0] - a[0] * b[1]) / (b[0] * b[0] + b[1] * b[1]);
+  const real = ((a[0] * b[0]) + (a[1] * b[1])) / ((b[0] * b[0]) + (b[1] * b[1]));
+  const imaginary = ((a[1] * b[0]) - (a[0] * b[1])) / ((b[0] * b[0]) + (b[1] * b[1]));
   return [real, imaginary];
 }
 

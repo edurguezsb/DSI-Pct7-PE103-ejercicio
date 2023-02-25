@@ -27,31 +27,33 @@ export function fromArrayToRanges(arrai: number[]): string {
     return ranges.join(", ");
   }
   
-  /**
-   * Decompresses a string of characters into an array of numbers.
-   * @param str The character string representing the ranges.
-   * @returns The array of numbers corresponding to the ranges.
-   */
-export function fromRangesToArray(str: string): number[] {
-    const ranges = str.split(", ");
-    const result: number[] = [];
+
+/**
+ * Splits a character string into an array of numbers.
+ * @param ranges The character string with ranges to split.
+ * @returns An array of numbers.
+*/
+export function fromRangesToArray(ranges: string): number[] {
+  if (!ranges || ranges.trim() === '') {
+    return [];
+  }
   
-    for (let i = 0; i < ranges.length; i++) {
-      const range = ranges[i].split("_");
-  
-      if (range.length === 1) {
-        result.push(parseInt(range[0]));
-      } else {
-        const start = parseInt(range[0]);
-        const end = parseInt(range[1]);
-        for (let j = start; j <= end; j++) {
-          result.push(j);
-        }
-      }
+  const result: number[] = ranges.split(/,\s*/).flatMap(range => {
+    const [startStr, endStr] = range.split(/_|-/);
+    const start = parseInt(startStr, 10);
+    const end = parseInt(endStr, 10) || start;
+    
+    if (isNaN(start) || isNaN(end)) {
+      return [];
     }
-  
-    return result;
+
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  });
+
+  return result;
 }
+
+
 
 /*
 console.log(fromArrayToRanges([5, 6, 7, 9, 12, 13, 14]));

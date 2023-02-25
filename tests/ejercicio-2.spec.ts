@@ -9,36 +9,36 @@ describe('complex number operations', () => {
 
   it('should add two complex numbers', () => {
     const result = add(a1, a2);
-    expect(result).to.eql([4, 2]);
+    expect(result).to.be.eqls([4, 2]);
   });
 
   it('should subtract two complex numbers', () => {
     const result = sub(a1, a2);
-    expect(result).to.eql([2, 6]);
+    expect(result).to.be.eqls([2, 6]);
   });
 
   it('should multiply two complex numbers', () => {
     const result = mult(a1, a2);
-    expect(result).to.eql([11, -2]);
+    expect(result).to.be.eqls([11, -2]);
   });
 
   it('should divide two complex numbers', () => {
     const result = div(a1, a2);
-    expect(result).to.eql([0.6, 2.2]);
+    expect(result).to.be.eqls([-1, 2]);
   });
 
   it('should scale a complex number', () => {
     const result = prod(a1, scalar);
-    expect(result).to.eql([6, 8]);
+    expect(result).to.be.eqls([6, 8]);
   });
 
   it('should calculate the conjugate of a complex number', () => {
     const result = conj(a1);
-    expect(result).to.eql([3, -4]);
+    expect(result).to.be.eqls([3, -4]);
   });
 
   it('should calculate the absolute value of a complex number', () => {
     const result = abs(a1);
-    expect(result).to.eql(5);
+    expect(result).to.be.eqls(5);
   });
 });

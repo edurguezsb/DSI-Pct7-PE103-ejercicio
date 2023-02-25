@@ -37,4 +37,3 @@ export enum Allergen {
 //console.log(getAllergens(256));
 //console.log(getAllergens(515));
 //console.log(getAllergens(84));
-

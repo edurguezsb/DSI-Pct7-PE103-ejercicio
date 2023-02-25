@@ -135,7 +135,16 @@ describe('getAllergens function tests', () => {
 });
 ```
 
-![f1](Img/f1.png)
+Y como vemos, todas las pruebas propuestas son pasadas:
+
+```bash
+  getAllergens function tests
+    ✔ should return the correct allergens for a given score
+    ✔ should return an empty array if the score does not contain any allergens
+    ✔ should return the correct allergens when the score contains multiple allergens
+    ✔ should handle scores that include allergens not in the enum
+    ✔ should return undefined for not integer and not positive scores
+```
 
 
 ## _Ejercicio 2 - Números complejos_
@@ -318,7 +327,18 @@ describe('complex number operations', () => {
 });
 ```
 
-![f2](Img/f2.png)
+Y como vemos, todas las pruebas propuestas son pasadas:
+
+```bash
+  complex number operations
+    ✔ should add two complex numbers
+    ✔ should subtract two complex numbers
+    ✔ should multiply two complex numbers
+    ✔ should divide two complex numbers
+    ✔ should scale a complex number
+    ✔ should calculate the conjugate of a complex number
+    ✔ should calculate the absolute value of a complex number
+```
 
 
 ## _Ejercicio 3 - No cabrees a la reina_
@@ -532,7 +552,15 @@ describe('chessboard operations', () => {
   });
 ```
 
-![f3](Img/f3.png)
+Y como vemos, todas las pruebas propuestas son pasadas:
+
+```bash
+  chessboard operations
+    ✔ should return true if two queens can attack each other horizontally
+    ✔ should return true if two queens can attack each other vertically
+    ✔ should return true if two queens can attack each other diagonally
+    ✔ should return false if two queens cannot attack each other
+```
 
 
 
@@ -638,7 +666,15 @@ describe('myMap function', () => {
 });
 ```
 
-![f4](Img/f4.png)
+Y como vemos, todas las pruebas propuestas son pasadas:
+
+```bash
+  myMap function
+    ✔ should return an empty array if the input array is empty
+    ✔ should apply the callback function to each element in the array and return the transformed array
+    ✔ should handle arrays of non-numeric types
+    ✔ should not modify the original array
+```
 
 ## _Ejercicio 5 - Matrices espirales_
 
@@ -815,7 +851,16 @@ describe('getSpiralMatrix function', () => {
 });
 ```
 
-![f5](Img/f5.png)
+Y como vemos, todas las pruebas propuestas son pasadas:
+
+```bash
+  getSpiralMatrix function
+    ✔ should return an empty array if the input is 0
+    ✔ should return a 1x1 array if the input is 1
+    ✔ should generate a 2x2 matrix with values in a spiral
+    ✔ should generate a 3x3 matrix with values in a spiral
+    ✔ should generate a 5x5 matrix with values in a spiral
+```
 
 ## _Ejercicio 6 - Compresión de números en rangos_
 
@@ -843,7 +888,7 @@ Escriba una función fromRangesToArray que lleve a cabo la operación inversa, e
  * @param arrai The array of numbers to compress.
  * @returns The character string representing the returned ranges.
  */
-function fromArrayToRanges(arrai: number[]): string {
+export function fromArrayToRanges(arrai: number[]): string {
     if (arrai.length === 0) {
       return "";
     }
@@ -867,38 +912,38 @@ function fromArrayToRanges(arrai: number[]): string {
     return ranges.join(", ");
   }
   
-  /**
-   * Decompresses a string of characters into an array of numbers.
-   * @param str The character string representing the ranges.
-   * @returns The array of numbers corresponding to the ranges.
-   */
-  function fromRangesToArray(str: string): number[] {
-    const ranges = str.split(", ");
-    const result: number[] = [];
+
+/**
+ * Splits a character string into an array of numbers.
+ * @param ranges The character string with ranges to split.
+ * @returns An array of numbers.
+*/
+export function fromRangesToArray(ranges: string): number[] {
+  if (!ranges || ranges.trim() === '') {
+    return [];
+  }
   
-    for (let i = 0; i < ranges.length; i++) {
-      const range = ranges[i].split("_");
-  
-      if (range.length === 1) {
-        result.push(parseInt(range[0]));
-      } else {
-        const start = parseInt(range[0]);
-        const end = parseInt(range[1]);
-        for (let j = start; j <= end; j++) {
-          result.push(j);
-        }
-      }
+  const result: number[] = ranges.split(/,\s*/).flatMap(range => {
+    const [startStr, endStr] = range.split(/_|-/);
+    const start = parseInt(startStr, 10);
+    const end = parseInt(endStr, 10) || start;
+    
+    if (isNaN(start) || isNaN(end)) {
+      return [];
     }
-  
-    return result;
+
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+  });
+
+  return result;
 }
 ```
 
 Tenemos dos funciones, ```fromArrayToRanges``` y ```fromRangesToArray```, que se utilizan para convertir entre una cadena de caracteres que representa un rango de números y un arreglo de números digamos.
 
-La función ```fromArrayToRanges``` toma un arreglo de números y devuelve una cadena de caracteres que representa los rangos en el arreglo. La función itera sobre el arreglo y determina los rangos de números que aparecen consecutivamente. Luego, para cada rango, la función agrega una cadena de caracteres que representa ese rango al arreglo ```ranges```. Finalmente, la función une todos los elementos del arreglo ```ranges``` con una coma ```,``` y un espacio ``` ``` para producir la cadena de caracteres de salida.
+La función ```fromArrayToRanges``` recibe una serie de números y devuelve una cadena de caracteres que representa los rangos en esa serie de números. La función itera sobre la serie y determina los rangos de números que aparecen consecutivamente. Luego, para cada rango, la función agrega una cadena de caracteres que representa ese rango en la serie como ```ranges```. Finalmente, la función une todos los elementos de la serie ```ranges``` con una coma ```,``` y un _ cuando separa los dos límites del rango, para producir la cadena de caracteres de salida.
 
-La función ```fromRangesToArray```hace lo contrario a la anterior,  toma una cadena de caracteres que representa un rango de números y devuelve el arreglo que corresponde a los números en el rango. En esta función utilizamos la función ```split``` para dividir la cadena de caracteres de entrada en rangos individuales. Luego, para cada rango, la función divide la cadena de caracteres del rango en dos números, el inicio y el final del rango. La función itera desde el inicio hasta el final del rango y agrega cada número al arreglo ```result```. Finalmente, devuelve ```result```ahora si con todos los números correspondientes al rango.
+La función ```fromRangesToArray``` hace lo contrario,ya que recibe una cadena que representa una lista de rangos y devuelve un array de números que incluye todos los números contenidos en esos rangos. Si la cadena de entrada está vacía o es false, devuelve un array vacío. Si hay algún error de formato en la cadena de entrada, devuelve un array vacío.
 
 #### Comprobaciones
 
@@ -976,7 +1021,17 @@ describe('fromRangesToArray function', () => {
 });
 ```
 
-![f6](Img/f6.png)
+Y como vemos, todas las pruebas propuestas son pasadas:
+
+```bash
+  fromArrayToRanges function
+    ✔ should return an empty string if the input array is empty
+    ✔ should return a string that represents the ranges in the input array
+
+  fromRangesToArray function
+    ✔ should return an empty array if the input string is empty
+    ✔ should return an array of numbers that corresponds to the input string
+```
 
 ## _Ejercicio 7 - Decodificar resistencias_
 
@@ -1095,7 +1150,11 @@ describe('decodeResistor function', () => {
 });
 ```
 
-![f7](Img/f7.png)
+Y como vemos, todas las pruebas propuestas son pasadas:
+
+```bash
+
+```
 
 ## _Ejercicio 8 - Palabras encadenadas en un array_
 
@@ -1248,7 +1307,11 @@ describe('meshArray function', () => {
 });
 ```
 
-![f8](Img/f8.png)
+Y como vemos, todas las pruebas propuestas son pasadas:
+
+```bash
+
+```
 
 ## Elementos Bibliográficos:
 

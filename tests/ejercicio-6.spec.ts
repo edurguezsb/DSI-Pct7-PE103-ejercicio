@@ -18,10 +18,11 @@ describe('fromArrayToRanges function', () => {
 
 describe('fromRangesToArray function', () => {
   it('should return an empty array if the input string is empty', () => {
-    const input = "";
+    const input = '';
     const result = fromRangesToArray(input);
-    expect(result).to.deep.equal([]);
+    expect(result).to.eql([]);
   });
+  
 
   it('should return an array of numbers that corresponds to the input string', () => {
     const input = "1_3, 5_7, 10";
