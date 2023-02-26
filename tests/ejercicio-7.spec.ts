@@ -4,27 +4,27 @@ import {decodeResistor} from '../src/ejercicio-7';
 
 describe('decodeResistor function', () => {
   it('should return the correct value for a two-band resistor', () => {
-    const result = decodeResistor(['marrón', 'negro']);
-    expect(result).to.equal(1);
-  });
-
-  it('should return the correct value for a three-band resistor', () => {
-    const result = decodeResistor(['marrón', 'negro', 'rojo']);
+    const result = decodeResistor(['Marrón', 'Negro']);
     expect(result).to.equal(10);
   });
 
-  it('should return the correct value for a four-band resistor', () => {
-    const result = decodeResistor(['marrón', 'negro', 'negro', 'rojo']);
-    expect(result).to.equal(100);
+  it('should return the correct value for a two-band resistor', () => {
+    const result = decodeResistor(['Naranja', 'Amarillo']);
+    expect(result).to.equal(34);
   });
 
-  it('should return the correct value for a five-band resistor', () => {
-    const result = decodeResistor(['marrón', 'negro', 'negro', 'oro', 'marrón']);
-    expect(result).to.equal(1000);
+  it('should return the correct value for a two-band resistor', () => {
+    const result = decodeResistor(['Marrón', 'Verde']);
+    expect(result).to.equal(15);
   });
 
-  it('should return the correct value for a six-band resistor', () => {
-    const result = decodeResistor(['marrón', 'negro', 'negro', 'marrón', 'negro', 'plata']);
-    expect(result).to.equal(100000);
+  it('should return the correct value for a three-band resistor ignoring the third color', () => {
+    const result = decodeResistor(['Marrón', 'Negro', 'Rojo']);
+    expect(result).to.equal(10);
+  });
+
+  it('should return the correct value for a four-band resistor ignoring the third and fourth color', () => {
+    const result = decodeResistor(['Marrón', 'Negro', 'Negro', 'Rojo']);
+    expect(result).to.equal(10);
   });
 });

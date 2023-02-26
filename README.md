@@ -1,7 +1,9 @@
 # Práctica 4
 
 En esta actividad, la Práctica 4 de la asignatura, se nos plantean varios problemas de programación que nos ayudarán a conocer más en profundidad los arrays, tuplas y enumerados de TypeScript.
-A continuación se mostrarán las soluciones para los problemas mencionados anteriormente, acompañados de explicaciones y comentarios que faciliten su comprendimiento.
+A continuación se mostrarán las soluciones para los problemas mencionados anteriormente, acompañados de explicaciones y comentarios que faciliten su comprensión.
+
+Los objetivos de esta práctica son familiarizarnos con el manejo de arrays, tuplas y enumarados ya que son componentes fundamentales y básicos que serán necesarios para el correcto desarrollo y avance en la asignatura de Desarrollo de Sistemas Informáticos, juntos con lo ya trabjado en prácticas anteriores, y lo que iremos viendo en las próximas semanas.
 
 
 ## _Ejercicio 1 - El alergólogo_
@@ -87,7 +89,7 @@ Cuyos resultados son:
 [ 4, 16, 64 ]
 ```
 
-Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
+Y también se han realizado pruebas con Mocha y Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
 import 'mocha';
@@ -146,6 +148,11 @@ Y como vemos, todas las pruebas propuestas son pasadas:
     ✔ should return undefined for not integer and not positive scores
 ```
 
+.
+.
+.
+.
+.
 
 ## _Ejercicio 2 - Números complejos_
 
@@ -278,7 +285,7 @@ Conjugado de a1:  [ 3, -4 ]
 Módulo de a1:  5
 ```
 
-Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
+Y también se han realizado pruebas con Mocha y Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
 import 'mocha';
@@ -339,6 +346,12 @@ Y como vemos, todas las pruebas propuestas son pasadas:
     ✔ should calculate the conjugate of a complex number
     ✔ should calculate the absolute value of a complex number
 ```
+
+.
+.
+.
+.
+.
 
 
 ## _Ejercicio 3 - No cabrees a la reina_
@@ -486,7 +499,7 @@ Cuyos resultados son:
 ¿Las reinas pueden atacarse en el tablero 4? undefined
 ```
 
-Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
+Y también se han realizado pruebas con Mocha y Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
 import 'mocha';
@@ -562,6 +575,11 @@ Y como vemos, todas las pruebas propuestas son pasadas:
     ✔ should return false if two queens cannot attack each other
 ```
 
+.
+.
+.
+.
+.
 
 
 ## _Ejercicio 4 - Reimplementando la función ```map```_
@@ -632,7 +650,7 @@ Cuyos resultados son:
 ]
 ```
 
-Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
+Y también se han realizado pruebas con Mocha y Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
 import 'mocha';
@@ -675,6 +693,12 @@ Y como vemos, todas las pruebas propuestas son pasadas:
     ✔ should handle arrays of non-numeric types
     ✔ should not modify the original array
 ```
+
+.
+.
+.
+.
+.
 
 ## _Ejercicio 5 - Matrices espirales_
 
@@ -810,7 +834,7 @@ Cuyos resultados son:
 ]
 ```
 
-Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
+Y también se han realizado pruebas con Mocha y Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
 import 'mocha';
@@ -861,6 +885,13 @@ Y como vemos, todas las pruebas propuestas son pasadas:
     ✔ should generate a 3x3 matrix with values in a spiral
     ✔ should generate a 5x5 matrix with values in a spiral
 ```
+
+.
+.
+.
+.
+.
+
 
 ## _Ejercicio 6 - Compresión de números en rangos_
 
@@ -985,7 +1016,7 @@ Cuyos resultados son:
 [ 3, 5, 6, 7, 9, 10 ]
 ```
 
-Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
+Y también se han realizado pruebas con Mocha y Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
 import 'mocha';
@@ -1032,6 +1063,13 @@ Y como vemos, todas las pruebas propuestas son pasadas:
     ✔ should return an empty array if the input string is empty
     ✔ should return an array of numbers that corresponds to the input string
 ```
+
+.
+.
+.
+.
+.
+
 
 ## _Ejercicio 7 - Decodificar resistencias_
 
@@ -1115,7 +1153,7 @@ Cuyos resultados son:
 36
 ```
 
-Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
+Y también se han realizado pruebas con Mocha y Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
 import 'mocha';
@@ -1124,28 +1162,28 @@ import {decodeResistor} from '../src/ejercicio-7';
 
 describe('decodeResistor function', () => {
   it('should return the correct value for a two-band resistor', () => {
-    const result = decodeResistor(['marrón', 'negro']);
-    expect(result).to.equal(1);
-  });
-
-  it('should return the correct value for a three-band resistor', () => {
-    const result = decodeResistor(['marrón', 'negro', 'rojo']);
+    const result = decodeResistor(['Marrón', 'Negro']);
     expect(result).to.equal(10);
   });
 
-  it('should return the correct value for a four-band resistor', () => {
-    const result = decodeResistor(['marrón', 'negro', 'negro', 'rojo']);
-    expect(result).to.equal(100);
+  it('should return the correct value for a two-band resistor', () => {
+    const result = decodeResistor(['Naranja', 'Amarillo']);
+    expect(result).to.equal(34);
   });
 
-  it('should return the correct value for a five-band resistor', () => {
-    const result = decodeResistor(['marrón', 'negro', 'negro', 'oro', 'marrón']);
-    expect(result).to.equal(1000);
+  it('should return the correct value for a two-band resistor', () => {
+    const result = decodeResistor(['Marrón', 'Verde']);
+    expect(result).to.equal(15);
   });
 
-  it('should return the correct value for a six-band resistor', () => {
-    const result = decodeResistor(['marrón', 'negro', 'negro', 'marrón', 'negro', 'plata']);
-    expect(result).to.equal(100000);
+  it('should return the correct value for a three-band resistor ignoring the third color', () => {
+    const result = decodeResistor(['Marrón', 'Negro', 'Rojo']);
+    expect(result).to.equal(10);
+  });
+
+  it('should return the correct value for a four-band resistor ignoring the third and fourth color', () => {
+    const result = decodeResistor(['Marrón', 'Negro', 'Negro', 'Rojo']);
+    expect(result).to.equal(10);
   });
 });
 ```
@@ -1153,8 +1191,20 @@ describe('decodeResistor function', () => {
 Y como vemos, todas las pruebas propuestas son pasadas:
 
 ```bash
-
+  decodeResistor function
+    ✔ should return the correct value for a two-band resistor
+    ✔ should return the correct value for a two-band resistor
+    ✔ should return the correct value for a two-band resistor
+    ✔ should return the correct value for a three-band resistor ignoring the third color
+    ✔ should return the correct value for a four-band resistor ignoring the third and fourth color
 ```
+
+.
+.
+.
+.
+.
+
 
 ## _Ejercicio 8 - Palabras encadenadas en un array_
 
@@ -1267,12 +1317,12 @@ Error al encadenar
 Error al encadenar
 ```
 
-Y también se han realizado pruebas con Mocha y a Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
+Y también se han realizado pruebas con Mocha y Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
 import 'mocha';
-import { expect } from 'chai';
-import { meshArray } from '../src/ejercicio-8';
+import {expect} from 'chai';
+import {meshArray} from '../src/ejercicio-8';
 
 describe('meshArray function', () => {
   it('should return an empty string when an empty array is passed', () => {
@@ -1284,7 +1334,7 @@ describe('meshArray function', () => {
   it('should return the common letters when the words are chained together', () => {
     const input = ['beach', 'achieve', 'evening'];
     const result = meshArray(input);
-    expect(result).to.equal('che');
+    expect(result).to.equal('acheve');
   });
 
   it('should return an error message when the words are not chained together', () => {
@@ -1310,8 +1360,20 @@ describe('meshArray function', () => {
 Y como vemos, todas las pruebas propuestas son pasadas:
 
 ```bash
-
+  meshArray function
+    ✔ should return an empty string when an empty array is passed
+    ✔ should return the common letters when the words are chained together
+    ✔ should return an error message when the words are not chained together
+    ✔ should handle an array with one word
+    ✔ should handle an array with two identical words
 ```
+
+.
+.
+.
+.
+.
+
 
 ## Elementos Bibliográficos:
 
@@ -1343,3 +1405,5 @@ Y como vemos, todas las pruebas propuestas son pasadas:
 Ejercicios bastante entretenidos para probar cosas al igual que en la práctica 3, sobretodo sirven para  ir aprendiendo y conociendo nuevos métodos de los tipos de datos. En este caso gracias a estos ejercicios hemos aprendido y mejorado en cuanto a conocer más en profundidad los arrays, tuplas y enumerados. 
 
 También hay que destacar que hemos aprendido nociones básicas de TypeDoc para poder generar documentación muy útil de una manera muy sencilla realmente. Por otra parte podríamos decir que lo más complejo esta vez ha sido empezar a hacer tests con Mocha y la librería Chai, pero es cuestión de ir probando cosas, que a base de errores también se aprende.
+
+Además, estas pruebas realizadas de manera exclusiva para cada ejercicio, al principio las ves como algo absurdo porque piensas (o al menos en mi caso) que son lo mismo que los ```console.log()```, pero luego te das cuenta de que te permiten probar la eficacia de tu código y su funcionalidad de una manera más "concentrada".

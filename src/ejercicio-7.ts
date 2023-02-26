@@ -1,33 +1,34 @@
 /**
- * Decodes the value of a resistor based on the colors of its bands.
- * @param colors The colors of the resistance bands.
- * @returns The numerical value of the resistor.
+ * Represents the colors and their corresponding values for a resistor.
+ * @enum
  */
-export function decodeResistor(colors: string[]): number {
-    const equivalence = {
-      negro: 0,
-      marrón: 1,
-      rojo: 2,
-      naranja: 3,
-      amarillo: 4,
-      verde: 5,
-      azul: 6,
-      violeta: 7,
-      gris: 8,
-      blanco: 9,
-    };
-  
-    const color1 = equivalence[colors[0].toLowerCase()];
-    const color2 = equivalence[colors[1].toLowerCase()];
-    const result = (color1 * 10) + color2;
-  
-    return result;
+export enum ResistorColors {
+  Negro = 0,
+  Marrón = 1,
+  Rojo = 2,
+  Naranja = 3,
+  Amarillo = 4,
+  Verde = 5,
+  Azul = 6,
+  Violeta = 7,
+  Gris = 8,
+  Blanco = 9,
 }
 
-/*
-console.log(decodeResistor(["Marrón", "Verde"]));
+/**
+ * Calculates the value of a resistor based on its color bands.
+ * @param colors - An array of strings representing the colors of the resistor.
+ * @returns The numeric value of the resistor.
+ */
+export function decodeResistor(colors: string[]): number {
+  const values = colors.slice(0, 2).map(color => ResistorColors[color]);
+  const result = Number(values.join(""));
+  return result;
+}
+
+
+console.log(decodeResistor(["Marrón", "Negro"]));
 console.log(decodeResistor(["Marrón", "Verde", "Violeta"]));
 console.log(decodeResistor(["Amarillo", "Blanco"]));
 console.log(decodeResistor(["Negro", "Negro"]));
 console.log(decodeResistor(["Naranja", "Azul", "Verde", "Blanco"]));
-*/

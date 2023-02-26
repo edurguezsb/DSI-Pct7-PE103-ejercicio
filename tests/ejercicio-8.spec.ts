@@ -12,7 +12,7 @@ describe('meshArray function', () => {
   it('should return the common letters when the words are chained together', () => {
     const input = ['beach', 'achieve', 'evening'];
     const result = meshArray(input);
-    expect(result).to.equal('che');
+    expect(result).to.equal('acheve');
   });
 
   it('should return an error message when the words are not chained together', () => {
