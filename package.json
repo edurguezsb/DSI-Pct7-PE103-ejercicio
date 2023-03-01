@@ -13,6 +13,7 @@
   "devDependencies": {
     "@types/chai": "^4.3.4",
     "@types/mocha": "^10.0.1",
+    "@types/prompt-sync": "^4.2.0",
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
     "chai": "^4.3.7",
@@ -23,5 +24,8 @@
     "ts-node": "^10.9.1",
     "tsc-watch": "^6.0.0",
     "typedoc": "^0.23.25"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
   }
 }

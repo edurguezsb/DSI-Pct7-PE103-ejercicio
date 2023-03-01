@@ -1,30 +1,38 @@
 # Práctica 4
 
-En esta actividad, la Práctica 4 de la asignatura, se nos plantean varios problemas de programación que nos ayudarán a conocer más en profundidad los arrays, tuplas y enumerados de TypeScript.
+En esta actividad, la Práctica 5 de la asignatura, se nos plantean varios problemas de programación que nos ayudarán a conocer más en profundidad objetos, clases e interfaces en TypeScript.
 A continuación se mostrarán las soluciones para los problemas mencionados anteriormente, acompañados de explicaciones y comentarios que faciliten su comprensión.
 
-Los objetivos de esta práctica son familiarizarnos con el manejo de arrays, tuplas y enumarados ya que son componentes fundamentales y básicos que serán necesarios para el correcto desarrollo y avance en la asignatura de Desarrollo de Sistemas Informáticos, juntos con lo ya trabjado en prácticas anteriores, y lo que iremos viendo en las próximas semanas.
+Los objetivos de esta práctica son familiarizarnos con el manejo de objetos, clases e interfaces ya que son componentes fundamentales y que serán necesarios para el correcto desarrollo y avance en la asignatura de Desarrollo de Sistemas Informáticos, juntos con lo ya trabjado en prácticas anteriores, y lo que iremos viendo en las próximas semanas.
 
 
-## _Ejercicio 1 - El alergólogo_
+## _Ejercicio 1 - Biblioteca musical_
 
 ### Enunciado:
 
-Una prueba de alérgenos produce un valor numérico (entero positivo) único, el cual contiene información sobre las alergias de una persona. La lista de posibles alérgenos es la siguiente:
+Diseñe el conjunto de clases e interfaces necesarias para almacenar una biblioteca musical. El desarrollo realizado debe cumplir los siguientes requisitos funcionales:
 
-Huevo (1)
-Cacahuete (2)
-Marisco (4)
-Fresa (8)
-Tomate (16)
-Chocolate (32)
-Polen (64)
-Gato (128)
-Por ejemplo, si alguien fuera alérgico a los gatos y al tomate, obtendría una puntuación igual a 128 + 16 = 144.
-
-Escriba una función getAllergens que reciba una puntuación de alérgenos de una persona y que devuelva una lista con los alérgenos a los que la persona es alérgica. Los diferentes alérgenos deberán modelarse mediante un enumerado.
-
-Por último, tenga en cuenta que la función podría recibir una puntuación que incluya alérgenos no contemplados en la lista, esto es, alérgenos cuya puntuación sea 256, 512, 1024, etc. Además, si el valor pasado como argumento no es entero y positivo, la función deberá retornar el valor undefined.
+La información de un artista, ya sea un grupo o un solista, será la siguiente:
+-Nombre
+-Número de oyentes mensuales
+-Discografía
+La discografía de un artista consistirá en una colección de discos, donde la información de un disco será:
+-Nombre
+-Año de publicación
+-Canciones
+Por cada canción perteneciente a un disco, la información será la siguiente:
+-Nombre
+-Duración en segundos
+-Géneros
+-Single (determina si la canción fue lanzada como un single o no)
+-Número de reproducciones
+La biblioteca musical deberá permitir:
+-Almacenar la información de diferentes artistas, su discografía y las canciones pertenecientes a cada disco o álbum.
+-Mostrar por la consola la información de la biblioteca en formato tabla (console.table).
+-Permitir llevar a cabo búsquedas de artistas, discos y canciones y mostrar los resultados de la búsqueda en formato de tabla.
+-Permitir calcular el número de canciones incluidas en un disco concreto.
+-Permitir calcular la duración de un disco, a partir de la duración de todas y cada una de las canciones que lo conforman.
+-Permitir calcular el número de reproducciones de un disco, a partir del número de reproducciones de todas y cada una de las canciones incluidas en el mismo.
 
 #### Código
 
@@ -154,7 +162,7 @@ Y como vemos, todas las pruebas propuestas son pasadas:
 .
 .
 
-## _Ejercicio 2 - Números complejos_
+## _Ejercicio 2 - Conecta 4_
 
 ### Enunciado:
 
