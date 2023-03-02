@@ -11,7 +11,7 @@
     "outDir": "./dist"
   },
   "typedocOptions":{
-    "entryPoints": ["src/ejercicio-1/Artista.ts", "src/ejercicio/Cancion.ts", "src/ejercicio-1/BibliotecaMusical.ts", "src/ejercicio-1/Discografia.ts"],
+    "entryPoints": ["src/ejercicio-1/Artista.ts", "src/ejercicio/Cancion.ts", "src/ejercicio-1/BibliotecaMusical.ts", "src/ejercicio-1/Discografia.ts", "src/ejercicio-PE103-1/ejercicio-PE103-1.ts", "src/ejercicio-PE103-1/ejercicio-PE103-2.ts"],
     "out": "docs"
   },
 }
