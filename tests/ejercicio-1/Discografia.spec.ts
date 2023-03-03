@@ -1,11 +1,11 @@
 import 'mocha';
 import { expect } from 'chai';
-import { Discografia } from '../../src/ejercicio-1/Discografia';
+import { Disco } from '../../src/ejercicio-1/Discografia';
 import { Cancion } from '../../src/ejercicio-1/Cancion';
 
 
 describe('Discografia', () => {
-    let disco: Discografia;
+    let disco: Disco;
     let canciones: Cancion[];
   
     beforeEach(() => {
@@ -15,7 +15,7 @@ describe('Discografia', () => {
         new Cancion('Nothing Else Matters', 390, ['Rock', 'Ballad'], true, 90),
       ];
   
-      disco = new Discografia('Metallica', 1991, canciones);
+      disco = new Disco('Metallica', 1991, canciones);
     });
   
     it('debería tener un nombre', () => {
@@ -33,7 +33,7 @@ describe('Discografia', () => {
       it('debería agregar una canción a su lista de canciones', () => {
         const cancion1 = new Cancion('Cancion 1', 180, ['Rock'], true, 100);
         const cancion2 = new Cancion('Cancion 2', 200, ['Pop'], false, 50);
-        const discografia = new Discografia('Mi discografia', 2022, [cancion1]);
+        const discografia = new Disco('Mi discografia', 2022, [cancion1]);
         discografia.agregarCancion(cancion2);
         expect(discografia.canciones).to.deep.equal([cancion1, cancion2]);
       });

@@ -1,33 +1,39 @@
-//const prompt = require('prompt-sync')();
-const { BibliotecaMusical } = require('./BibliotecaMusical');
-const { Artista } = require('./Artista');
-const { Discografia } = require('./Discografia');
-const { Cancion } = require('./Cancion');
+import * as Prompt from 'prompt-sync';
+const prompt = Prompt();
+import { BibliotecaMusical } from './BibliotecaMusical';
+import { Artista } from './Artista';
+import { Disco } from './Discografia';
+import { Cancion } from './Cancion';
 
 // Crear una instancia de BibliotecaMusical
 const biblioteca = new BibliotecaMusical();
 
-// Solicitar al usuario que ingrese la información del artista
-const nombreArtista = prompt('Ingrese el nombre del artista: ');
-const paisArtista = prompt('Ingrese el país del artista: ');
-const artista = new Artista(nombreArtista, paisArtista);
-
-// Solicitar al usuario que ingrese la información de la discografía
-const nombreDiscografia = prompt('Ingrese el nombre de la discografía: ');
-const anioDiscografia = prompt('Ingrese el año de la discografía: ');
-const discografia = new Discografia(nombreDiscografia, anioDiscografia);
-
 // Solicitar al usuario que ingrese la información de la canción
 const nombreCancion = prompt('Ingrese el nombre de la canción: ');
-const duracionCancion = prompt('Ingrese la duración de la canción en segundos: ');
-const reproduccionesCancion = prompt('Ingrese el número de reproducciones de la canción: ');
-const cancion = new Cancion(nombreCancion, duracionCancion, reproduccionesCancion);
+const duracionCancion = Number (prompt('Ingrese la duración de la canción en segundos: '));
+const reproduccionesCancion = Number (prompt('Ingrese el número de reproducciones de la canción: '));
+const genero = prompt('Ingrese el genero de la canción: ');
+const generos:string[] = [genero];
+const SingleSiONo = Boolean (prompt('¿Es un signle? true o false: '));
+const cancion = new Cancion(nombreCancion, duracionCancion, generos, SingleSiONo, reproduccionesCancion);
+const canciones:Cancion[] = [cancion];
+
+// Solicitar al usuario que ingrese la información del artista
+const nombreArtista = prompt('Ingrese el nombre del artista: ');
+const oyentesMensuales = Number(prompt('Ingrese el número de oyentes mensuales: '));
+
+// Solicitar al usuario que ingrese la información de la discografía
+const nombreDiscografia = prompt('Ingrese el nombre del disco: ');
+const anioDiscografia = Number(prompt('Ingrese el año del disco: '));
+const disco = new Disco(nombreDiscografia, anioDiscografia, canciones);
+const discografia:Disco[] = [disco];
+const artista = new Artista(nombreArtista, oyentesMensuales, discografia);
 
 // Agregar la canción a la discografía
-discografia.agregarCancion(cancion);
+discografia[0].agregarCancion(cancion);
 
 // Agregar la discografía al artista
-artista.agregarDisco(discografia);
+//artista.agregarDisco(disco);
 
 // Agregar el artista a la biblioteca
 biblioteca.agregarArtista(artista);

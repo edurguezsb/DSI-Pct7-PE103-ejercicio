@@ -1,4 +1,4 @@
-import { Discografia } from './Discografia';
+import { Disco } from './Discografia';
 
 /**
  * Clase que representa un artista
@@ -6,9 +6,9 @@ import { Discografia } from './Discografia';
 export class Artista {
   nombre: string;
   oyentesMensuales: number;
-  discografia: Discografia[];
+  discografia: Disco[];
 
-  constructor(nombre: string, oyentesMensuales: number, discografia: Discografia[]) {
+  constructor(nombre: string, oyentesMensuales: number, discografia: Disco[]) {
     this.nombre = nombre;
     this.oyentesMensuales = oyentesMensuales;
     this.discografia = discografia;
@@ -26,7 +26,7 @@ export class Artista {
 Agrega un disco a la discografía del artista
 @param disco Objeto Discografia que se agregará a la discografía del artista
 */
-  agregarDisco(disco: Discografia) {
+  agregarDisco(disco: Disco) {
     this.discografia.push(disco);
   }
 }

@@ -2,7 +2,7 @@ import 'mocha';
 import { expect } from 'chai';
 import { Artista } from '../../src/ejercicio-1/Artista';
 import { BibliotecaMusical } from '../../src/ejercicio-1/BibliotecaMusical';
-import { Discografia } from '../../src/ejercicio-1/Discografia';
+import { Disco } from '../../src/ejercicio-1/Discografia';
 import { Cancion } from '../../src/ejercicio-1/Cancion';
 
 
@@ -41,8 +41,8 @@ describe('BibliotecaMusical', () => {
     it('debería poder buscar discografías cuyo nombre contenga la cadena especificada', () => {
       const cancion1 = new Cancion('La camisa negra', 230, ['Rock', 'Pop'], true, 10000000);
       const cancion2 = new Cancion('A Dios le pido', 320, ['Pop', 'Rock'], true, 15000000);
-      const disco1 = new Discografia('Mi sangre', 2004, [cancion1]);
-      const disco2 = new Discografia('Un Día Normal', 2002, [cancion2]);
+      const disco1 = new Disco('Mi sangre', 2004, [cancion1]);
+      const disco2 = new Disco('Un Día Normal', 2002, [cancion2]);
       const artista = new Artista('Juanes', 20000000, [disco1, disco2]);
       biblioteca.agregarArtista(artista);
       const resultado = biblioteca.buscarDiscografias('normal');
@@ -59,8 +59,8 @@ describe('BibliotecaMusical', () => {
     it('debería poder buscar canciones cuyo nombre contenga la cadena especificada', () => {
       const cancion1 = new Cancion('La camisa negra', 230, ['Rock', 'Pop'], true, 10000000);
       const cancion2 = new Cancion('A Dios le pido', 320, ['Pop', 'Rock'], true, 15000000);
-      const disco1 = new Discografia('Mi sangre', 2004, [cancion1]);
-      const disco2 = new Discografia('Un Día Normal', 2002, [cancion2]);
+      const disco1 = new Disco('Mi sangre', 2004, [cancion1]);
+      const disco2 = new Disco('Un Día Normal', 2002, [cancion2]);
       const artista = new Artista('Juanes', 2000000, [disco1, disco2]);
       biblioteca.agregarArtista(artista);
       const cancionesEncontradas = biblioteca.buscarCanciones('Cam');
@@ -71,8 +71,8 @@ describe('BibliotecaMusical', () => {
     it('debería devolver un array vacío si no se encuentran canciones', () => {
         const cancion1 = new Cancion('La camisa negra', 230, ['Rock', 'Pop'], true, 10000000);
         const cancion2 = new Cancion('A Dios le pido', 320, ['Pop', 'Rock'], true, 15000000);
-        const disco1 = new Discografia('Mi sangre', 2004, [cancion1]);
-        const disco2 = new Discografia('Un Día Normal', 2002, [cancion2]);
+        const disco1 = new Disco('Mi sangre', 2004, [cancion1]);
+        const disco2 = new Disco('Un Día Normal', 2002, [cancion2]);
         const artista = new Artista('Juanes', 2000000, [disco1, disco2]);
         biblioteca.agregarArtista(artista);
         const cancionesEncontradas = biblioteca.buscarCanciones('No existo');
@@ -84,7 +84,7 @@ describe('BibliotecaMusical', () => {
     it('debería poder calcular el número de canciones de un disco', () => {
       const cancion1 = new Cancion('Diamonds', 227, ['Pop'], true, 1000000000);
       const cancion2 = new Cancion('Umbrella', 280, ['Pop'], false, 500000000);
-      const discografia = new Discografia('Good Girl Gone Bad', 2007, [cancion1, cancion2]);
+      const discografia = new Disco('Good Girl Gone Bad', 2007, [cancion1, cancion2]);
       const artista = new Artista('Rihanna', 100000000, [discografia]);
       biblioteca.agregarArtista(artista);
       const numCanciones = biblioteca.numCancionesDisco('Good Girl Gone Bad');
@@ -94,12 +94,12 @@ describe('BibliotecaMusical', () => {
     it('debería devolver 0 si no se encuentra el disco', () => {
       const cancion1 = new Cancion('Diamonds', 227, ['Pop'], true, 1000000000);
       const cancion2 = new Cancion('Umbrella', 280, ['Pop'], false, 500000000);
-      const discografia = new Discografia('Good Girl Gone Bad', 2007, [cancion1, cancion2]);
+      const discografia = new Disco('Good Girl Gone Bad', 2007, [cancion1, cancion2]);
       const artista = new Artista('Rihanna', 100000000, [discografia]);
       biblioteca.agregarArtista(artista);
       const numCanciones = biblioteca.numCancionesDisco('Inventado');
       expect(numCanciones).to.equal(0);
       });
     });
-
+    
   });

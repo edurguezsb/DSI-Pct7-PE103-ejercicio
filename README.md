@@ -1,4 +1,4 @@
-# Práctica 4
+# Práctica 5
 
 En esta actividad, la Práctica 5 de la asignatura, se nos plantean varios problemas de programación que nos ayudarán a conocer más en profundidad objetos, clases e interfaces en TypeScript.
 A continuación se mostrarán las soluciones para los problemas mencionados anteriormente, acompañados de explicaciones y comentarios que faciliten su comprensión.

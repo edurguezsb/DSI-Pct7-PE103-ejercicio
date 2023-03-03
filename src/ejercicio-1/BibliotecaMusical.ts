@@ -1,5 +1,5 @@
 import { Artista } from './Artista';
-import { Discografia } from './Discografia';
+import { Disco } from './Discografia';
 import { Cancion } from './Cancion';
 
 /**
@@ -36,8 +36,8 @@ export class BibliotecaMusical {
    * @param nombre Cadena a buscar en el nombre de la discografía
    * @returns Array de objetos Discografia que coinciden con la búsqueda
    */
-  buscarDiscografias(nombre: string): Discografia[] {
-    let discografias: Discografia[] = [];
+  buscarDiscografias(nombre: string): Disco[] {
+    let discografias: Disco[] = [];
 
     this.artistas.forEach((artista) => {
       discografias = discografias.concat(artista.discografia.filter((disco) => disco.nombre.toLowerCase().includes(nombre.toLowerCase())));
