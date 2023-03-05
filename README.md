@@ -727,7 +727,6 @@ export class Board {
    * es válida, se muestra un mensaje de error y se devuelve `false`. Si la
    * columna está llena, se muestra un mensaje de error y se devuelve `false`.
    * Si la ficha se coloca con éxito, se devuelve `true`.
-   *
    * @param col Columna en la que se desea colocar la ficha.
    * @param piece Ficha que se desea colocar.
    * @returns `true` si la ficha se colocó con éxito, `false` si no.
@@ -760,7 +759,6 @@ export class Board {
    * Método que verifica si el jugador ha ganado el juego. Verifica todas las
    * posibles combinaciones de 4 fichas consecutivas en línea, tanto horizontal
    * como verticalmente, así como en diagonal.
-   *
    * @param piece Ficha del jugador actual.
    * @returns `true` si el jugador ha ganado, `false` si no.
    */
@@ -1698,8 +1696,6 @@ Pruebas para la implementación de clases
 
 ## Conclusiones
 
-Estos dos ejercicios han sido bastante entretenidos, sobre todo el segundo, tanto para probar cosas como para aprender e incluso divertirnos a través de ese aprendizaje. En este caso gracias a estos ejercicios hemos aprendido y mejorado en cuanto a conocer más en profundidad los arrays, tuplas y enumerados. 
+Estos dos ejercicios han sido bastante entretenidos, sobre todo el segundo, tanto para probar cosas como para aprender e incluso divertirnos a través de ese aprendizaje. En este caso gracias a estos ejercicios hemos aprendido mas sobre clases, objetos e interfaces.
 
-También hay que destacar que hemos aprendido nociones básicas de TypeDoc para poder generar documentación muy útil de una manera muy sencilla realmente. Por otra parte podríamos decir que lo más complejo esta vez ha sido empezar a hacer tests con Mocha y la librería Chai, pero es cuestión de ir probando cosas, que a base de errores también se aprende.
-
-Además, estas pruebas realizadas de manera exclusiva para cada ejercicio, al principio las ves como algo absurdo porque piensas (o al menos en mi caso) que son lo mismo que los ```console.log()```, pero luego te das cuenta de que te permiten probar la eficacia de tu código y su funcionalidad de una manera más "concentrada".
+En cada práctica me doy cuenta de lo bien que vienen desarrollar las pruebas con Mochai y Chai, ya que gracias a eso te empiezas a imaginar como debería de ser tu código, que cosas deberías de hacer y cuales no.
