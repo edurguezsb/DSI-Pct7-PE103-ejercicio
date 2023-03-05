@@ -67,7 +67,7 @@ describe("Board", () => {
       expect(result).to.be.true;
     });
 
-    it("debería devolver true si 4 fichas están en diagonal de izquierda a derecha y de abajo a arriba)", () => {
+    it("debería devolver true si 4 fichas están en diagonal de izquierda a derecha y de abajo a arriba", () => {
       const board = new Board();
       board.placePiece(0, "@");
       board.placePiece(0, "@");

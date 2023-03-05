@@ -62,7 +62,7 @@ export class Board {
 
   /**
    * Método que verifica si el jugador ha ganado el juego. Verifica todas las
-   * posibles combinaciones de 4 fichas consecutivas en línea, tanto horizontal
+   * posibles combinaciones de 4 fichas seguidas en línea, tanto horizontal
    * como verticalmente, así como en diagonal.
    *
    * @param piece Ficha del jugador actual.

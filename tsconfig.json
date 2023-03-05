@@ -1,17 +1,17 @@
 {
-  "exclude":[
-    "./tests",
-    "./node_modules",
-    "/dist"
-  ],
-  "compilerOptions": {
-    "target": "es2022",
-    "module": "commonjs",
-    "rootDir": "./",
-    "outDir": "./dist"
-  },
-  "typedocOptions":{
-    "entryPoints": ["src/ejercicio-1/Artista.ts", "src/ejercicio/Cancion.ts", "src/ejercicio-1/BibliotecaMusical.ts", "src/ejercicio-1/Discografia.ts", "src/ejercicio-PE103-1/ejercicio-PE103-1.ts", "src/ejercicio-PE103-1/ejercicio-PE103-2.ts"],
-    "out": "docs"
-  },
-}
+    "exclude":[
+      "./tests",
+      "./node_modules",
+      "/dist"
+    ],
+    "compilerOptions": {
+      "target": "es2022",
+      "module": "commonjs",
+      "rootDir": "./",
+      "outDir": "./dist"
+    },
+    "typedocOptions":{
+      "entryPoints": ["src/ejercicio-1/Artista.ts", "src/ejercicio-1/Cancion.ts", "src/ejercicio-1/BibliotecaMusical.ts", "src/ejercicio-1/Discografia.ts", "src/ejercicio-2/Conecta4.ts", "src/ejercicio-2/PruebaConecta4.ts", "src/ejercicio-PE103-1/ejercicio-PE103-1.ts", "src/ejercicio-PE103-2/ejercicio-PE103-2.ts"],
+      "out": "docs"
+    },
+  }

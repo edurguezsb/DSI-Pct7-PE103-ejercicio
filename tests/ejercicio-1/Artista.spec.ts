@@ -7,15 +7,15 @@ describe('Artista', () => {
   let artista: Artista;
 
   beforeEach(() => {
-    artista = new Artista('Metallica', 2000000, []);
+    artista = new Artista('Quevedo', 5000000, []);
   });
 
   it('debería tener un nombre', () => {
-    expect(artista.nombre).to.equal('Metallica');
+    expect(artista.nombre).to.equal('Quevedo');
   });
 
   it('debería tener un número de oyentes mensuales', () => {
-    expect(artista.oyentesMensuales).to.equal(2000000);
+    expect(artista.oyentesMensuales).to.equal(5000000);
   });
 
   it('debería tener una discografía vacía inicialmente', () => {
