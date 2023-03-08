@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import { Cancion } from '../../src/ejercicio-1/Cancion';
+import { Cancion } from '../../src/ejercicio-3/Cancion';
 
 describe('Cancion', () => {
     it('debería crear una instancia de Cancion con los valores pasados', () => {

@@ -1,9 +1,9 @@
 import 'mocha';
 import { expect } from 'chai';
-import { Artista } from '../../src/ejercicio-1/Artista';
-import { BibliotecaMusical } from '../../src/ejercicio-1/BibliotecaMusical';
-import { Disco } from '../../src/ejercicio-1/Discografia';
-import { Cancion } from '../../src/ejercicio-1/Cancion';
+import { Artista } from '../../src/ejercicio-3/Artista';
+import { BibliotecaMusical } from '../../src/ejercicio-3/BibliotecaMusical';
+import { Disco } from '../../src/ejercicio-3/Discografia';
+import { Cancion } from '../../src/ejercicio-3/Cancion';
 
 
 describe('BibliotecaMusical', () => {

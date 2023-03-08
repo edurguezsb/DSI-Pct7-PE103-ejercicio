@@ -8,10 +8,11 @@
       "target": "es2022",
       "module": "commonjs",
       "rootDir": "./",
-      "outDir": "./dist"
+      "outDir": "./dist",
+      "noImplicitAny": false
     },
     "typedocOptions":{
-      "entryPoints": ["src/ejercicio-1/Artista.ts", "src/ejercicio-1/Cancion.ts", "src/ejercicio-1/BibliotecaMusical.ts", "src/ejercicio-1/Discografia.ts", "src/ejercicio-2/Conecta4.ts", "src/ejercicio-2/PruebaConecta4.ts", "src/ejercicio-PE103-1/ejercicio-PE103-1.ts", "src/ejercicio-PE103-2/ejercicio-PE103-2.ts"],
+      "entryPoints": ["src/ejercicio-3/Artista.ts", "src/ejercicio-3/Cancion.ts", "src/ejercicio-3/BibliotecaMusical.ts", "src/ejercicio-3/Discografia.ts", "src/ejercicio-2/Conecta4.ts", "src/ejercicio-2/PruebaConecta4.ts", "src/ejercicio-PE103-1/ejercicio-PE103-1.ts"],
       "out": "docs"
     },
   }

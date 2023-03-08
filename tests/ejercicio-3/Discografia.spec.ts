@@ -1,7 +1,7 @@
 import 'mocha';
 import { expect } from 'chai';
-import { Disco } from '../../src/ejercicio-1/Discografia';
-import { Cancion } from '../../src/ejercicio-1/Cancion';
+import { Disco } from '../../src/ejercicio-3/Discografia';
+import { Cancion } from '../../src/ejercicio-3/Cancion';
 
 
 describe('Discografia', () => {

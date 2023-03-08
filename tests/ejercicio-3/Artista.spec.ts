@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import { Artista } from '../../src/ejercicio-1/Artista';
+import { Artista } from '../../src/ejercicio-3/Artista';
 
 
 describe('Artista', () => {
