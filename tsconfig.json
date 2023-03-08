@@ -12,7 +12,7 @@
       "noImplicitAny": false
     },
     "typedocOptions":{
-      "entryPoints": ["src/ejercicio-3/Artista.ts", "src/ejercicio-3/Cancion.ts", "src/ejercicio-3/BibliotecaMusical.ts", "src/ejercicio-3/Discografia.ts", "src/ejercicio-2/Conecta4.ts", "src/ejercicio-2/PruebaConecta4.ts", "src/ejercicio-PE103-1/ejercicio-PE103-1.ts"],
+      "entryPoints": ["src/ejercicio-1/BasicStreamableCollection.ts", "src/ejercicio-1/Documentaries.ts", "src/ejercicio-1/Interfaces.ts", "src/ejercicio-1/Movies.ts", "src/ejercicio-1/Series.ts", "src/ejercicio-1/Streamable.ts","src/ejercicio-3/Artista.ts", "src/ejercicio-3/Cancion.ts", "src/ejercicio-3/BibliotecaMusical.ts", "src/ejercicio-3/Discografia.ts", "src/ejercicio-2/Conecta4.ts", "src/ejercicio-2/PruebaConecta4.ts", "src/ejercicio-PE103-1/ejercicio-PE103-1.ts"],
       "out": "docs"
     },
   }

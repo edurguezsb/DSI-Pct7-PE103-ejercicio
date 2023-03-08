@@ -23,75 +23,380 @@ Trate de aplicar los principios SOLID. Preste especial atención al diseño de l
 
 #### Código
 
+El ejercicio uno se divide en varios ficheros que voy a explicar a continuación brevemente.
+
+- BasicStremeableCollection.ts:
 
 ``` TypeScript
+import { Streamable } from "./Streamable";
 
+export abstract class BasicStreamableCollection<T> implements Streamable {
+    constructor(protected collection: T[]) {}
+
+    abstract searchName(name: string): T[];
+    abstract searchYear(year: number): T[];
+}
 ```
 
+Este código define una clase abstracta llamada ```BasicStreamableCollection<T>``` que implementa la interfaz ```Streamable```. La clase tiene dos métodos abstractos, ```searchName``` y ```searchYear```, y un constructor que toma un arreglo de objetos tipo ```T``` y lo almacena en una propiedad protegida llamada ```collection```. La clase ```BasicStreamableCollection``` es abstracta, lo que significa que debe ser extendida por una subclase para ser utilizada.
 
-
+- Documentaries.ts:
 
 ```TypeScript
+import { BasicStreamableCollection } from "./BasicStreamableCollection";
+import { Documentarie } from "./Interfaces";
 
+export class DocumentalesCollection extends BasicStreamableCollection<Documentarie> {
+    searchName(name: string): Documentarie[] {
+        return this.collection.filter((documentales) => documentales.nombre === name);
+    }
+
+    searchYear(year: number): Documentarie[] {
+        return this.collection.filter((documentales) => documentales.año === year);
+    }
+
+    searchDuration(duration: number): Documentarie[] {
+        return this.collection.filter((documentales) => documentales.duracion === duration);
+    }
+
+    searchTopic(topic: string): Documentarie[] {
+        return this.collection.filter((documentales) => documentales.topico === topic);
+    }
+}
 ```
 
+Se define una clase llamada ```DocumentalesCollection```. Esta clase extiende la clase ```BasicStreamableCollection``` y se especializa para contener objetos de tipo ```Documentarie```. La clase tiene cuatro métodos para buscar dentro de la colección de documentales por nombre, año, duración y tema. Cada uno de estos métodos utiliza el método ```filter``` para buscar los elementos de la colección que coincidan con los criterios especificados y los devuelve en forma de arreglo de objetos ```Documentarie```.
 
+- Interfaces.ts:
 
 ```TypeScript
+export interface Serie{
+  nombre: string;
+  año: number;
+  temporadas: number;
+}
 
+export interface Documentarie{
+  nombre: string;
+  año: number;
+  duracion: number;
+  topico: string;
+}
+
+export interface Movie{
+  nombre: string;
+  año: number;
+  duracion: number;
+}
+```
+Se definen tres interfaces:
+
+1. La interfaz ```Serie``` tiene tres propiedades: nombre que es de tipo ```string```, año que es de tipo ```number``` y temporadas que también es de tipo ```number```.
+
+2. La interfaz ```Documentarie``` tiene cuatro propiedades: nombre que es de tipo ```string```, año que es de tipo ```number```, duracion que es de tipo ```number``` y topico que es de tipo ```string```.
+
+3. La interfaz ```Movie``` tiene tres propiedades: nombre que es de tipo ```string```, año que es de tipo ```number``` y duracion que también es de tipo ```number```.
+
+- Movies.ts:
+
+```TypeScript
+import { BasicStreamableCollection } from "./BasicStreamableCollection";
+import { Movie } from "./Interfaces";
+
+export class PeliculasCollection extends BasicStreamableCollection<Movie> {
+    searchName = (name: string) => this.collection.filter((movie) => movie.nombre === name);
+
+    searchYear = (year: number) => this.collection.filter((movie) => movie.año === year);
+
+    searchDuration = (duration: number) => this.collection.filter((movie) => movie.duracion === duration);
+}
 ```
 
+Aquí exportamos la clase llamada ```PeliculasCollection``` que extiende de la clase ```BasicStreamableCollection``` y se especializa para trabajar con películas. La clase tiene tres métodos de búsqueda, ```searchName```, ```searchYear``` y ```searchDuration```, que toman un parámetro de búsqueda y devuelven una lista filtrada de películas que coinciden con ese parámetro. La búsqueda de ```searchName``` se realiza por el nombre de la película, la búsqueda de ```searchYear``` se realiza por el año de lanzamiento de la película y la búsqueda de ```searchDuration``` se realiza por la duración de la película.
 
-
-```TypeScript
-
-````
-
-
+- Series.ts:
 
 ```TypeScript
+import { BasicStreamableCollection } from "./BasicStreamableCollection";
+import { Serie } from "./Interfaces";
 
+export class SeriesCollection extends BasicStreamableCollection<Serie> {
+    constructor(collection: Serie[]) {
+        super(collection);
+    }
+
+    searchName(name: string): Serie[] {
+        const result = [];
+        for (const serie of this.collection) {
+            if (serie.nombre === name) {
+                result.push(serie);
+            }
+        }
+        return result;
+    }
+
+    searchYear(year: number): Serie[] {
+        const result = [];
+        for (const serie of this.collection) {
+            if (serie.año === year) {
+                result.push(serie);
+            }
+        }
+        return result;
+    }
+
+    searchSeasons(seasons: number): Serie[] {
+        const result = [];
+        for (const serie of this.collection) {
+            if (serie.temporadas === seasons) {
+                result.push(serie);
+            }
+        }
+        return result;
+    }
+}
 ```
 
+Definimos una clase llamada ```SeriesCollection```. Esta clase extiende de una clase llamada ```BasicStreamableCollection``` que toma un tipo genérico de ```Serie```. La clase tiene un ```constructor``` que acepta una colección de ```Serie```.
+
+Además, la clase tiene tres métodos de búsqueda que buscan ```Series``` en la colección por nombre, año y número de temporadas. Cada método devuelve una matriz de ```Serie``` que cumple con el criterio de búsqueda.
 
 
+- Streamable.ts:
+
+```TypeScript
+export interface Streamable {
+  searchYear(year: number): any[];
+  searchName(name: string): any[];
+}
+```
+
+Simplemente definimos la interfaz ```Streamable``` y le ponemos dos métodos: ```searchYear``` y ```searchName```. Ambos métodos toman un argumento y devuelven un array de cualquier tipo. 
+
+- ```searchYear``` toma un número como argumento y devuelve un array de cualquier tipo.
+
+- ```searchName``` toma una cadena como argumento y devuelve un array de cualquier tipo.
 
 #### Comprobaciones
 
-
-
 Se han realizado pruebas con Mocha y Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
-
-
-
 ```TypeScript
+import "mocha";
+import { expect } from "chai";
+import {SeriesCollection} from "../../src/ejercicio-1/Series";
+import {DocumentalesCollection} from "../../src/ejercicio-1/Documentaries";
+import {PeliculasCollection} from "../../src/ejercicio-1/Movies";
 
+describe("Streamable", () => {
+    it("searchYear debería devolver un array con las series del año buscado", () => {
+      const series = [
+        { nombre: "You", año: 2018, temporadas: 4 },
+        { nombre: "Dragon ball", año: 1985, temporadas: 20 },
+      ];
+      const seriesCollection = new SeriesCollection(series);
+      const result = seriesCollection.searchYear(1985);
+      expect(result).to.have.lengthOf(1);
+      expect(result[0]).to.deep.include({
+        nombre: "Dragon ball",
+        año: 1985,
+        temporadas: 20,
+      });
+    });
+
+    it("searchName debería devolver un array con los documentales que tengan ese nombre", () => {
+      const documentaries = [
+        { nombre: "Cosmos", año: 2014, duracion: 500, topico: "Espacial" },
+        { nombre: "No confíes en nadie", año: 2022, duracion: 100, topico: "Criptomonedas" },
+      ];
+      const documentariesCollection = new DocumentalesCollection(documentaries);
+      const result = documentariesCollection.searchName("No confíes en nadie");
+      expect(result).to.have.lengthOf(1);
+      expect(result[0]).to.deep.include({
+        nombre: "No confíes en nadie",
+        año: 2022,
+        duracion: 100,
+        topico: "Criptomonedas",
+      });
+    });
+  });
+
+describe("Series", () => {
+    it("searchSeasons debería devolver un array de series que tengan ese número de temporadas", () => {
+      const series = [
+        { nombre: "You", año: 2018, temporadas: 4 },
+        { nombre: "Dragon ball", año: 1985, temporadas: 20 },
+        { nombre: "Friends", año: 1994, temporadas: 10 },
+      ];
+      const seriesCollection = new SeriesCollection(series);
+      const result = seriesCollection.searchSeasons(20);
+      expect(result).to.have.lengthOf(1);
+      expect(result[0]).to.deep.include({
+        nombre: "Dragon ball",
+        año: 1985,
+        temporadas: 20,
+      });
+    });
+
+    it("searchName debería devolver un array de series que tengan el nombre buscado", () => {
+      const series = [
+        { nombre: "You", año: 2018, temporadas: 4 },
+        { nombre: "Dragon ball", año: 1985, temporadas: 20 },
+        { nombre: "Friends", año: 1994, temporadas: 10 },
+      ];
+      const seriesCollection = new SeriesCollection(series);
+      const result = seriesCollection.searchName("Friends");
+      expect(result).to.have.lengthOf(1);
+      expect(result[0]).to.deep.include({
+        nombre: "Friends",
+        año: 1994,
+        temporadas: 10,
+      });
+    });
+  });
+
+describe("Movies", () => {
+    it("searchDuration debería devolver un array de películas con la duración buscada", () => {
+      const movies = [
+        { nombre: "Inception", año: 2010, duracion: 152 },
+        { nombre: "The Godfather", año: 1972, duracion: 175 },
+        { nombre: "The Dark Knight", año: 2018, duracion: 152 },
+      ];
+      const moviesCollection = new PeliculasCollection(movies);
+      const result = moviesCollection.searchDuration(152);
+      expect(result).to.have.lengthOf(2);
+      expect(result[0]).to.deep.include({
+        nombre: "Inception",
+        año: 2010,
+        duracion: 152,
+      });
+      expect(result[1]).to.deep.include({
+        nombre: "The Dark Knight",
+        año: 2018,
+        duracion: 152,
+      });
+    });
+
+    it("searchYear debería devolver un array con las películas que salieron ese año", () => {
+      const peliculas = [
+        { nombre: "The Dark Knight", año: 2018, duracion: 152 },
+        { nombre: "Inception", año: 2010, duracion: 152 },
+      ];
+      const peliculasCollection = new PeliculasCollection(peliculas);
+      const result = peliculasCollection.searchYear(2010);
+      expect(result).to.have.lengthOf(1);
+      expect(result[0]).to.deep.include({
+        nombre: "Inception",
+        año: 2010,
+        duracion: 152,
+      });
+    });
+
+    it("searchName debería devolver un array con las películas que tienen ese nombre", () => {
+      const peliculas = [
+        { nombre: "The Dark Knight", año: 2018, duracion: 152 },
+        { nombre: "Inception", año: 2010, duracion: 152 },
+      ];
+      const peliculasCollection = new PeliculasCollection(peliculas);
+      const result = peliculasCollection.searchName("Inception");
+      expect(result).to.have.lengthOf(1);
+      expect(result[0]).to.deep.include({
+        nombre: "Inception",
+        año: 2010,
+        duracion: 152,
+      });
+    });
+  });
+
+describe("Documentaries", () => {
+    it("searchTopic debería devolver un array de documentales de ese tipo", () => {
+      const documentaries = [
+        { nombre: "Cosmos", año: 2014, duracion: 500, topico: "Espacial" },
+        { nombre: "No confíes en nadie", año: 2022, duracion: 100, topico: "Criptomonedas" },
+        { nombre: "Osa Polar", año: 2020, duracion: 200, topico: "Animales" },
+      ];
+      const documentariesCollection = new DocumentalesCollection(documentaries);
+      const result = documentariesCollection.searchTopic("Criptomonedas");
+      expect(result).to.have.lengthOf(1);
+      expect(result[0]).to.deep.include({
+        nombre: "No confíes en nadie",
+        año: 2022,
+        duracion: 100,
+        topico: "Criptomonedas",
+      });
+  });
+
+    it("searchDuration debería devolver un array de documentales la duración buscada", () => {
+      const documentaries = [
+        { nombre: "Cosmos", año: 2014, duracion: 500, topico: "Espacial" },
+        { nombre: "No confíes en nadie", año: 2022, duracion: 100, topico: "Criptomonedas" },
+        { nombre: "Osa Polar", año: 2020, duracion: 200, topico: "Animales" },
+      ];
+      const documentariesCollection = new DocumentalesCollection(documentaries);
+      const result = documentariesCollection.searchDuration(100);
+      expect(result).to.have.lengthOf(1);
+      expect(result[0]).to.deep.include({
+        nombre: "No confíes en nadie",
+        año: 2022,
+        duracion: 100,
+        topico: "Criptomonedas",
+      });
+    });
+
+    it("searchYear debería devolver un array de documentales que salieron en ese año", () => {
+      const documentaries = [
+        { nombre: "Cosmos", año: 2014, duracion: 500, topico: "Espacial" },
+        { nombre: "No confíes en nadie", año: 2022, duracion: 100, topico: "Criptomonedas" },
+        { nombre: "Osa Polar", año: 2020, duracion: 200, topico: "Animales" },
+      ];
+      const documentariesCollection = new DocumentalesCollection(documentaries);
+      const result = documentariesCollection.searchYear(2022);
+      expect(result).to.have.lengthOf(1);
+      expect(result[0]).to.deep.include({
+        nombre: "No confíes en nadie",
+        año: 2022,
+        duracion: 100,
+        topico: "Criptomonedas",
+      });
+    });
+  });
 ```
 
+Como podemos observar, todas las pruebas fueron superadas:
 
+```Bash
+  Streamable
+    ✔ searchYear debería devolver un array con las series del año buscado
+    ✔ searchName debería devolver un array con los documentales que tengan ese nombre
 
+  Series
+    ✔ searchSeasons debería devolver un array de series que tengan ese número de temporadas
+    ✔ searchName debería devolver un array de series que tengan el nombre buscado
 
-```TypeScript
+  Movies
+    ✔ searchDuration debería devolver un array de películas con la duración buscada
+    ✔ searchYear debería devolver un array con las películas que salieron ese año
+    ✔ searchName debería devolver un array con las películas que tienen ese nombre
 
+  Documentaries
+    ✔ searchTopic debería devolver un array de documentales de ese tipo
+    ✔ searchDuration debería devolver un array de documentales la duración buscada
+    ✔ searchYear debería devolver un array de documentales que salieron en ese año
+
+  10 passing (54ms)
 ```
 
-
-
-```TypeScript
-
-```
-
-
+Y también podemos comprobar gracias a que hemos utilizado Istanbul y Coveralls, como de cubierto tenemos nuestro código:
 
 ```TypeScript
-
-```
-
-Y como vemos, todas las pruebas propuestas son pasadas:
-
-```bash
-
+-------------------------------|---------|----------|---------|---------|-------------------
+File                           | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------------------|---------|----------|---------|---------|-------------------                 
+ ejercicio-1                   |     100 |      100 |     100 |     100 |                   
+  BasicStreamableCollection.ts |     100 |      100 |     100 |     100 |                   
+  Documentaries.ts             |     100 |      100 |     100 |     100 |                   
+  Movies.ts                    |     100 |      100 |     100 |     100 |                   
+  Series.ts                    |     100 |      100 |     100 |     100 | 
 ```
 
 .
