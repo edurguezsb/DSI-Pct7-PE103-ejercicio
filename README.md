@@ -386,7 +386,7 @@ Como podemos observar, todas las pruebas fueron superadas:
   10 passing (54ms)
 ```
 
-Y también podemos comprobar gracias a que hemos utilizado Istanbul y Coveralls, como de cubierto tenemos nuestro código:
+Y también podemos comprobar gracias a que hemos utilizado Istanbul y Coveralls, cómo de cubierto tenemos nuestro código:
 
 ```TypeScript
 -------------------------------|---------|----------|---------|---------|-------------------
@@ -397,6 +397,7 @@ File                           | % Stmts | % Branch | % Funcs | % Lines | Uncove
   Documentaries.ts             |     100 |      100 |     100 |     100 |                   
   Movies.ts                    |     100 |      100 |     100 |     100 |                   
   Series.ts                    |     100 |      100 |     100 |     100 | 
+-------------------------------|---------|----------|---------|---------|-------------------
 ```
 
 .
@@ -496,31 +497,122 @@ export class Lista<T> {
 }
 ```
 
+Para este ejercicio, definimos una clase ```Lista<T>``` que es una implementación de una lista genérica como se nos pide en el enunciado. Los métodos incluyen que tenemos son:
 
+-```append``` para agregar elementos a la lista.
+-```concatenate``` para concatenar varias listas.
+-```filter``` para filtrar la lista según un predicado.
+-```length``` para obtener la longitud de la lista.
+-```map``` para transformar cada elemento de la lista
+-```reduce``` para reducir la lista a un solo valor.
+-```reverse``` para invertir el orden de los elementos en la lista.
+-```forEach``` para ejecutar una función en cada elemento de la lista.
+-```toArray``` para obtener un arreglo de los elementos en la lista.
 
-```TypeScript
-
-```
-
+La clase utiliza un tipo genérico ```T``` que se utiliza en la definición de los métodos y en la definición del arreglo elementos que almacena los elementos de la lista. El ```constructor``` de la clase acepta un número variable de argumentos de tipo ```T```, que se utilizan para inicializar la lista. La mayoría de los métodos crean y devuelven una nueva instancia de ```Lista<T>``` para guardar sin modificar la lista original.
 
 
 #### Comprobaciones
 
-
-
-```TypeScript
-
-```
-
-
-```bash
-
-```
-
-
+Se han realizado pruebas con Mocha y Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
 ```TypeScript
+import "mocha";
+import { expect } from "chai";
+import { Lista } from "../../src/ejercicio-2/Lista";
 
+describe("Lista", () => {
+  it("debería crear una lista vacía", () => {
+    const lista = new Lista();
+    expect(lista.length()).to.equal(0);
+  });
+
+  it("debería crear una lista con elementos", () => {
+    const lista = new Lista("hola", "mundo");
+    expect(lista.length()).to.equal(2);
+    expect(lista.toArray()).to.deep.equal(["hola", "mundo"]);
+  });
+
+  it("debería agregar elementos al final de la lista", () => {
+    const lista = new Lista(1, 2);
+    lista.append(new Lista(3, 4));
+    expect(lista.toArray()).to.deep.equal([1, 2, 3, 4]);
+  });
+
+  it("debería concatenar varias listas en una sola lista", () => {
+    const lista1 = new Lista(1, 2);
+    const lista2 = new Lista(3, 4);
+    const lista3 = new Lista(5, 6);
+    const lista4 = lista1.concatenate(lista2, lista3);
+    expect(lista4.toArray()).to.deep.equal([1, 2, 3, 4, 5, 6]);
+  });
+
+  it("debería filtrar los elementos de la lista", () => {
+    const lista = new Lista(1, 2, 3, 4, 5);
+    const numerosPares = lista.filter((n) => n % 2 === 0);
+    expect(numerosPares.toArray()).to.deep.equal([2, 4]);
+  });
+
+  it("debería mapear los elementos de la lista", () => {
+    const lista = new Lista(1, 2, 3, 4, 5);
+    const numerosDuplicados = lista.map((n) => n * 2);
+    expect(numerosDuplicados.toArray()).to.deep.equal([2, 4, 6, 8, 10]);
+  });
+
+  it("debería reducir los elementos de la lista", () => {
+    const lista = new Lista(1, 2, 3, 4, 5);
+    const sumaNumeros = lista.reduce((acumulador, n) => acumulador + n, 0);
+    expect(sumaNumeros).to.equal(15);
+  });
+
+  it("debería invertir los elementos de la lista", () => {
+    const lista = new Lista(1, 2, 3, 4, 5);
+    const numerosInversos = lista.reverse();
+    expect(numerosInversos.toArray()).to.deep.equal([5, 4, 3, 2, 1]);
+  });
+
+  it("debería iterar sobre los elementos de la lista y ejecutar la función de callback en cada uno", () => {
+    const lista = new Lista<number>(1, 2, 3);
+    const elementos: number[] = [];
+    lista.forEach((n) => elementos.push(n * 2));
+    expect(elementos).to.deep.equal([2, 4, 6]);
+  });
+
+  it("debería devolver un array vacío si se aplica filter a una lista vacía", () => {
+    const lista = new Lista<number>();
+    const listaFiltrada = lista.filter((n: number) => n % 2 === 0);
+    expect(listaFiltrada.toArray()).to.deep.equal([]);
+  });
+});
+```
+
+Como podemos observar, todas las pruebas fueron superadas:
+
+```Bash
+  Lista
+    ✔ debería crear una lista vacía
+    ✔ debería crear una lista con elementos
+    ✔ debería agregar elementos al final de la lista
+    ✔ debería concatenar varias listas en una sola lista
+    ✔ debería filtrar los elementos de la lista
+    ✔ debería mapear los elementos de la lista
+    ✔ debería reducir los elementos de la lista
+    ✔ debería invertir los elementos de la lista
+    ✔ debería iterar sobre los elementos de la lista y ejecutar la función de callback en cada uno
+    ✔ debería devolver un array vacío si se aplica filter a una lista vacía
+
+  10 passing
+```
+
+Y también podemos comprobar gracias a que hemos utilizado Istanbul y Coveralls, cómo de cubierto tenemos nuestro código:
+
+```TypeScript
+-------------------------------|---------|----------|---------|---------|-------------------
+File                           | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------------------|---------|----------|---------|---------|-------------------                  
+ ejercicio-2                   |     100 |      100 |     100 |     100 |                   
+  Lista.ts                     |     100 |      100 |     100 |     100 |                   
+-------------------------------|---------|----------|---------|---------|-------------------
 ```
 
 .
