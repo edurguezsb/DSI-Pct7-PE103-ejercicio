@@ -1,32 +1,25 @@
-import { Disco } from './Discografia';
+import { Discografia } from "./Discografia";
 
-/**
- * Clase que representa un artista
- */
 export class Artista {
-  nombre: string;
-  oyentesMensuales: number;
-  discografia: Disco[];
+  private _nombre: string;
+  private _oyentesMensuales: number;
+  private _discografia: Discografia;
 
-  constructor(nombre: string, oyentesMensuales: number, discografia: Disco[]) {
-    this.nombre = nombre;
-    this.oyentesMensuales = oyentesMensuales;
-    this.discografia = discografia;
+  constructor(nombre: string, oyentesMensuales: number, discografia: Discografia) {
+    this._nombre = nombre;
+    this._oyentesMensuales = oyentesMensuales;
+    this._discografia = discografia;
   }
 
-/**
-* Calcula el número total de reproducciones de todas las canciones del artista
-* @returns Número total de reproducciones del artista
-*/
-  numReproduccionesTotal(): number {
-    return this.discografia.reduce((acumulador, disco) => acumulador + disco.numReproduccionesTotal(), 0);
+  get nombre(): string {
+    return this._nombre;
   }
-/**
 
-Agrega un disco a la discografía del artista
-@param disco Objeto Discografia que se agregará a la discografía del artista
-*/
-  agregarDisco(disco: Disco) {
-    this.discografia.push(disco);
+  get oyentesMensuales(): number {
+    return this._oyentesMensuales;
+  }
+
+  get discografia(): Discografia {
+    return this._discografia;
   }
 }

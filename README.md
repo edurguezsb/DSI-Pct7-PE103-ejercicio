@@ -637,6 +637,9 @@ Además, ahora deberá hacer que la discografía sea una clase genérica. En alg
 
 #### Código
 
+Ahora la discografía de un artista puede contener una colección de discos o de singles, y se ha agregado la entidad Single para representar esta nueva forma de organización. Además, la clase Discografía ha sido convertida en una clase genérica, para que pueda ser una colección de discos, singles o ambos. También se han realizado cambios en la clase BibliotecaMusical para manejar correctamente la nueva entidad Single y permitir la búsqueda de discos y singles.
+
+
 ``` TypeScript
 
 ```

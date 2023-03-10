@@ -2,7 +2,7 @@ import 'mocha';
 import { expect } from 'chai';
 import { Artista } from '../../src/ejercicio-3/Artista';
 import { BibliotecaMusical } from '../../src/ejercicio-3/BibliotecaMusical';
-import { Disco } from '../../src/ejercicio-3/Discografia';
+import { Disco } from '../../src/ejercicio-3/Disco';
 import { Cancion } from '../../src/ejercicio-3/Cancion';
 
 

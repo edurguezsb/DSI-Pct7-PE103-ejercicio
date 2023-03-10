@@ -1,24 +1,30 @@
 import 'mocha';
 import { expect } from 'chai';
 import { Artista } from '../../src/ejercicio-3/Artista';
+import { Discografia } from "../../src/ejercicio-3/Discografia";
 
-
-describe('Artista', () => {
-  let artista: Artista;
-
-  beforeEach(() => {
-    artista = new Artista('Quevedo', 5000000, []);
+describe("Artista", () => {
+  it("Debería crear un artista con el nombre especificado", () => {
+    const nombre = "Adele";
+    const oyentesMensuales = 1000000;
+    const discografia = new Discografia([]);
+    const artista = new Artista(nombre, oyentesMensuales, discografia);
+    expect(artista.nombre).to.equal(nombre);
   });
 
-  it('debería tener un nombre', () => {
-    expect(artista.nombre).to.equal('Quevedo');
+  it("Debería crear un artista con el número de oyentes mensuales especificado", () => {
+    const nombre = "Adele";
+    const oyentesMensuales = 1000000;
+    const discografia = new Discografia([]);
+    const artista = new Artista(nombre, oyentesMensuales, discografia);
+    expect(artista.oyentesMensuales).to.equal(oyentesMensuales);
   });
 
-  it('debería tener un número de oyentes mensuales', () => {
-    expect(artista.oyentesMensuales).to.equal(5000000);
-  });
-
-  it('debería tener una discografía vacía inicialmente', () => {
-    expect(artista.discografia).to.be.an('array').that.is.empty;
+  it("Debería crear un artista con la discografía especificada", () => {
+    const nombre = "Adele";
+    const oyentesMensuales = 1000000;
+    const discografia = new Discografia([]);
+    const artista = new Artista(nombre, oyentesMensuales, discografia);
+    expect(artista.discografia).to.equal(discografia);
   });
 });
