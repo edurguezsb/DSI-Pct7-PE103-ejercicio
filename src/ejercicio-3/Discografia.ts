@@ -1,49 +1,28 @@
-import { Artista } from "./Artista";
-import { Cancion } from "./Cancion"
+export class Discografia {
+  
+    private pNombre: string;
+    private pAño: number;
 
 
-export interface IDisco {
-  nombre: string;
-  anioPublicacion: number;
-  canciones: Cancion[];
-}
-
-export interface ISingle extends IDisco {
-  esSingle: boolean;
-}
-
-export class Disco implements IDisco {
-  nombre: string;
-  anioPublicacion: number;
-  canciones: Cancion[];
-
-  constructor(nombre: string, anioPublicacion: number, canciones: Cancion[]) {
-    this.nombre = nombre;
-    this.anioPublicacion = anioPublicacion;
-    this.canciones = canciones;
+  constructor(nombre: string, año:number){
+    this.pNombre = nombre;
+    this.pAño = año;
   }
-}
 
-export class Single implements ISingle {
-  nombre: string;
-  anioPublicacion: number;
-  canciones: Cancion[];
-  esSingle: boolean;
-
-  constructor(nombre: string, anioPublicacion: number, canciones: Cancion[]) {
-    this.nombre = nombre;
-    this.anioPublicacion = anioPublicacion;
-    this.canciones = canciones;
-    this.esSingle = true;
+  get nombre(): string {
+    return this.pNombre;
   }
-}
 
-export class Discografia<T extends IDisco> {
-  artist: Artista;
-  discos: T[];
+  set nombre(value: string) {
+    this.pNombre = value;
+  }
 
-  constructor(artist: Artista, discos: T[]) {
-    this.artist = artist;
-    this.discos = discos;
+
+  get año(): number {
+    return this.pAño;
+  }
+
+  set año(value: number) {
+    this.pAño = value;
   }
 }

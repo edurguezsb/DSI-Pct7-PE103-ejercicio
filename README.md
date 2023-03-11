@@ -1032,6 +1032,62 @@ describe('StringSearchableCollection', () => {
   });
 ```
 
+Al final me decidí por crean también pruebas unitarias para SearchableCollection con el fin de que visualmente me saliera un cubrimiento del código del 100% :).
+
+- SearchableCollection.spec.ts:
+
+```TypeScript
+import 'mocha';
+import { expect } from 'chai';
+import { SearchableCollection } from '../../src/ejercicio-PE103-1/SearchableCollection';
+
+
+class Persona {
+  constructor(public nombre: string, public edad: number) {}
+}
+
+class ColeccionPersonas extends SearchableCollection<Persona> {
+  search(term: string): Persona[] {
+    return this.items.filter((p) => p.nombre.includes(term));
+  }
+}
+
+describe('SearchableCollection', () => {
+  let coleccion: ColeccionPersonas;
+
+  beforeEach(() => {
+    coleccion = new ColeccionPersonas();
+    coleccion.addItem(new Persona('Ana', 23));
+    coleccion.addItem(new Persona('Juan', 31));
+    coleccion.addItem(new Persona('María', 42));
+  });
+
+  it('debería permitir agregar elementos a la colección', () => {
+    expect(coleccion.getNumberOfItems()).to.equal(3);
+    coleccion.addItem(new Persona('Pedro', 29));
+    expect(coleccion.getNumberOfItems()).to.equal(4);
+  });
+
+  it('debería permitir obtener un elemento de la colección', () => {
+    expect(coleccion.getItem(1)?.nombre).to.equal('Juan');
+    expect(coleccion.getItem(3)?.nombre).to.be.undefined;
+  });
+
+  it('debería permitir eliminar un elemento de la colección', () => {
+    expect(coleccion.removeItem(1)?.nombre).to.equal('Juan');
+    expect(coleccion.getNumberOfItems()).to.equal(2);
+    expect(coleccion.removeItem(3)).to.be.undefined;
+    expect(coleccion.getNumberOfItems()).to.equal(2);
+  });
+
+  it('debería permitir realizar una búsqueda en la colección', () => {
+    const resultados = coleccion.search('Mar');
+    expect(resultados.length).to.equal(1);
+    expect(resultados[0].nombre).to.equal('María');
+  });
+});
+```
+
 Como podemos observar, todas las pruebas fueron superadas:
 
 ```bash
@@ -1054,6 +1110,12 @@ Como podemos observar, todas las pruebas fueron superadas:
       ✔ debe devolver una serie de números que coincidan con el término de búsqueda
       ✔ debería devolver una matriz vacía si ningún número coincide con el término de búsqueda
 
+  SearchableCollection
+    ✔ debería permitir agregar elementos a la colección
+    ✔ debería permitir obtener un elemento de la colección
+    ✔ debería permitir eliminar un elemento de la colección
+    ✔ debería permitir realizar una búsqueda en la colección
+
   StringSearchableCollection
     ✔ debería devolver un array de strings que contengan el término buscado
     ✔ debería devolver un array vacío si no hay ningún string que contenga el término de búsqueda
@@ -1064,9 +1126,9 @@ Como podemos observar, todas las pruebas fueron superadas:
     ✔ debería eliminar elementos de la colección
     ✔ debería devolver un array vacío si la colección está vacía
 
-
-  16 passing (46ms)
+  20 passing (53ms)
 ```
+
 
 Y también podemos comprobar gracias a que hemos utilizado Istanbul y Coveralls, cómo de cubierto tenemos nuestro código, y vemos que los dos fichero sobre los que hemos realizado las pruebas están cubiertos:
 
@@ -1074,10 +1136,23 @@ Y también podemos comprobar gracias a que hemos utilizado Istanbul y Coveralls,
 ---------------------------------|---------|----------|---------|---------|-------------------
 File                             | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 ---------------------------------|---------|----------|---------|---------|-------------------
-
- ejercicio-PE103-1               |   78.57 |        0 |   77.77 |   76.92 |                   
+All files                        |     100 |      100 |     100 |     100 |                   
+ ejercicio-1                     |     100 |      100 |     100 |     100 |                   
+  BasicStreamableCollection.ts   |     100 |      100 |     100 |     100 |                   
+  Documentaries.ts               |     100 |      100 |     100 |     100 |                   
+  Movies.ts                      |     100 |      100 |     100 |     100 |                   
+  Series.ts                      |     100 |      100 |     100 |     100 |                   
+ ejercicio-2                     |     100 |      100 |     100 |     100 |                   
+  Lista.ts                       |     100 |      100 |     100 |     100 |                   
+ ejercicio-3                     |     100 |      100 |     100 |     100 |                   
+  Artista.ts                     |     100 |      100 |     100 |     100 |                   
+  Cancion.ts                     |     100 |      100 |     100 |     100 |                   
+  Disco.ts                       |     100 |      100 |     100 |     100 |                   
+  Discografia.ts                 |     100 |      100 |     100 |     100 |                   
+  Single.ts                      |     100 |      100 |     100 |     100 |                   
+ ejercicio-PE103-1               |     100 |      100 |     100 |     100 |                   
   NumericSearchableCollection.ts |     100 |      100 |     100 |     100 |                   
-  SearchableCollection.ts        |      25 |        0 |       0 |      25 | 24-53             
+  SearchableCollection.ts        |     100 |      100 |     100 |     100 |                   
   StringSearchableCollection.ts  |     100 |      100 |     100 |     100 |                   
 ---------------------------------|---------|----------|---------|---------|-------------------
 ```
@@ -1120,3 +1195,5 @@ File                             | % Stmts | % Branch | % Funcs | % Lines | Unco
 Estos ejercicios han sido bastante entretenidos, sobre todo el segundo, tanto para probar cosas como para aprender e incluso divertirnos a través de ese aprendizaje. En este caso gracias a estos ejercicios hemos aprendido más sobre clases e interfaces genéricas, también teniendo en cuenta los principios SOLID, y también haciendo uso de Instanbul Y Coveralls, que acaban siendo bastante útiles para ir haciendo un seguimiento de nuestros pryectos.
 
 Por otra parte, al empezar a trabajar con Coveralls e Istanbul me hue vuelto a sorprender ya que al comienzo de la asignatura pensaba que simplemente con ```console.log``` se podían llevar a cabo todas las comprobaciones necesarios sin que se me pasara nada por alto, sin embargo al empezar a hacer pruebas unitarias con Mocha y Chai me di cuenta de que estaba claramente equivocado. Y una vez ya sorprendido con lo bien que vienen esas pruebas en comparación con los simples ```console.log```, nos encontramos con Coveralls e Istanbul, que son ideales para cumplimentar tus pruebas al máximo con el fin de hacer el mejor seguimiento y cubrimiento posible a tu código.
+
+Lomás complicado fue adaptar la BibliotecaMusical, no se ni cuantas versiones hice, pero cada vez me complicaba mas y mas, así que decidi empezarla de 0 teniendo en cuenta lo de la práctica 5 y las nuevas condiciones de la 6.

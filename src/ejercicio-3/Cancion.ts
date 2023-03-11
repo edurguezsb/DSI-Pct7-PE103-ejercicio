@@ -1,23 +1,55 @@
-export interface ICancion {
-  nombre: string;
-  duracion: number;
-  generos: string[];
-  esSingle: boolean;
-  reproducciones: number;
-}
+export class Cancion {
 
-export class Cancion implements ICancion {
-  nombre: string;
-  duracion: number;
-  generos: string[];
-  esSingle: boolean;
-  reproducciones: number;
+  constructor(
+    private pNombre: string,
+    private pDuracion: number,
+    private pGenero: string[],
+    private pSingle: boolean,
+    private pReproducciones: number
+  ) {}
 
-  constructor(nombre: string, duracion: number, generos: string[], esSingle: boolean, reproducciones: number) {
-    this.nombre = nombre;
-    this.duracion = duracion;
-    this.generos = generos;
-    this.esSingle = esSingle;
-    this.reproducciones = reproducciones;
+
+  get nombre(): string {
+    return this.pNombre;
+  }
+
+  set nombre(value: string) {
+    this.pNombre = value;
+  }
+
+
+  get duracion(): number {
+    return this.pDuracion;
+  }
+
+  set duracion(value: number) {
+    this.pDuracion = value;
+  }
+
+
+  get generos(): string[] {
+    return this.pGenero;
+  }
+
+  set generos(value: string[]) {
+    this.pGenero = value;
+  }
+
+
+  get single(): boolean {
+    return this.pSingle;
+  }
+
+  set single(value: boolean) {
+    this.pSingle = value;
+  }
+
+
+  get reproducciones(): number {
+    return this.pReproducciones;
+  }
+
+  set reproducciones(value: number) {
+    this.pReproducciones = value;
   }
 }
