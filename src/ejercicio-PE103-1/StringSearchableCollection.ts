@@ -4,14 +4,16 @@ import { SearchableCollection } from './SearchableCollection';
  * Clase que representa una colección de cadenas de caracteres que puede ser buscada.
  */
 export class StringSearchableCollection extends SearchableCollection<string> {
-  /** Array de cadenas de caracteres que contiene los elementos de la colección. */
+  /** Array de cadenas de caracteres que contiene los elementos de la colección. 
+   * 
+   */
   private collection: string[] = [];
 
   /**
    * Crea una instancia de StringSearchableCollection.
    */
   constructor() {
-    super(); // Llamada al constructor de la clase base.
+    super();
   }
 
   /**

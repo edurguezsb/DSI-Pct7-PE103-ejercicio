@@ -1,5 +1,6 @@
 /**
  * Una interfaz que define los métodos necesarios para buscar elementos de un stream.
+ * 
  */
 export interface Streamable {
   /**

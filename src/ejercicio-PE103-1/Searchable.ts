@@ -10,4 +10,3 @@ export interface Searchable<T> {
      */
     search(term: T): T[];
   }
-  

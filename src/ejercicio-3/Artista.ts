@@ -1,25 +1,18 @@
-import { Discografia } from "./Discografia";
+import { Disco, Discografia, Single } from "./Discografia";
 
-export class Artista {
-  private _nombre: string;
-  private _oyentesMensuales: number;
-  private _discografia: Discografia;
+export interface IArtista {
+  nombre: string;
+  oyentesMensuales: number;
+}
 
-  constructor(nombre: string, oyentesMensuales: number, discografia: Discografia) {
-    this._nombre = nombre;
-    this._oyentesMensuales = oyentesMensuales;
-    this._discografia = discografia;
-  }
+export class Artista implements IArtista {
+  nombre: string;
+  oyentesMensuales: number;
+  discografia: Discografia<Disco> | Discografia<Single>; // Especificar el tipo de elemento
 
-  get nombre(): string {
-    return this._nombre;
-  }
-
-  get oyentesMensuales(): number {
-    return this._oyentesMensuales;
-  }
-
-  get discografia(): Discografia {
-    return this._discografia;
+  constructor(nombre: string, oyentesMensuales: number) {
+    this.nombre = nombre;
+    this.oyentesMensuales = oyentesMensuales;
+    this.discografia = new Discografia<Disco | Single>(this, []); // Crear una nueva instancia de Discografia
   }
 }

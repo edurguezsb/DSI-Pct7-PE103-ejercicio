@@ -179,38 +179,30 @@ Simplemente definimos la interfaz ```Streamable``` y le ponemos dos métodos: ``
 
 #### Comprobaciones
 
-Se han realizado pruebas con Mocha y Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
+En cuanto a las pruebas unitarias, antes las tenía todas de manera conjunta, y ahora las he separado en distintos ficheros gracias a la recomendación del profesor de que se debería de tener la misma estructura tanto en el ```src/``` como en el ```tests/```, así que a continuación, muestro los dintintos ficheros ```.spec.ts```que se han realizado, que son pruebas con Mocha y Chai:
+
+- Documentaries.spec.ts:
 
 ```TypeScript
 import "mocha";
 import { expect } from "chai";
-import {SeriesCollection} from "../../src/ejercicio-1/Series";
 import {DocumentalesCollection} from "../../src/ejercicio-1/Documentaries";
-import {PeliculasCollection} from "../../src/ejercicio-1/Movies";
 
-describe("Streamable", () => {
-    it("searchYear debería devolver un array con las series del año buscado", () => {
-      const series = [
-        { nombre: "You", año: 2018, temporadas: 4 },
-        { nombre: "Dragon ball", año: 1985, temporadas: 20 },
-      ];
-      const seriesCollection = new SeriesCollection(series);
-      const result = seriesCollection.searchYear(1985);
-      expect(result).to.have.lengthOf(1);
-      expect(result[0]).to.deep.include({
-        nombre: "Dragon ball",
-        año: 1985,
-        temporadas: 20,
-      });
-    });
 
-    it("searchName debería devolver un array con los documentales que tengan ese nombre", () => {
+import "mocha";
+import { expect } from "chai";
+import {DocumentalesCollection} from "../../src/ejercicio-1/Documentaries";
+
+
+describe("Documentaries", () => {
+    it("searchDuration debería devolver un array de documentales la duración buscada", () => {
       const documentaries = [
         { nombre: "Cosmos", año: 2014, duracion: 500, topico: "Espacial" },
         { nombre: "No confíes en nadie", año: 2022, duracion: 100, topico: "Criptomonedas" },
+        { nombre: "Osa Polar", año: 2020, duracion: 200, topico: "Animales" },
       ];
       const documentariesCollection = new DocumentalesCollection(documentaries);
-      const result = documentariesCollection.searchName("No confíes en nadie");
+      const result = documentariesCollection.searchDuration(100);
       expect(result).to.have.lengthOf(1);
       expect(result[0]).to.deep.include({
         nombre: "No confíes en nadie",
@@ -219,41 +211,50 @@ describe("Streamable", () => {
         topico: "Criptomonedas",
       });
     });
-  });
 
-describe("Series", () => {
-    it("searchSeasons debería devolver un array de series que tengan ese número de temporadas", () => {
-      const series = [
-        { nombre: "You", año: 2018, temporadas: 4 },
-        { nombre: "Dragon ball", año: 1985, temporadas: 20 },
-        { nombre: "Friends", año: 1994, temporadas: 10 },
+    it("searchYear debería devolver un array de documentales que salieron en ese año", () => {
+      const documentaries = [
+        { nombre: "Cosmos", año: 2014, duracion: 500, topico: "Espacial" },
+        { nombre: "No confíes en nadie", año: 2022, duracion: 100, topico: "Criptomonedas" },
+        { nombre: "Osa Polar", año: 2020, duracion: 200, topico: "Animales" },
       ];
-      const seriesCollection = new SeriesCollection(series);
-      const result = seriesCollection.searchSeasons(20);
+      const documentariesCollection = new DocumentalesCollection(documentaries);
+      const result = documentariesCollection.searchYear(2022);
       expect(result).to.have.lengthOf(1);
       expect(result[0]).to.deep.include({
-        nombre: "Dragon ball",
-        año: 1985,
-        temporadas: 20,
+        nombre: "No confíes en nadie",
+        año: 2022,
+        duracion: 100,
+        topico: "Criptomonedas",
       });
     });
 
-    it("searchName debería devolver un array de series que tengan el nombre buscado", () => {
-      const series = [
-        { nombre: "You", año: 2018, temporadas: 4 },
-        { nombre: "Dragon ball", año: 1985, temporadas: 20 },
-        { nombre: "Friends", año: 1994, temporadas: 10 },
-      ];
-      const seriesCollection = new SeriesCollection(series);
-      const result = seriesCollection.searchName("Friends");
-      expect(result).to.have.lengthOf(1);
-      expect(result[0]).to.deep.include({
-        nombre: "Friends",
-        año: 1994,
-        temporadas: 10,
-      });
+    it("searchTopic debería devolver un array de documentales de ese tipo", () => {
+        const documentaries = [
+          { nombre: "Cosmos", año: 2014, duracion: 500, topico: "Espacial" },
+          { nombre: "No confíes en nadie", año: 2022, duracion: 100, topico: "Criptomonedas" },
+          { nombre: "Osa Polar", año: 2020, duracion: 200, topico: "Animales" },
+        ];
+        const documentariesCollection = new DocumentalesCollection(documentaries);
+        const result = documentariesCollection.searchTopic("Criptomonedas");
+        expect(result).to.have.lengthOf(1);
+        expect(result[0]).to.deep.include({
+          nombre: "No confíes en nadie",
+          año: 2022,
+          duracion: 100,
+          topico: "Criptomonedas",
+        });
     });
   });
+```
+
+- Movies.spec.ts:
+
+```TypeScript
+import "mocha";
+import { expect } from "chai";
+import {PeliculasCollection} from "../../src/ejercicio-1/Movies";
+
 
 describe("Movies", () => {
     it("searchDuration debería devolver un array de películas con la duración buscada", () => {
@@ -307,50 +308,83 @@ describe("Movies", () => {
       });
     });
   });
+```
 
-describe("Documentaries", () => {
-    it("searchTopic debería devolver un array de documentales de ese tipo", () => {
-      const documentaries = [
-        { nombre: "Cosmos", año: 2014, duracion: 500, topico: "Espacial" },
-        { nombre: "No confíes en nadie", año: 2022, duracion: 100, topico: "Criptomonedas" },
-        { nombre: "Osa Polar", año: 2020, duracion: 200, topico: "Animales" },
+- Series.spec.ts:
+
+```TypeScript
+import "mocha";
+import { expect } from "chai";
+import {SeriesCollection} from "../../src/ejercicio-1/Series";
+
+
+describe("Series", () => {
+    it("searchSeasons debería devolver un array de series que tengan ese número de temporadas", () => {
+      const series = [
+        { nombre: "You", año: 2018, temporadas: 4 },
+        { nombre: "Dragon ball", año: 1985, temporadas: 20 },
+        { nombre: "Friends", año: 1994, temporadas: 10 },
       ];
-      const documentariesCollection = new DocumentalesCollection(documentaries);
-      const result = documentariesCollection.searchTopic("Criptomonedas");
+      const seriesCollection = new SeriesCollection(series);
+      const result = seriesCollection.searchSeasons(20);
       expect(result).to.have.lengthOf(1);
       expect(result[0]).to.deep.include({
-        nombre: "No confíes en nadie",
-        año: 2022,
-        duracion: 100,
-        topico: "Criptomonedas",
-      });
-  });
-
-    it("searchDuration debería devolver un array de documentales la duración buscada", () => {
-      const documentaries = [
-        { nombre: "Cosmos", año: 2014, duracion: 500, topico: "Espacial" },
-        { nombre: "No confíes en nadie", año: 2022, duracion: 100, topico: "Criptomonedas" },
-        { nombre: "Osa Polar", año: 2020, duracion: 200, topico: "Animales" },
-      ];
-      const documentariesCollection = new DocumentalesCollection(documentaries);
-      const result = documentariesCollection.searchDuration(100);
-      expect(result).to.have.lengthOf(1);
-      expect(result[0]).to.deep.include({
-        nombre: "No confíes en nadie",
-        año: 2022,
-        duracion: 100,
-        topico: "Criptomonedas",
+        nombre: "Dragon ball",
+        año: 1985,
+        temporadas: 20,
       });
     });
 
-    it("searchYear debería devolver un array de documentales que salieron en ese año", () => {
+    it("searchName debería devolver un array de series que tengan el nombre buscado", () => {
+      const series = [
+        { nombre: "You", año: 2018, temporadas: 4 },
+        { nombre: "Dragon ball", año: 1985, temporadas: 20 },
+        { nombre: "Friends", año: 1994, temporadas: 10 },
+      ];
+      const seriesCollection = new SeriesCollection(series);
+      const result = seriesCollection.searchName("Friends");
+      expect(result).to.have.lengthOf(1);
+      expect(result[0]).to.deep.include({
+        nombre: "Friends",
+        año: 1994,
+        temporadas: 10,
+      });
+    });
+  });
+```
+
+- Streamable.spec.ts
+
+```TypeScript
+import "mocha";
+import { expect } from "chai";
+import {SeriesCollection} from "../../src/ejercicio-1/Series";
+import {DocumentalesCollection} from "../../src/ejercicio-1/Documentaries";
+
+
+describe("Streamable", () => {
+    it("searchYear debería devolver un array con las series del año buscado", () => {
+      const series = [
+        { nombre: "You", año: 2018, temporadas: 4 },
+        { nombre: "Dragon ball", año: 1985, temporadas: 20 },
+      ];
+      const seriesCollection = new SeriesCollection(series);
+      const result = seriesCollection.searchYear(1985);
+      expect(result).to.have.lengthOf(1);
+      expect(result[0]).to.deep.include({
+        nombre: "Dragon ball",
+        año: 1985,
+        temporadas: 20,
+      });
+    });
+
+    it("searchName debería devolver un array con los documentales que tengan ese nombre", () => {
       const documentaries = [
         { nombre: "Cosmos", año: 2014, duracion: 500, topico: "Espacial" },
         { nombre: "No confíes en nadie", año: 2022, duracion: 100, topico: "Criptomonedas" },
-        { nombre: "Osa Polar", año: 2020, duracion: 200, topico: "Animales" },
       ];
       const documentariesCollection = new DocumentalesCollection(documentaries);
-      const result = documentariesCollection.searchYear(2022);
+      const result = documentariesCollection.searchName("No confíes en nadie");
       expect(result).to.have.lengthOf(1);
       expect(result[0]).to.deep.include({
         nombre: "No confíes en nadie",
@@ -365,23 +399,23 @@ describe("Documentaries", () => {
 Como podemos observar, todas las pruebas fueron superadas:
 
 ```Bash
-  Streamable
-    ✔ searchYear debería devolver un array con las series del año buscado
-    ✔ searchName debería devolver un array con los documentales que tengan ese nombre
-
-  Series
-    ✔ searchSeasons debería devolver un array de series que tengan ese número de temporadas
-    ✔ searchName debería devolver un array de series que tengan el nombre buscado
+  Documentaries
+    ✔ searchDuration debería devolver un array de documentales la duración buscada
+    ✔ searchYear debería devolver un array de documentales que salieron en ese año
+    ✔ searchTopic debería devolver un array de documentales de ese tipo
 
   Movies
     ✔ searchDuration debería devolver un array de películas con la duración buscada
     ✔ searchYear debería devolver un array con las películas que salieron ese año
     ✔ searchName debería devolver un array con las películas que tienen ese nombre
 
-  Documentaries
-    ✔ searchTopic debería devolver un array de documentales de ese tipo
-    ✔ searchDuration debería devolver un array de documentales la duración buscada
-    ✔ searchYear debería devolver un array de documentales que salieron en ese año
+  Series
+    ✔ searchSeasons debería devolver un array de series que tengan ese número de temporadas
+    ✔ searchName debería devolver un array de series que tengan el nombre buscado
+
+  Streamable
+    ✔ searchYear debería devolver un array con las series del año buscado
+    ✔ searchName debería devolver un array con los documentales que tengan ese nombre
 
   10 passing (54ms)
 ```
@@ -637,7 +671,7 @@ Además, ahora deberá hacer que la discografía sea una clase genérica. En alg
 
 #### Código
 
-Ahora la discografía de un artista puede contener una colección de discos o de singles, y se ha agregado la entidad Single para representar esta nueva forma de organización. Además, la clase Discografía ha sido convertida en una clase genérica, para que pueda ser una colección de discos, singles o ambos. También se han realizado cambios en la clase BibliotecaMusical para manejar correctamente la nueva entidad Single y permitir la búsqueda de discos y singles.
+Han habido numerosas complicaciones debido a que el código de la entrega 5 no era y no estaba implementado de la mejor manera posible, después de haber llevado a cabo 3 posibles soluciones, y de intentar adaptar la que ya tenía, decidí que llegados a ese punto que lo mejor era empezar el ejercicio de 0, y finalmente este es el resultado.
 
 
 ``` TypeScript
@@ -672,29 +706,380 @@ Ahora la discografía de un artista puede contener una colección de discos o de
 
 ### Enunciado:
 
+Implemente una interfaz genérica 'Collectable' con los siguientes métodos, los cuales deberá definir toda clase que quiera implementar dicha interfaz: addItem, getItem, removeItem, getNumberOfItems.
+
+Implemente una interfaz genérica 'Searchable' con los siguientes métodos, los cuales deberá definir toda clase que desee implementar dicha interfaz: search. Este método recibirá un término de búsqueda cuyo tipo no se conoce a priori.
+
+Implemente una clase abstracta genérica 'SearchableCollection' que implemente las interfaces genéricas 'Collectable' y 'Searchable'. Tenga en cuenta que en este punto deberá implementar todos los metodos de la interfaz 'Collectable', mientras que el método search de 'Searchable' será abstracto, de modo que aquellas clases que extiendan a 'SearchableCollection' tengan que implementarlo obligatoriamente.
+
+Extienda la clase abstracta genérica 'SearchableCollection' escribiendo dos subclases: 'NumericSearchableCollection' y 'StringSearchableCollection'. La primera deberá modelar una colección de elementos numéricos en la que el método search deberá poder buscar un número concreto y devolverá un array con todas las ocurrencias de dicho número en la colección. La segunda deberá modelar una colección de cadenas de caracteres en la que el método search deberá poder buscar una subcadena y devolverá un array con todas las cadenas de la colección que contengan dicha subcadena.
+
+Pruebe el correcto funcionamiento de las clases 'NumericSearchableCollection' y 'StringSearchableCollection'. Esto debería haberlo hecho ya si ha utilizado TDD/BDD durante su desarrollo.
 
 
 #### Código
 
-``` TypeScript
 
+Como había que separar por interfaces y clases, hemos acabado con 5 ficheros:
+
+- Collectable.ts:
+
+``` TypeScript
+export interface Collectable<T> {
+
+    addItem(item: T): void;
+  
+    getItem(index: number): T | undefined;
+  
+    removeItem(index: number): void;
+  
+    getNumberOfItems(): number;
+  }
 ```
 
+Este código define una interfaz genérica ```Collectable<T>``` que describe una colección de elementos que se pueden agregar, obtener y eliminar. La interfaz tiene cuatro métodos:
+
+- ```addItem(item: T)```: agrega un elemento item a la colección.
+
+-```getItem(index: number)```: devuelve el elemento en el índice index.
+
+-```removeItem(index: number)```: elimina el elemento en el índice index.
+
+-```getNumberOfItems()```: devuelve el número de elementos en la colección.
+
+La interfaz utiliza un tipo genérico ```T``` que especifica el tipo de elemento que se almacena en la colección. Esto permite que la interfaz se utilice con diferentes tipos de elementos. Por ejemplo, se podría crear una implementación de la interfaz ```Collectable``` para una colección de canciones o para una colección de artistas.
+
+- Searchable.ts:
+
+```TypeScript
+export interface Searchable<T> {
+
+    search(term: T): T[];
+  }
+```
+
+Se define una interfaz genérica llamada ```Searchable<T>```. La interfaz tiene un método ```search()``` que toma un argumento ```term``` de tipo ```T``` y devuelve un array de objetos de tipo ```T``` que coinciden con el término de búsqueda especificado. Podríamos decir que esta interfaz puede ser implementada por cualquier clase que sea capaz de realizar una búsqueda y devolver los resultados en un array del mismo tipo. El uso de una interfaz genérica permite que esta misma interfaz sea utilizada con diferentes tipos de objetos, proporcionando una mayor flexibilidad y reutilización de código.
+
+- SearchableCollection.ts:
+
+```TypeScript
+import { Collectable } from './Collectable';
+import { Searchable } from './Searchable';
 
 
+export abstract class SearchableCollection<T> implements Collectable<T>, Searchable<T> {
+  protected items: T[] = [];
+
+  abstract search(term: unknown): T[];
+
+  addItem(item: T): void {
+    this.items.push(item);
+  }
+
+  getItem(index: number): T | undefined {
+    return this.items[index];
+  }
+
+  removeItem(index: number): T | undefined {
+    if (index < 0 || index >= this.items.length) {
+      return undefined;
+    }
+    return this.items.splice(index, 1)[0];
+  }
+
+  getNumberOfItems(): number {
+    return this.items.length;
+  }
+}
+```
+
+La clase abstracta ```SearchableCollection``` es una colección de elementos que pueden ser buscados y manipulados. Define los métodos para agregar, obtener y eliminar elementos, y un método abstracto ```search()``` para realizar búsquedas en la colección. Se utiliza como base para definir colecciones específicas de elementos.
+
+- NumericSearchableCollection.ts:
+
+```TypeScript
+import { SearchableCollection } from './SearchableCollection';
+
+export class NumericSearchableCollection extends SearchableCollection<number> {
+
+  private collection: number[] = [];
+
+  constructor() {
+    super();
+  }
+
+  addItem(item: number): void {
+    this.collection.push(item);
+  }
+
+  getItem(index: number): number | undefined {
+    return this.collection[index];
+  }
+
+  removeItem(index: number): number {
+    return this.collection.splice(index, 1)[0];
+  }
+
+  getNumberOfItems(): number {
+    return this.collection.length;
+  }
+
+  search(term: number): number[] {
+    return this.collection.filter((item) => item === term);
+  }
+}
+```
+
+Este código define una clase llamada ```NumericSearchableCollection``` que representa una colección de números que se puede buscar. La clase tiene varios métodos para agregar, obtener y eliminar elementos de la colección, y también tiene un método ```search()``` que busca un número en la colección y devuelve un array con los números que coinciden con el término de búsqueda. La clase utiliza un array privado llamado ```collection``` para almacenar los números de la colección.
+
+- StringSearchableCollection.ts:
+
+```TypeScript
+import { SearchableCollection } from './SearchableCollection';
+
+
+export class StringSearchableCollection extends SearchableCollection<string> {
+
+  private collection: string[] = [];
+
+
+  constructor() {
+    super();
+  }
+
+  addItem(item: string): void {
+    this.collection.push(item);
+  }
+
+  getItem(index: number): string | undefined {
+    return this.collection[index];
+  }
+
+  removeItem(index: number): string {
+    return this.collection.splice(index, 1)[0];
+  }
+
+  getNumberOfItems(): number {
+    return this.collection.length;
+  }
+
+  search(term: string): string[] {
+    return this.collection.filter((item) => item.includes(term));
+  }
+}
+```
+
+El código define una clase llamada ```StringSearchableCollection``` que hereda de otra clase llamada ```SearchableCollection``` y se utiliza para almacenar y buscar cadenas de caracteres. Proporciona métodos para agregar, obtener, eliminar y buscar elementos en la colección.
 
 #### Comprobaciones
 
+Se han realizado pruebas con Mocha y Chai. A continuación veremos el fichero ```.spec.ts```que hemos creado para este ejercicio:
 
-
+- NumericSearchableCollection.spec.ts:
 
 ```TypeScript
+import 'mocha';
+import { expect } from 'chai';
+import { NumericSearchableCollection } from '../../src/ejercicio-PE103-1/NumericSearchableCollection';
 
+
+describe("NumericSearchableCollection", () => {
+    let collection: NumericSearchableCollection;
+  
+    beforeEach(() => {
+      collection = new NumericSearchableCollection();
+      collection.addItem(1);
+      collection.addItem(2);
+      collection.addItem(3);
+      collection.addItem(2);
+    });
+  
+    it("la búsqueda debería devolver un array de numeros que coincidan con las búsqueda", () => {
+      expect(collection.search(2)).to.eql([2, 2]);
+    });
+  
+    it("la búsqueda debería devolver un array vacío si no hay numeros que coincidan con la búsqueda", () => {
+      expect(collection.search(4)).to.eql([]);
+    });
+  });
+
+
+  describe('NumericSearchableCollection', () => {
+    let collection: NumericSearchableCollection;
+  
+    beforeEach(() => {
+      collection = new NumericSearchableCollection();
+    });
+
+  describe('addItem', () => {
+    it('debe agregar un número a la colección', () => {
+      collection.addItem(1);
+      expect(collection.getNumberOfItems()).to.equal(1);
+    });
+  });
+
+  describe('getItem', () => {
+    it('debe devolver el número en el índice especificado', () => {
+      collection.addItem(1);
+      expect(collection.getItem(0)).to.equal(1);
+    });
+
+    it('debería devolver indefinido si el índice está fuera de los límites', () => {
+      expect(collection.getItem(0)).to.be.undefined;
+    });
+  });
+
+  describe('removeItem', () => {
+    it('debe eliminar el número en el índice especificado', () => {
+      collection.addItem(1);
+      collection.removeItem(0);
+      expect(collection.getNumberOfItems()).to.equal(0);
+    });
+
+    it('debe devolver el número eliminado', () => {
+      collection.addItem(1);
+      expect(collection.removeItem(0)).to.equal(1);
+    });
+  });
+
+  describe('getNumberOfItems', () => {
+    it('debe devolver el número de artículos en la colección', () => {
+      collection.addItem(1);
+      collection.addItem(2);
+      expect(collection.getNumberOfItems()).to.equal(2);
+    });
+  });
+
+  describe('search', () => {
+    it('debe devolver una serie de números que coincidan con el término de búsqueda', () => {
+      collection.addItem(1);
+      collection.addItem(2);
+      collection.addItem(3);
+      collection.addItem(2);
+      expect(collection.search(2)).to.deep.equal([2, 2]);
+    });
+
+    it('debería devolver una matriz vacía si ningún número coincide con el término de búsqueda', () => {
+      collection.addItem(1);
+      collection.addItem(2);
+      collection.addItem(3);
+      expect(collection.search(4)).to.be.an('array').that.is.empty;
+    });
+  });
+});
 ```
 
+- StringSearchableCollection.spec.ts:
+
+```TypeScript
+import 'mocha';
+import { expect } from 'chai';
+import { StringSearchableCollection } from '../../src/ejercicio-PE103-1/StringSearchableCollection';
+
+
+describe("StringSearchableCollection", () => {
+  let collection: StringSearchableCollection;
+
+  beforeEach(() => {
+    collection = new StringSearchableCollection();
+    collection.addItem("hello");
+    collection.addItem("world");
+    collection.addItem("foo");
+    collection.addItem("bar");
+  });
+
+  it("debería devolver un array de strings que contengan el término buscado", () => {
+    expect(collection.search("o")).to.eql(["hello", "world", "foo"]);
+  });
+
+  it("debería devolver un array vacío si no hay ningún string que contenga el término de búsqueda", () => {
+    expect(collection.search("z")).to.eql([]);
+  });
+});
+
+describe('StringSearchableCollection', () => {
+    let collection: StringSearchableCollection;
+  
+    beforeEach(() => {
+      collection = new StringSearchableCollection();
+    });
+  
+    it('debería agregar elementos a la colección', () => {
+      collection.addItem('hola');
+      collection.addItem('adiós');
+      expect(collection.getNumberOfItems()).to.equal(2);
+    });
+  
+    it('debería obtener elementos de la colección', () => {
+      collection.addItem('hola');
+      collection.addItem('adiós');
+      expect(collection.getItem(0)).to.equal('hola');
+      expect(collection.getItem(1)).to.equal('adiós');
+      expect(collection.getItem(2)).to.be.undefined;
+    });
+  
+    it('debería eliminar elementos de la colección', () => {
+      collection.addItem('hola');
+      collection.addItem('adiós');
+      collection.removeItem(0);
+      expect(collection.getNumberOfItems()).to.equal(1);
+      expect(collection.getItem(0)).to.equal('adiós');
+    });
+  
+    it('debería devolver un array vacío si la colección está vacía', () => {
+      expect(collection.search('hola')).to.deep.equal([]);
+    });
+  });
+```
+
+Como podemos observar, todas las pruebas fueron superadas:
 
 ```bash
+  NumericSearchableCollection
+    ✔ la búsqueda debería devolver un array de numeros que coincidan con las búsqueda
+    ✔ la búsqueda debería devolver un array vacío si no hay numeros que coincidan con la búsqueda
 
+  NumericSearchableCollection
+    addItem
+      ✔ debe agregar un número a la colección
+    getItem
+      ✔ debe devolver el número en el índice especificado
+      ✔ debería devolver indefinido si el índice está fuera de los límites
+    removeItem
+      ✔ debe eliminar el número en el índice especificado
+      ✔ debe devolver el número eliminado
+    getNumberOfItems
+      ✔ debe devolver el número de artículos en la colección
+    search
+      ✔ debe devolver una serie de números que coincidan con el término de búsqueda
+      ✔ debería devolver una matriz vacía si ningún número coincide con el término de búsqueda
+
+  StringSearchableCollection
+    ✔ debería devolver un array de strings que contengan el término buscado
+    ✔ debería devolver un array vacío si no hay ningún string que contenga el término de búsqueda
+
+  StringSearchableCollection
+    ✔ debería agregar elementos a la colección
+    ✔ debería obtener elementos de la colección
+    ✔ debería eliminar elementos de la colección
+    ✔ debería devolver un array vacío si la colección está vacía
+
+
+  16 passing (46ms)
+```
+
+Y también podemos comprobar gracias a que hemos utilizado Istanbul y Coveralls, cómo de cubierto tenemos nuestro código, y vemos que los dos fichero sobre los que hemos realizado las pruebas están cubiertos:
+
+```TypeScript
+---------------------------------|---------|----------|---------|---------|-------------------
+File                             | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------------------------|---------|----------|---------|---------|-------------------
+
+ ejercicio-PE103-1               |   78.57 |        0 |   77.77 |   76.92 |                   
+  NumericSearchableCollection.ts |     100 |      100 |     100 |     100 |                   
+  SearchableCollection.ts        |      25 |        0 |       0 |      25 | 24-53             
+  StringSearchableCollection.ts  |     100 |      100 |     100 |     100 |                   
+---------------------------------|---------|----------|---------|---------|-------------------
 ```
 
 .
@@ -734,4 +1119,4 @@ Ahora la discografía de un artista puede contener una colección de discos o de
 
 Estos ejercicios han sido bastante entretenidos, sobre todo el segundo, tanto para probar cosas como para aprender e incluso divertirnos a través de ese aprendizaje. En este caso gracias a estos ejercicios hemos aprendido más sobre clases e interfaces genéricas, también teniendo en cuenta los principios SOLID, y también haciendo uso de Instanbul Y Coveralls, que acaban siendo bastante útiles para ir haciendo un seguimiento de nuestros pryectos.
 
-Por otra parte, al empezar a trabajar con Coveralls e Istanbul me hue vuelto a sorprender ya que al comienzo de la asignatura pensaba que simplemente con ```console.log``` se podían llevar a cabo todas las comprobaciones necesarios sin que se me pasara nada por alto, sin embargo al empezar a hacer pruebas unitarias con Mocha y Chai me di cuenta de que estaba claramente equivocado. Y una vez ya sorprendido con lo bien que vienen esas pruebas en comparación con los simples ```console.log```, nos encontramos con Coveralls e Istanbul, que son ideales para cumplimentar tus pruebas al máximo con el fin de hacer el mejor seguimiento posible a tu código.
+Por otra parte, al empezar a trabajar con Coveralls e Istanbul me hue vuelto a sorprender ya que al comienzo de la asignatura pensaba que simplemente con ```console.log``` se podían llevar a cabo todas las comprobaciones necesarios sin que se me pasara nada por alto, sin embargo al empezar a hacer pruebas unitarias con Mocha y Chai me di cuenta de que estaba claramente equivocado. Y una vez ya sorprendido con lo bien que vienen esas pruebas en comparación con los simples ```console.log```, nos encontramos con Coveralls e Istanbul, que son ideales para cumplimentar tus pruebas al máximo con el fin de hacer el mejor seguimiento y cubrimiento posible a tu código.
