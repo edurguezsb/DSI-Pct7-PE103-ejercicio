@@ -8,33 +8,33 @@ import {Disco} from "../../src/ejercicio-3/Disco";
 
 describe('Artista', () => {
 
-    it('devuelve el nombre del artista', () => {
+    it('debería devolver el nombre del artista', () => {
       const artista = new Artista('Quevedo', 1000000000, []);
       
       expect(artista.nombre).to.be.equal('Quevedo');
     });
 
-    it('actualiza el nombre del artista', () => {
+    it('debería actualizar el nombre del artista', () => {
       const artista = new Artista('Quevedo', 1000000000, []);
       artista.nombre = 'Pepe Benavente';
       
       expect(artista.nombre).to.be.equal('Pepe Benavente');
     });
 
-    it('devuelve el número de oyentes', () => {
+    it('debería devolver el número de oyentes', () => {
       const artista = new Artista('Quevedo', 1000000000, []);
       
       expect(artista.oyentes).to.be.equal(1000000000);
     });
 
-    it('actualiza el número de oyentes', () => {
+    it('debería actualizar el número de oyentes', () => {
       const artista = new Artista('Quevedo', 1000000000, []);
       artista.oyentes = 70000000;
       
       expect(artista.oyentes).to.be.equal(70000000);
     });
 
-    it('devuelve la discografía del artista', () => {
+    it('debería devolver la discografía del artista', () => {
       const cancion1 = new Cancion('Quedate', 220, ['Rap', 'Trap'], false, 34562345);
       const cancion2 = new Cancion('Cayo la noche', 300, ['Rap', 'Trap'], false, 453634);
       const canciones = [cancion1, cancion2];
@@ -45,7 +45,7 @@ describe('Artista', () => {
       expect(artista.discografia).to.be.deep.equal(discos);
     });
   
-    it('actualiza la discografía del artista', () => {
+    it('debería actualizar la discografía del artista', () => {
       const cancion1 = new Cancion('Quedate', 220, ['Rap', 'Trap'], false, 34562345);
       const cancion2 = new Cancion('Cayo la noche', 300, ['Rap', 'Trap'], false, 453634);
       const canciones = [cancion1, cancion2];

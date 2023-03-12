@@ -5,7 +5,6 @@ import {Single} from "../../src/ejercicio-3/Single";
 
 
 describe('Single', () => {
-    describe('creación', () => {
       it('debería crear un nuevo single con los valores proporcionados', () => {
         const cancion1 = new Cancion('Amorfoda', 350, ['Rap', 'Romantiqueo'], false, 45673456);
         const disco = new Single('Amorfoda', 2016, cancion1);
@@ -14,9 +13,7 @@ describe('Single', () => {
         expect(disco.año).to.equal(2016);
         expect(disco.cancion).to.equal(cancion1);
       });
-    });
   
-    describe('actualización', () => {
       let disco: Single;
       let cancion1: Cancion;
       let cancion2: Cancion;
@@ -42,4 +39,3 @@ describe('Single', () => {
         expect(disco.cancion).to.equal(cancion2);
       });
     });
-  });

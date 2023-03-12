@@ -38,7 +38,7 @@ export abstract class BasicStreamableCollection<T> implements Streamable {
 }
 ```
 
-Este código define una clase abstracta llamada ```BasicStreamableCollection<T>``` que implementa la interfaz ```Streamable```. La clase tiene dos métodos abstractos, ```searchName``` y ```searchYear```, y un constructor que toma un arreglo de objetos tipo ```T``` y lo almacena en una propiedad protegida llamada ```collection```. La clase ```BasicStreamableCollection``` es abstracta, lo que significa que debe ser extendida por una subclase para ser utilizada.
+Este código define una clase abstracta llamada ```BasicStreamableCollection<T>``` que implementa la interfaz ```Streamable```. La clase tiene dos métodos abstractos, ```searchName``` y ```searchYear```, y un constructor que toma un array de objetos tipo ```T``` y lo almacena en una propiedad protegida llamada ```collection```. La clase ```BasicStreamableCollection``` es abstracta, lo que significa que debe ser extendida por una subclase para ser utilizada.
 
 - Documentaries.ts:
 
@@ -65,7 +65,7 @@ export class DocumentalesCollection extends BasicStreamableCollection<Documentar
 }
 ```
 
-Se define una clase llamada ```DocumentalesCollection```. Esta clase extiende la clase ```BasicStreamableCollection``` y se especializa para contener objetos de tipo ```Documentarie```. La clase tiene cuatro métodos para buscar dentro de la colección de documentales por nombre, año, duración y tema. Cada uno de estos métodos utiliza el método ```filter``` para buscar los elementos de la colección que coincidan con los criterios especificados y los devuelve en forma de arreglo de objetos ```Documentarie```.
+Se define una clase llamada ```DocumentalesCollection```. Esta clase extiende la clase ```BasicStreamableCollection``` y se especializa para contener objetos de tipo ```Documentarie```. La clase tiene cuatro métodos para buscar dentro de la colección de documentales por nombre, año, duración y tema. Cada uno de estos métodos utiliza el método ```filter``` para buscar los elementos de la colección que coincidan con los criterios especificados y los devuelve en forma de array de objetos ```Documentarie```.
 
 - Interfaces.ts:
 
@@ -541,9 +541,9 @@ Para este ejercicio, definimos una clase ```Lista<T>``` que es una implementaci�
 -```reduce``` para reducir la lista a un solo valor.
 -```reverse``` para invertir el orden de los elementos en la lista.
 -```forEach``` para ejecutar una función en cada elemento de la lista.
--```toArray``` para obtener un arreglo de los elementos en la lista.
+-```toArray``` para obtener un array de los elementos en la lista.
 
-La clase utiliza un tipo genérico ```T``` que se utiliza en la definición de los métodos y en la definición del arreglo elementos que almacena los elementos de la lista. El ```constructor``` de la clase acepta un número variable de argumentos de tipo ```T```, que se utilizan para inicializar la lista. La mayoría de los métodos crean y devuelven una nueva instancia de ```Lista<T>``` para guardar sin modificar la lista original.
+La clase utiliza un tipo genérico ```T``` que se utiliza en la definición de los métodos y en la definición del array elementos que almacena los elementos de la lista. El ```constructor``` de la clase acepta un número variable de argumentos de tipo ```T```, que se utilizan para inicializar la lista. La mayoría de los métodos crean y devuelven una nueva instancia de ```Lista<T>``` para guardar sin modificar la lista original.
 
 
 #### Comprobaciones
@@ -673,10 +673,296 @@ Además, ahora deberá hacer que la discografía sea una clase genérica. En alg
 
 Han habido numerosas complicaciones debido a que el código de la entrega 5 no era y no estaba implementado de la mejor manera posible, después de haber llevado a cabo 3 posibles soluciones, y de intentar adaptar la que ya tenía, decidí que llegados a ese punto que lo mejor era empezar el ejercicio de 0, y finalmente este es el resultado.
 
+Todas las propiedades que sean privadas de una clase están declaradas con una "p" delante de la palabra por simple comodidad a las hora de identificarlas, que entre tantas versiones me empezaba a confundir con todo.
+
+Se divide en varios ficheros:
+
+- Artista.ts:
 
 ``` TypeScript
+export class Artista {
+  
+    constructor(
+      private pNombre: string,
+      private pOyentes: number,
+      private pDiscografia: Discografia[]
+    ) {}
+  
+    get nombre(): string {
+      return this.pNombre;
+    }
 
+    set nombre(value: string) {
+      this.pNombre = value;
+    }
+  
+    get oyentes(): number {
+      return this.pOyentes;
+    }
+
+    set oyentes(value: number) {
+      this.pOyentes = value;
+    }
+  
+    get discografia(): Discografia[] {
+      return this.pDiscografia;
+    }
+
+    set discografia(value: Discografia[]) {
+      this.pDiscografia = value;
+    }
+  }
 ```
+
+Este código es una definición de clase llamada ```Artista```. Tiene tres propiedades privadas: ```pNombre``` de tipo string, ```pOyentes``` de tipo number, y ```pDiscografia``` de tipo Discografia[], que es un array de objetos Discografia. También tiene tres métodos públicos con los getters y setters para acceder y modificar estas propiedades privadas.
+
+- BibliotecaMusical.ts:
+
+```TypeScript
+import {Artista} from "./Artista";
+import {Disco} from "./Disco";
+import {Cancion} from "./Cancion";
+
+export class Biblioteca {
+    private pArtistas: Artista[];
+  
+    constructor(artistas: Artista[]) {
+      this.pArtistas = artistas;
+    }
+  
+    get artistas(): Artista[] {
+      return this.pArtistas;
+    }
+    set artistas(value: Artista[]) {
+      this.pArtistas = value;
+    }
+  
+    searchArtist(nombre: string): void | undefined{
+        this.pArtistas.forEach((item: Artista) => {
+            if (item.nombre === nombre) console.table(item);
+        });
+        return undefined;
+    }
+
+    searchDisco(nombre: string): void | undefined{
+        this.pArtistas.forEach((item: Artista) => {
+            item.discografia.forEach((item2: Disco) =>{
+                if (item2.nombre === nombre) console.table(item2);
+            });
+        });
+        return undefined;
+    }
+
+    searchCancion(nombre: string): void | undefined{
+        this.pArtistas.forEach((item: Artista) => {
+            item.discografia.forEach((item2: Disco) =>{
+                item2.canciones.forEach((item3: Cancion)=>{
+                    if (item3.nombre === nombre) console.table(item3);
+                });
+            });
+        });
+        return undefined;
+    }
+
+    showBiblioteca(): void{
+        console.table(this.pArtistas);
+    }
+
+    songsNumber(nombre: string): number{
+        let result = 0;
+        this.pArtistas.forEach((item: Artista) => {
+            item.discografia.forEach((item2: Disco) =>{
+                if (item2.nombre === nombre) result = item2.canciones.length;
+            });
+        });
+        return result;
+    }
+
+    duration(nombre: string): number{
+        let result = 0;
+        this.pArtistas.forEach((item: Artista) => {
+            item.discografia.forEach((item2: Disco) =>{
+                if (item2.nombre === nombre){
+                    item2.canciones.forEach((item3: Cancion) =>{
+                        result += item3.duracion
+                    })
+                }
+            });
+        });
+        return result;
+    }
+
+    reproducciones(nombre: string): number{
+        let result = 0;
+        this.pArtistas.forEach((item: Artista) => {
+            item.discografia.forEach((item2: Disco) =>{
+                if (item2.nombre === nombre){
+                    item2.canciones.forEach((item3: Cancion) =>{
+                        result += item3.reproducciones
+                    })
+                }
+            });
+        });
+        return result;
+    }
+}
+```
+
+ La clase llamada ```Biblioteca``` que tiene métodos para buscar, mostrar y calcular "estadísticas" por así decirlo sobre la música almacenada en la biblioteca. La clase tiene propiedades privadas para almacenar una lista de objetos de la clase ```Artista```. Los métodos incluyen: buscar artista por nombre, buscar disco por nombre, buscar canción por nombre, mostrar toda la biblioteca, obtener el número de canciones de un disco en particular, la duración total de un disco y el número total de reproducciones de un disco. La clase también tiene getters y setters para la propiedad de artistas.
+
+- Cancion.ts:
+
+```TypeScript
+export class Cancion {
+
+  constructor(
+    private pNombre: string,
+    private pDuracion: number,
+    private pGenero: string[],
+    private pSingle: boolean,
+    private pReproducciones: number
+  ) {}
+
+
+  get nombre(): string {
+    return this.pNombre;
+  }
+
+  set nombre(value: string) {
+    this.pNombre = value;
+  }
+
+
+  get duracion(): number {
+    return this.pDuracion;
+  }
+
+  set duracion(value: number) {
+    this.pDuracion = value;
+  }
+
+
+  get generos(): string[] {
+    return this.pGenero;
+  }
+
+  set generos(value: string[]) {
+    this.pGenero = value;
+  }
+
+
+  get single(): boolean {
+    return this.pSingle;
+  }
+
+  set single(value: boolean) {
+    this.pSingle = value;
+  }
+
+
+  get reproducciones(): number {
+    return this.pReproducciones;
+  }
+
+  set reproducciones(value: number) {
+    this.pReproducciones = value;
+  }
+}
+```
+
+Aquí tenemos la clase ```Cancion``` con propiedades privadas como nombre, duración, género, single y reproducciones. La clase tiene métodos get y set para acceder y modificar estas propiedades. En resumen, la clase representa una canción con ciertas propiedades y métodos para acceder a ellas.
+
+
+- Disco.ts:
+
+```TypeScript
+import { Cancion } from "./Cancion";
+import { Discografia } from "./Discografia";
+
+
+export class Disco extends Discografia{
+  private pCanciones: Cancion[]
+
+  constructor(nombre: string, año:number, canciones: Cancion[]){
+    super(nombre, año);
+    this.pCanciones = canciones
+  }
+
+
+  get canciones(): Cancion[] {
+    return this.pCanciones;
+  }
+
+  set canciones(value: Cancion[]) {
+    this.pCanciones = value;
+  }
+}
+```
+
+Este código define la clase ```Disco``` que tiene un array de objetos ```Cancion```. Esta clase extiende a ```Discografia```. El constructor inicializa el nombre, año y canciones del disco. La clase tiene dos métodos ```get``` y ```set``` para acceder y actualizar el array de canciones.
+
+- Discografia.ts:
+
+```TypeScript
+export class Discografia {
+  
+    private pNombre: string;
+    private pAño: number;
+
+
+  constructor(nombre: string, año:number){
+    this.pNombre = nombre;
+    this.pAño = año;
+  }
+
+  get nombre(): string {
+    return this.pNombre;
+  }
+
+  set nombre(value: string) {
+    this.pNombre = value;
+  }
+
+
+  get año(): number {
+    return this.pAño;
+  }
+
+  set año(value: number) {
+    this.pAño = value;
+  }
+}
+```
+
+Se define la clase ```Discografia``` con dos propiedades privadas: ```pNombre``` y ```pAño```. La clase tiene un constructor que toma dos argumentos: "nombre" y "año" que inicializan las propiedades privadas. La clase también tiene dos métodos ```get``` y ```set``` para acceder y modificar las propiedades desde fuera de la clase como ya hemos visto en otras de las clases.
+
+- Single.ts:
+
+```TypeScript
+import { Cancion } from "./Cancion";
+import { Discografia } from "./Discografia";
+
+
+export class Single extends Discografia{
+  private pCancion: Cancion
+
+  constructor(nombre: string, año:number, cancion: Cancion){
+    super(nombre, año);
+    this.pCancion = cancion
+  }
+
+
+  get cancion(): Cancion {
+    return this.pCancion;
+  }
+
+  set cancion(value: Cancion) {
+    this.pCancion = value;
+  }
+}
+```
+
+Por último tenemos la clase ```Single``` que extiende a la clase llamada ```Discografia```. Tiene un atributo privado llamado ```pCancion``` del tipo ```Cancion``` y un constructor que inicializa el objeto con un nombre, año y una canción. También hay métodos ```getter``` y ```setter``` para el atributo de canción.
 
 
 
@@ -684,15 +970,55 @@ Han habido numerosas complicaciones debido a que el código de la entrega 5 no e
 #### Comprobaciones
 
 
-
+Numerosas pruebas fueron realizadas para asegurarme del correcto funcionamiento de la nueva Biblioteca Musical, muchas más pruebas que en la práctica 5, donde al no haber utilizado Istanbul y Coveralls no me estaba dando cuenta de que no estaba probando realmente si todo el código funcionaba. Todas las pruebas fueron superadas.
 
 ```TypeScript
+  Artista
+    ✔ debería devolver el nombre del artista
+    ✔ debería actualizar el nombre del artista
+    ✔ debería devolver el número de oyentes
+    ✔ debería actualizar el número de oyentes
+    ✔ debería devolver la discografía del artista
+    ✔ debería actualizar la discografía del artista
 
+  Cancion
+    ✔ debería crear una nueva canción con los valores correctos
+    ✔ debería actualizar el nombre de la canción
+    ✔ debería actualizar la duración de la canción
+    ✔ debería actualizar los géneros de la canción
+    ✔ debería actualizar el valor de single de la canción
+    ✔ debería actualizar el número de reproducciones de la canción
+
+  Disco
+    ✔ debería devolver el nombre del disco
+    ✔ debería actualizar el nombre del disco
+    ✔ debería devolver el año de lanzamiento del disco
+    ✔ debería actualizar el año de lanzamiento del disco
+    ✔ debería devolver las canciones del disco
+    ✔ debería actualizar el array de canciones
+
+  Single
+    ✔ debería crear un nuevo single con los valores proporcionados
+    ✔ debería actualizar el nombre del single
+    ✔ debería actualizar el año del single
+    ✔ debería actualizar la canción del single
+
+  22 passing (31ms)
 ```
 
+Y también podemos comprobar gracias a que hemos utilizado Istanbul y Coveralls, cómo de cubierto tenemos nuestro código, y vemos que los dos ficheros sobre los que hemos realizado las pruebas están cubiertos:
 
 ```bash
-
+---------------------------------|---------|----------|---------|---------|-------------------
+File                             | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------------------------|---------|----------|---------|---------|-------------------                
+ ejercicio-3                     |     100 |      100 |     100 |     100 |                   
+  Artista.ts                     |     100 |      100 |     100 |     100 |                   
+  Cancion.ts                     |     100 |      100 |     100 |     100 |                   
+  Disco.ts                       |     100 |      100 |     100 |     100 |                   
+  Discografia.ts                 |     100 |      100 |     100 |     100 |                   
+  Single.ts                      |     100 |      100 |     100 |     100 |                         
+---------------------------------|---------|----------|---------|---------|-------------------
 ```
 
 .
@@ -1196,4 +1522,27 @@ Estos ejercicios han sido bastante entretenidos, sobre todo el segundo, tanto pa
 
 Por otra parte, al empezar a trabajar con Coveralls e Istanbul me hue vuelto a sorprender ya que al comienzo de la asignatura pensaba que simplemente con ```console.log``` se podían llevar a cabo todas las comprobaciones necesarios sin que se me pasara nada por alto, sin embargo al empezar a hacer pruebas unitarias con Mocha y Chai me di cuenta de que estaba claramente equivocado. Y una vez ya sorprendido con lo bien que vienen esas pruebas en comparación con los simples ```console.log```, nos encontramos con Coveralls e Istanbul, que son ideales para cumplimentar tus pruebas al máximo con el fin de hacer el mejor seguimiento y cubrimiento posible a tu código.
 
-Lomás complicado fue adaptar la BibliotecaMusical, no se ni cuantas versiones hice, pero cada vez me complicaba mas y mas, así que decidi empezarla de 0 teniendo en cuenta lo de la práctica 5 y las nuevas condiciones de la 6.
+Lo más complicado fue adaptar la BibliotecaMusical, no se ni cuantas versiones hice, pero cada vez me complicaba mas y mas, así que decidi empezarla de 0 teniendo en cuenta lo de la práctica 5 y las nuevas condiciones de la 6.
+
+
+By:
+
+```
+EEEEEEEEEE      DDDDDDDDDDDDD         UUUUUUUU       UUUUUUUU
+E::::::::::::E   D::::::::::::DDD      U::::::U       U::::::U
+E::::::::::::E   D:::::::::::::::DD    U::::::U       U::::::U
+EE:::::::EEEEE   DDD:::::DDDDD:::::D   UU:::::U       U:::::UU
+  E:::::E         D:::::D    D:::::D   U:::::U       U:::::U 
+  E:::::E         D:::::D     D:::::D  U:::::U       U:::::U 
+  E::::::EEEEEEE  D:::::D     D:::::D  U:::::U       U:::::U 
+  E::::::::::::E  D:::::D     D:::::D  U:::::U       U:::::U 
+  E::::::::::::E  D:::::D     D:::::D  U:::::U       U:::::U 
+  E::::::EEEEEEE  D:::::D     D:::::D  U:::::U       U:::::U 
+  E:::::E         D:::::D     D:::::D  U:::::U       U:::::U 
+  E:::::E         D:::::D    D:::::D   U::::::U     U::::::U 
+EE:::::::EEEEEEE  DDD:::::DDDDD:::::D   U:::::::UUU:::::::U 
+E::::::::::::E   D:::::::::::::::DD     UU:::::::::::::UU  
+E::::::::::::E   D::::::::::::DDD           UU:::::::::UU    
+EEEEEEEEEEEEEE   DDDDDDDDDDDDD                UUUUUUUUU  
+
+```
