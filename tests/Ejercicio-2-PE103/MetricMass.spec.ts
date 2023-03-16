@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { MetricMass } from '../../src/Ejercicio-2-PE103/MetricMass'
+//import { MetricMass } from '../../src/Ejercicio-2-PE103/MetricMass'
 
 
 describe("MetricMass", () => {
